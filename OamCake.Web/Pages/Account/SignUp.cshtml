@@ -1,0 +1,197 @@
+﻿@page
+@model OamCake.Web.Pages.Account.SignUpModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>
+        Distribuidora las tres JJJ
+    </title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+</head>
+
+<body>
+    <section class="h-100">
+        <div class="container h-100">
+            <div class="row justify-content-sm-center h-100">
+                <div class="col-sm-9 col-xs-9">
+                    <div class="text-center my-5">
+                        @*<img src="https://getbootstrap.com/docs/5.0/assets/brand/bootstrap-logo.svg" alt="logo" width="100">*@
+                    </div>
+                    <div class="card shadow-lg">
+                        <div class="card-body p-5">
+                            <form method="POST" class="needs-validation" autocomplete="off">
+                                <div asp-validation-summary="All"></div>
+                                <input type="hidden" asp-for="UserCreationDto.Id" />
+                                <div class="col-xl-12">
+                                    <img src="~/assets/img/add-photo-icon.jpg" style="width:200px;height:200px" alt="Productos bis mol line" />
+
+                                    <div class="card-body p-md-5 text-black">
+                                        <h3 class="mb-5 text-uppercase">Formulario de Registro de Empleado</h3>
+
+                                        <fieldset>
+                                            <legend>Usuario</legend>
+                                            <div class="row">
+                                                <div class="col-md-12 mb-12">
+                                                    <div class="form-outline">
+                                                        <label class="form-label" asp-for="UserCreationDto.Email">Email</label>
+                                                        <input type="email" asp-for="UserCreationDto.Email" class="form-control form-control-lg" />                                                        
+                                                        <span asp-validation-for="UserCreationDto.Email"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 mb-4">
+                                                    <div class="form-outline">
+                                                        <label class="form-label" asp-for="UserCreationDto.Password">Contraseña</label>
+                                                        <input type="password" asp-for="UserCreationDto.Password" class="form-control form-control-lg" />
+                                                        <span asp-validation-for="UserCreationDto.Password"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 mb-4">
+                                                    <div class="form-outline">
+                                                        <label class="form-label" asp-for="UserCreationDto.ConfirmPassword">Confirmar Contraseña</label>
+                                                        <input type="password" asp-for="UserCreationDto.ConfirmPassword" class="form-control form-control-lg" />
+                                                        <span asp-validation-for="UserCreationDto.ConfirmPassword"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                        <hr />
+                                        <fieldset>
+                                            <legend>Datos Personales</legend>
+                                            <div class="row">
+                                                <div class="col-md-6 mb-4">
+                                                    <div class="form-outline">
+                                                        <label class="form-label" asp-for="UserCreationDto.Name">Nombre</label>
+                                                        <input type="text" asp-for="UserCreationDto.Name" class="form-control form-control-lg" />
+                                                        <span asp-validation-for="UserCreationDto.Name"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 mb-4">
+                                                    <div class="form-outline">
+                                                        <label class="form-label" asp-for="UserCreationDto.LastName">Apellido</label>
+                                                        <input type="text" asp-for="UserCreationDto.LastName" class="form-control form-control-lg" />
+                                                        <span asp-validation-for="UserCreationDto.LastName"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6 mb-4">
+                                                    <div class="form-outline">
+                                                        <label class="form-label" asp-for="UserCreationDto.Phone">Teléfono</label>
+                                                        <input type="text" asp-for="UserCreationDto.Phone" class="form-control form-control-lg" />
+                                                        <span asp-validation-for="UserCreationDto.Phone"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-outline mb-4">
+                                                <label class="form-label" asp-for="UserCreationDto.Address">Dirección</label>
+                                                <input type="text" asp-for="UserCreationDto.Address" class="form-control form-control-lg" />
+                                                <span asp-validation-for="UserCreationDto.Address"></span>
+                                            </div>
+
+                                            @*<div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
+
+                                                <h6 class="mb-0 me-4">Gender: </h6>
+
+                                                <div class="form-check form-check-inline mb-0 me-4">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="femaleGender"
+                                                value="option1" />
+                                                <label class="form-check-label" for="femaleGender">Female</label>
+                                                </div>
+
+                                                <div class="form-check form-check-inline mb-0 me-4">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="maleGender"
+                                                value="option2" />
+                                                <label class="form-check-label" for="maleGender">Male</label>
+                                                </div>
+
+                                                <div class="form-check form-check-inline mb-0">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="otherGender"
+                                                value="option3" />
+                                                <label class="form-check-label" for="otherGender">Other</label>
+                                                </div>
+                                                </div>*@
+
+                                            @*<div class="row">
+                                                <div class="col-md-6 mb-4">
+
+                                                <select class="select">
+                                                <option value="1">State</option>
+                                                <option value="2">Option 1</option>
+                                                <option value="3">Option 2</option>
+                                                <option value="4">Option 3</option>
+                                                </select>
+
+                                                </div>
+                                                <div class="col-md-6 mb-4">
+
+                                                <select class="select">
+                                                <option value="1">City</option>
+                                                <option value="2">Option 1</option>
+                                                <option value="3">Option 2</option>
+                                                <option value="4">Option 3</option>
+                                                </select>
+
+                                                </div>
+                                                </div>
+
+                                                <div class="form-outline mb-4">
+                                                <input type="text" id="form3Example9" class="form-control form-control-lg" />
+                                                <label class="form-label" for="form3Example9">DOB</label>
+                                                </div>
+
+                                                <div class="form-outline mb-4">
+                                                <input type="text" id="form3Example90" class="form-control form-control-lg" />
+                                                <label class="form-label" for="form3Example90">Pincode</label>
+                                                </div>
+
+                                                <div class="form-outline mb-4">
+                                                <input type="text" id="form3Example99" class="form-control form-control-lg" />
+                                                <label class="form-label" for="form3Example99">Course</label>
+                                                </div>
+
+                                                <div class="form-outline mb-4">
+                                                <input type="text" id="form3Example97" class="form-control form-control-lg" />
+                                                <label class="form-label" for="form3Example97">Email ID</label>
+                                                </div>
+
+                                            *@
+                                        </fieldset>
+
+                                        <div class="d-flex justify-content-end pt-3">
+                                            <button type="button" class="btn btn-light btn-lg">Reset all</button>
+                                            <button type="submit" class="btn btn-primary btn-lg ms-2">Submit form</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-footer py-3 border-0">
+                            <div class="text-center">
+                                Ya tiene un usuario? <a href="Login" class="text-dark">Entrar</a>
+                            </div>
+                            <div class="text-center">
+                                <a href="/" class="text-dark">Productos</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center mt-5 text-muted">
+                        © 17 July 2017 Copyright: DISTRIBUIDORA LAS TRES JJJ
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+</body>
+</html>

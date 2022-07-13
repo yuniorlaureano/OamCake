@@ -1,6 +1,6 @@
 ﻿namespace OamCake.Entity
 {
-    public class OrderDelivery
+    public class OrderDelivery : BaseEntity
     {
         public long Id { get; set; }
         public long OrderId { get; set; }

@@ -1,0 +1,159 @@
+﻿@page
+@model OamCake.Web.Pages.Admin.IndexModel
+@{
+    ViewData["Page"] = "Dashboard";
+    ViewData[nameof(PageTypes)] = PageTypes.Dashboard;
+    decimal GetPercentage(decimal amount)
+    {
+        if (Model.Inputs == 0 && Model.Outputs == 0)
+        {
+            return 0;
+        }
+
+        if (amount == 0)
+        {
+            return 0;
+        }
+
+        var output = Model.Outputs < 0 ? Model.Outputs * -1 : Model.Outputs;
+        amount = amount < 0 ? amount * -1 : amount;
+
+        return Math.Round((amount / (Model.Inputs + output)) * 100);
+    }
+}
+
+<section class="section dashboard">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="row">
+                <!-- Sales Card -->
+                <div class="col-xxl-4 col-md-6">
+                    <a href="/App/Input">
+                        <div class="card info-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Entradas | <span>cantidad</span></h5>
+                            <div class="d-flex align-items-center">
+                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center" style="background-color: #C8FACD">
+                                    <i class="bi bi-box-arrow-in-right"></i>
+                                </div>
+                                <div class="ps-3">
+                                    <h6>@Model.Inputs</h6>
+                                    <span class="text-success small pt-1 fw-bold">+@GetPercentage(Model.Inputs)%</span> <span class="text-muted small pt-2 ps-1">Incremento</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                </div><!-- End Sales Card -->
+                <!-- Revenue Card -->
+                <div class="col-xxl-4 col-md-6">
+                    <a href="/App/Output">
+                        <div class="card info-card">
+                            <div class="card-body">
+                                <h5 class="card-title">Salidas | <span>cantidad</span></h5>
+
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center" style="background-color: #FFE7D9">
+                                        <i class="bi bi-box-arrow-right"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h6>@Model.Outputs</h6>
+                                        <span class="text-success small pt-1 fw-bold">-@GetPercentage(Model.Outputs)%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div><!-- End Revenue Card -->
+                <!-- Customers Card -->
+                <div class="col-xxl-4 col-xl-12">
+
+                    <div class="card info-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Existencia | <span>cantidad</span></h5>
+
+                            <div class="d-flex align-items-center">
+                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-bag-check"></i>
+                                </div>
+                                <div class="ps-3">
+                                    <h6>@(Model.Inputs + Model.Outputs)</h6>
+                                    <span class="text-danger small pt-1 fw-bold">+@GetPercentage(Model.Inputs)%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div><!-- End Customers Card -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Sales -->
+    <div class="col-12">
+        <div class="card recent-sales overflow-auto">
+            <div class="card-body">
+                <h5 class="card-title">Inventario <span>| Resumen</span></h5>
+                <div class="input-group mb-3 d-flex justify-content-end">
+                    <form class="d-flex justify-content-end" method="get" asp-page-handler="OnGet">
+                        <input type="text" class="form-control" asp-for="Search" placeholder="Buscar por nombre" aria-label="Recipient's username">
+                        <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-search"></i></button>
+                    </form>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-borderless">
+                        <thead>
+                            <tr>
+                                <th scope="col">Código</th>
+                                <th scope="col">Producto</th>
+                                <th scope="col">Descripción</th>
+                                <th scope="col">Cantidad</th>
+                                <th scope="col">$Cantidad*Precio</th>
+                                <th scope="col">Precio Cantidad</th>
+                                <th scope="col">Precio $Cantidad*Dinero</th>
+                                <th scope="col">Cantidad Total</th>
+                                <th scope="col">$Dinero Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @*@foreach (var input in Model.InputTable.Data)
+                            {
+                                <tr>
+                                    <td scope="row">@input.ProductCode</td>
+                                    <td>@input.ProductName</td>
+                                    <td>@input.ProductDescription</td>
+                                    <td style="background-color: #C8FACD">@input.InputQty</td>
+                                    <td style="background-color: #C8FACD">@input.InputPrice</td>
+                                    <td style="background-color: #FFE7D9">@input.OutputQty</td>
+                                    <td style="background-color: #FFE7D9">@input.OutputPrice</td>
+                                    <td style="background-color: lightgreen">@(input.InputQty + input.OutputQty)</td>
+                                    <td style="background-color: lightgreen">@(input.InputPrice + input.OutputPrice)</td>
+                                </tr>
+                            }*@
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="9">
+                                    <nav aria-label="Page navigation">
+                                        <ul class="pagination pagination-sm justify-content-end">
+                                            @*@for (var i = 0; i < Model.InputTable.CalcPage(20); i++)
+                                            {
+                                                <li class="page-item @(i == Model.Pages ? "active": "")" aria-current="page">
+                                                    <a class="page-link" href="/Admin/Dashboard?pages=@i&Search=@Model.Search">@(i+1)</a>
+                                                </li>
+                                            }*@
+                                        </ul>
+                                    </nav>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div><!-- End Recent Sales -->
+</section>
+
+

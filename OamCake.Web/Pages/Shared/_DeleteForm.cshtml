@@ -1,0 +1,8 @@
+﻿@model object
+
+<form style="display:inline-block" asp-page-handler="Delete" method="post" onsubmit="confirmDelete(event)">
+    <input type="hidden" name="Id" value="@Model" />
+    <button type="submit" class="btn btn-danger">
+        <i class='bx bx-trash'></i>
+    </button>
+</form>

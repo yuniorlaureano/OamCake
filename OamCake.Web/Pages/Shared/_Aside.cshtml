@@ -1,0 +1,164 @@
+﻿@using OamCake.Common
+@{
+    string MarkLinkAsActive(PageTypes pageType)
+    {
+        if (ViewData[nameof(PageTypes)] == null)
+        {
+            return string.Empty;
+        }
+        var tempPageType = (PageTypes)ViewData[nameof(PageTypes)];
+        return tempPageType == pageType ? "active bg-gradient-primary" : "";
+    }
+
+    string CollapseMenuUl(PageTypes pageType)
+    {
+        if (ViewData[nameof(PageTypes)] == null)
+        {
+            return string.Empty;
+        }
+        var tempPageType = (PageTypes)ViewData[nameof(PageTypes)];
+        return tempPageType == pageType ? " collapse show" : " collapse";
+    }
+}
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+        <li class="nav-item">
+            <a class="nav-link @(MarkLinkAsActive(PageTypes.Dashboard))" " href="/Admin/">
+                <i class="bi bi-grid"></i><span>Dashboard</span>
+            </a>
+        </li><!-- End Dashboard Nav -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="/">
+                <i class="bi bi-house"></i><span>Catálogo</span>
+            </a>
+        </li><!-- End Dashboard Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link " data-bs-target="#product-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-bag-check"></i><span>Producto</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="product-nav" class="nav-content @(CollapseMenuUl(PageTypes.ProductList)) @(CollapseMenuUl(PageTypes.ProductEntry))" data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="/admin/product/list" class="@(MarkLinkAsActive(PageTypes.ProductList))">
+                        <i class="bi bi-layout-text-window-reverse"></i><span>Lista</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/product/add" class="@(MarkLinkAsActive(PageTypes.ProductEntry))">
+                        <i class="bi bi-circle"></i><span>Formulario</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link " data-bs-target="#input-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-box-arrow-in-right"></i></i><span>Entrada</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="input-nav" class="nav-content @(CollapseMenuUl(PageTypes.InputList)) @(CollapseMenuUl(PageTypes.InputEntry))" data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="/App/Input" class="@(MarkLinkAsActive(PageTypes.InputList))">
+                        <i class="bi bi-layout-text-window-reverse"></i><span>Lista</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/App/AddInput" class="@(MarkLinkAsActive(PageTypes.InputEntry))">
+                        <i class="bi bi-circle"></i><span>Formulario</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link " data-bs-target="#output-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-box-arrow-right"></i><span>Salida</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="output-nav" class="nav-content @(CollapseMenuUl(PageTypes.OutputList)) @(CollapseMenuUl(PageTypes.OutputEntry))" data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="/App/Output" class=" @(MarkLinkAsActive(PageTypes.OutputList))">
+                        <i class="bi bi-layout-text-window-reverse"></i><span>Lista</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/App/AddOutput" class="@(MarkLinkAsActive(PageTypes.OutputEntry))">
+                        <i class="bi bi-circle"></i><span>Formulario</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link " data-bs-target="#client-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-people-fill"></i><span>Cliente</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="client-nav" class="nav-content @(CollapseMenuUl(PageTypes.ClientList)) @(CollapseMenuUl(PageTypes.ClientEntry))" data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="/App/Client" class="@(MarkLinkAsActive(PageTypes.ClientList))">
+                        <i class="bi bi-layout-text-window-reverse"></i><span>Lista</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/App/AddClient" class="@(MarkLinkAsActive(PageTypes.ClientEntry))">
+                        <i class="bi bi-circle"></i><span>Formulario</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link " data-bs-target="#cake-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-people-fill"></i><span>Pastel</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="cake-nav" class="nav-content @(CollapseMenuUl(PageTypes.CakeList)) @(CollapseMenuUl(PageTypes.CakeEntry))" data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="/admin/cake/list" class="@(MarkLinkAsActive(PageTypes.CakeList))">
+                        <i class="bi bi-layout-text-window-reverse"></i><span>Lista</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/cake/add" class="@(MarkLinkAsActive(PageTypes.CakeEntry))">
+                        <i class="bi bi-circle"></i><span>Formulario</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link " data-bs-target="#category-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-people-fill"></i><span>Categoria</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="category-nav" class="nav-content @(CollapseMenuUl(PageTypes.CategoryList)) @(CollapseMenuUl(PageTypes.CategoryEntry))" data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="/admin/category/list" class="@(MarkLinkAsActive(PageTypes.CategoryList))">
+                        <i class="bi bi-layout-text-window-reverse"></i><span>Lista</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/category/add" class="@(MarkLinkAsActive(PageTypes.CategoryEntry))">
+                        <i class="bi bi-circle"></i><span>Formulario</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        @if (User.HasClaim(Constants.CLAIM_ADMIN, Constants.CLAIM_ADMIN))
+        {
+            <li class="nav-item">
+                <a class="nav-link " data-bs-target="#user-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-person-circle"></i><span>Usuario</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="user-nav" class="nav-content @(CollapseMenuUl(PageTypes.ActiveUsers))" data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="/account/users" class="@(MarkLinkAsActive(PageTypes.ActiveUsers))">
+                            <i class="bi bi-layout-text-window-reverse"></i><span>Lista</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        }
+    </ul>
+
+</aside><!-- End Sidebar-->

@@ -1,6 +1,6 @@
 ﻿namespace OamCake.Entity
 {
-    public class UserRol
+    public class UserRol : BaseEntity
     {
         public int Id { get; set; }
         public byte RoleId { get; set; }

@@ -1,6 +1,6 @@
 ﻿namespace OamCake.Entity
 {
-    public class Product
+    public class Product : BaseEntity
     {
         public short Id { get; set; }
         public string Code { get; set; }

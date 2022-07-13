@@ -1,0 +1,68 @@
+﻿@page
+@model OamCake.Web.Pages.Account.LoginModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>
+        Distribuidora las tres JJJ
+    </title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+</head>
+<body>
+    <section class="h-100">
+        <div class="container h-100">
+            <div class="row justify-content-sm-center h-100">
+                <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
+                    <div class="text-center my-5">
+                        @*<img src="https://getbootstrap.com/docs/5.0/assets/brand/bootstrap-logo.svg" alt="logo" width="100">*@
+                    </div>
+                    <div class="card shadow-lg">
+                        <div class="card-body p-5">
+                            <h1 class="fs-4 card-title fw-bold mb-4">Login</h1>
+                            <form method="POST" class="needs-validation" autocomplete="off">
+                                <div asp-validation-summary="All"></div>
+                                <div class="mb-3">
+                                    <label class="mb-2 text-muted" asp-for="LoginDto.Email">Usuario</label>
+                                    <input asp-for="LoginDto.Email" type="email" class="form-control" />
+                                    <div asp-validation-for="UserDto.Name" class="invalid-feedback"></div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="mb-2 text-muted" asp-for="LoginDto.Password">Contraseña</label>
+                                    <input asp-for="LoginDto.Password" type="password" class="form-control" />
+                                    <div asp-validation-for="UserDto.Password" class="invalid-feedback"></div>
+                                </div>
+
+                                <div class="d-flex align-items-center">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" asp-for="LoginDto.RememberMe">
+                                        <label asp-for="LoginDto.RememberMe" class="form-check-label">Remember Me</label>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary ms-auto">Entrar</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-footer py-3 border-0">
+                            <div class="text-center">
+                                No tiene un usuario? <a href="SignUp" class="text-dark">Crear Uno</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center mt-5 text-muted">
+                        © 17 July 2017 Copyright: DISTRIBUIDORA LAS TRES JJJ
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+</body>
+</html>

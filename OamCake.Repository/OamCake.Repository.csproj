@@ -13,5 +13,10 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.Compilers" Version="4.2.0-4.final" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OamCake.Common\OamCake.Common.csproj" />
+    <ProjectReference Include="..\OamCake.Data\OamCake.Data.csproj" />
+    <ProjectReference Include="..\OamCake.Entity\OamCake.Entity.csproj" />
+  </ItemGroup>
 
 </Project>

@@ -1,0 +1,46 @@
+﻿@page
+@model OamCake.Web.Pages.Admin.Product.AddModel
+@{
+    ViewData["Page"] = "Formulario de Producto";
+    ViewData[nameof(PageTypes)] = PageTypes.ProductEntry;
+}
+
+<section class="section">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Formulario de Productos</h5>
+                    <form class="row g-3" method="post" enctype="multipart/form-data">
+                        <input type="hidden" asp-for="Product.Id" />
+                        <div class="col-md-3 ">
+                            <label for="input-code" class="form-label">Código</label>
+                            <div class="input-group input-group-outline">
+                                <input type="text" asp-for="Product.Code" class="form-control" id="input-code">
+                                <span asp-validation-for="Product.Code"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <label for="input-name" class="form-label">Nombre</label>
+                            <div class="input-group input-group-outline">
+                                <input type="text" asp-for="Product.Name" class="form-control" id="input-name">
+                                <span asp-validation-for="Product.Name"></span>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label for="input-description" class="form-label">Descripción</label>
+                            <div class="input-group input-group-outline">
+                                <input type="text" asp-for="Product.Description" class="form-control" id="input-description">
+                                <span asp-validation-for="Product.Description"></span>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary"><i class='bx bx-save'></i> Guardar</button>
+                            <a href="/admin/product/list" class="btn btn-light"><i class='bx bx-window-close'></i> Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

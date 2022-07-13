@@ -1,0 +1,70 @@
+﻿@page
+@model OamCake.Web.Pages.Admin.Cake.AddModel
+@{
+    ViewData["Page"] = "Formulario de Pasteles";
+    ViewData[nameof(PageTypes)] = PageTypes.CakeEntry;
+}
+
+<section class="section">
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Formulario de Productos</h5>
+                    <form class="row g-3" method="post" enctype="multipart/form-data">
+                        <input type="hidden" asp-for="CakeCreationDto.Id" />
+                        <div class="col-md-9">
+                            <label for="input-name" class="form-label">Nombre</label>
+                            <div class="input-group input-group-outline">
+                                <input type="text" asp-for="CakeCreationDto.Name" class="form-control" id="input-name">
+                                <span asp-validation-for="CakeCreationDto.Name"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="input-photo" class="form-label">Foto</label>
+                            <div class="input-group input-group-outline">
+                                <input asp-for="CakeCreationDto.Photo" class="form-control form-control-lg" id="input-photo" type="file">
+                                <span asp-validation-for="CakeCreationDto.Photo"></span>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label for="input-category" class="form-label">Categoria</label>
+                            <div class="input-group input-group-outline">
+                                <select class="form-select" aria-label="Default select example" id="input-category" asp-for="CakeCreationDto.CategoryId">
+                                    <option value="">Seleccione una categoria</option>
+                                    @if (Model.CakeCreationDto != null && Model.CakeCreationDto.Id != 0 && Model.CakeCreationDto.CategoryId != null)
+                                    {
+                                        @foreach (var category in Model.Categories)
+                                        {
+                                            if(@category.Id == Model.CakeCreationDto.CategoryId)
+                                            {
+                                                <option selected value="@category.Id">@category.Name</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@category.Id">@category.Name</option>
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        @foreach (var category in Model.Categories)
+                                        {
+                                            <option value="@category.Id">@category.Name</option>
+                                        }
+                                    }
+                                </select>
+                                <span asp-validation-for="CakeCreationDto.CategoryId"></span>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary"><i class='bx bx-save'></i> Guardar</button>
+                            <a href="/App/Products" class="btn btn-light"><i class='bx bx-window-close'></i> Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

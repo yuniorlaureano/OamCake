@@ -1,0 +1,147 @@
+﻿@page
+@model IndexModel
+@{
+    Layout = null;
+}
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Biss Moli Line.Venta y distribución de productos de belleza. Productos Biss Moli line.">
+    <meta name="keywords" content="producto belleza, biss, moli, line,biss moli line, belleza, productos, biss moli, biss line, line biss moli, biss molie-line, productos de ajo, bi moli line, bis mol line, bis moli lain, bis moli lai" />
+    <meta name="author" content="Yunior Miguel Laureano">
+    <meta name="copyright" content="JUAN BEATO MOLINA ARIAS">
+    <meta name="generator" content="Hugo 0.84.0">
+    <title>Biss Moli Line</title>
+    <link href="~/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body>
+    <div class="page-holder">
+        <partial name="_Home_Navbar" />
+        
+        <div class="container pb-3 bg-cover bg-center d-flex align-items-center" style="background-image: url('/assets/img/biss-moli-line.png');height: 30%;background-repeat: no-repeat;background-position: center; background-size: contain;box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 15px;margin-top:14px">
+            <section>
+                <div class="container py-5">
+                </div>
+            </section>
+        </div>
+        <div class="container">
+            <section class="py-5">
+                <header class="text-center">
+                    <p class="small text-muted small text-uppercase mb-1">Listado de productos de belleza</p>
+                    <h2 class="h5 text-uppercase mb-4">Productos</h2>
+                    <div class="row">
+                        <form class="d-flex justify-content-end" method="get" asp-page-handler="OnGet">
+                            <div class="input-group mb-3">
+                                @*<input type="text" class="form-control" asp-for="Search" placeholder="Nombre Producto">*@
+                                <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-search"></i></button>
+                            </div>
+                        </form>
+                    </div>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-end">
+                           @* @for (var i = 0; i < Model.ProductTable.CalcPage(20); i++)
+                            {
+                                <li class="page-item @(i == Model.Pages ? "active": "")" aria-current="page">
+                                    <a class="page-link" href="/?pages=@i&Search=@Model.Search&categoryId=@Model.CategoryId">@(i+1)</a>
+                                </li>
+                            }*@
+                        </ul>
+                    </nav>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                           @* @if(Model.CategoryId == null || Model.CategoryId == 0)
+                            {
+                                <li class="breadcrumb-item active" aria-current="page">Todos</li>
+                            }
+                            else
+                            {
+                                <li class="breadcrumb-item"><a href="/">Todas</a></li>
+                            }
+
+                            @foreach(var category in Model.Categories)
+                            {
+                                @if(category.Id == Model.CategoryId)
+                                {
+                                    <li class="breadcrumb-item active" aria-current="page">@category.Name</li>    
+                                }
+                                else
+                                {
+                                    <li class="breadcrumb-item"><a href="/?categoryId=@category.Id">@category.Name</a></li>    
+                                }
+                            }*@
+                        </ol>
+                    </nav>
+                </header>
+                <div class="row">
+                  @*  @foreach (var product in Model.ProductTable.Data)
+                    {
+                        <!-- PRODUCT-->
+                        <div class="col-xl-3 col-lg-4 col-sm-6">
+                            <div class="product text-center border mb-2">
+                                <div class="position-relative mb-3">
+                                    <div class="badge text-white bg-"></div><a class="d-block" href="/Details?id=@product.Id"><img class="img-fluid w-100" src="/photos/@product.Photo" alt="@product.Description"></a>
+                                    
+                                </div>
+                                <h6> <a class="reset-anchor" href="/Details?id=@product.Id">@product.Name</a></h6>
+                                <p class="small text-muted">$@product.Price</p>
+                            </div>
+                        </div>
+                    }*@
+                </div>
+            </section>
+            <hr />
+            <section class="mt-5">
+                <div class="row mb-2">
+                    <div class="col-md-6">
+                        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                            <div class="col p-4 d-flex flex-column position-static">
+                                <h3 class="mb-0 text-primary">Biss Moli-Line</h3>
+                                <hr />
+                                <p class="card-text mb-auto">Shampoo, acondicionadores, gotas, mascarillas hidratantes, anticaida.</p>
+                            </div>
+                            <div class="col-auto d-none d-lg-block">
+                                <img src="~/assets/img/5858b89a-54cf-46a1-ac65-8b6119db8e14.jfif" style="width:200px;height:200px" alt="Productos bi moli line" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                            <div class="col p-4 d-flex flex-column position-static">
+                                <h3 class="mb-0  text-success">Biss Moli-Line</h3>
+                                <hr />
+                                <p class="mb-auto">Leave-in, mascarillas desintoxicante, gotero crecimiento, antioxidante</p>
+                            </div>
+                            <div class="col-auto d-none d-lg-block">
+                                <img src="~/assets/img/ce05c87e-bd28-472c-bcff-375a0e4c6b63.jfif" style="width:200px;height:200px" alt="Productos bis mol line" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <hr />
+            <div class="container pb-3 bg-cover bg-center d-flex align-items-center bg-light">
+                <section>
+                    <div class="container py-5">
+                        <div class="row px-4 px-lg-5">
+                            <div class="col-lg-6">
+                                <img src="~/assets/img/biss-moli-line.png" atl="biss moli line" title="biss moli line" style="width: 50%; border-radius: 50%; margin-bottom: 14px" />
+                                <h1 class="h2 text-uppercase mb-3">Biss Moli-Line</h1>
+                                <p class="text-muted small text-uppercase mb-2">Venta y distribución de productos belleza</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <section class="py-5">
+                <div class="container p-0">
+                </div>
+            </section>
+        </div>
+        <partial name="_Home_Footer" />
+        <script src="~/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    </div>
+</body>
+</html>

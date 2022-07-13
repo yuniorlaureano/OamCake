@@ -1,6 +1,6 @@
 ﻿namespace OamCake.Entity
 {
-    public class Permit
+    public class Permit : BaseEntity
     {
         public short Id { get; set; }
         public string Name { get; set; }

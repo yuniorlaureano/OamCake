@@ -1,0 +1,82 @@
+﻿@page
+@model OamCake.Web.Pages.Admin.Cake.ListModel
+@{
+    ViewData["Page"] = "Listado de Pasteles";
+    ViewData[nameof(PageTypes)] = PageTypes.CakeList;
+}
+
+<div class="row">
+    <form class="d-flex justify-content-end" method="get" asp-page-handler="OnGet">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" asp-for="Search" placeholder="Nombre del Pastel">
+            <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-search"></i></button>
+        </div>
+    </form>
+</div>
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        @for (var i = 0; i < Model.CakeTable.CalcPage(20); i++)
+        {
+            <li class="page-item @(i == Model.Pages ? "active": "")" aria-current="page">
+                <a class="page-link" href="/cake/list?pages=@i&Search=@Model.Search&categoryId=@Model.CategoryId">@(i+1)</a>
+            </li>
+        }
+    </ul>
+</nav>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        @if (Model.CategoryId == null || Model.CategoryId == 0)
+        {
+            <li class="breadcrumb-item active" aria-current="page">Todos</li>
+        }
+        else
+        {
+            <li class="breadcrumb-item"><a href="/cake/list">Todas</a></li>
+        }
+
+        @foreach (var category in Model.Categories)
+        {
+            @if (category.Id == Model.CategoryId)
+            {
+                <li class="breadcrumb-item active" aria-current="page">@category.Name</li>
+            }
+            else
+            {
+                <li class="breadcrumb-item"><a href="/cake/list?categoryId=@category.Id">@category.Name</a></li>
+            }
+        }
+    </ol>
+</nav>
+<div class="row">
+    <section>
+        <div class="row d-flex justify-content-center">
+            @foreach (var cake in Model.CakeTable.Data)
+            {
+                <div class="card" style="width: 15rem;margin:5px">
+                    <img src="/photos/@cake.Photo" class="card-img-top" alt="@cake.Name" ti>
+                    <div class="card-body">
+                        <h5 class="font-weight-bold d-block">@cake.Name</h5>
+                        <h6 class="badge bg-info text-dark">@cake.Category?.Name</h6>
+                        @*<span class="font-weight-bold d-block">$ @product.Price</span>*@
+                        @*<p class="weight"> <small>@product.Description</small> </p>*@
+                        <a href="/cake/add?id=@cake.Id" style="color: #ffc107;font-size:25px;vertical-align: middle;">
+                            <i class='bx bx-edit'></i>
+                        </a>
+                        <form style="display:inline-block;" asp-page-handler="Delete" method="post" onsubmit="confirmDelete(event)">
+                            <input type="hidden" name="Id" value="@cake.Id" />
+                            <button type="submit" class="btn" style="color:#dc3545;font-size:25px">
+                                <i class='bx bx-trash'></i>
+                            </button>
+                        </form>
+                        <a href="/app/Input?search=@cake.Name" style="color: #C8FACD;font-size:25px;vertical-align: middle;">
+                            <i class="bi bi-box-arrow-in-right"></i>
+                        </a>
+                        <a href="/app/Output?search=@cake.Name" style="color: #FFE7D9;font-size:25px;vertical-align: middle;">
+                            <i class="bi bi-box-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+</div>

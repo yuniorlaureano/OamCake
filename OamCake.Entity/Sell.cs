@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OamCake.Entity
+﻿namespace OamCake.Entity
 {
-    internal class Sell
+    public class Sell : BaseEntity
     {
+        public int Id { get; set; }
     }
 }

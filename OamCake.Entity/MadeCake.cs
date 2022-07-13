@@ -1,6 +1,6 @@
 ﻿namespace OamCake.Entity
 {
-    public class MadeCake
+    public class MadeCake : BaseEntity
     {
         public long Id { get; set; }
         public short CakeId { get; set; }

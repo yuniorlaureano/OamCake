@@ -1,6 +1,6 @@
 ﻿namespace OamCake.Entity
 {
-    public class Proyection
+    public class Proyection : BaseEntity
     {
         public long Id { get; set; }
         public short CakeId { get; set; }

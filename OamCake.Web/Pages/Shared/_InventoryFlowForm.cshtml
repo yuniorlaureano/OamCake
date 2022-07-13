@@ -1,0 +1,53 @@
+﻿@{
+    var i = 0;
+
+}
+<form method="post">
+    <div class="row table-responsive">
+        <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th>
+                        Producto
+                    </th>
+                    <th>
+                        Precio
+                    </th>
+                    <th></th>
+                    <th>
+                        Cantidad
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr></tr>
+               @* @foreach (var product in Model.Stock)
+                {
+                    <tr>
+                        <th>@product.Name</th>
+                        <td>
+                            <input type="hidden" name='CreateStock[@i].ProductId' value="@product.Id" />
+                            <input type="number" name='CreateStock[@i].Price' placeholder='Precio' value="@product.Price" class="form-control" style="width:100px"/>
+                        </td>
+                        <td style="text-align:">
+                            @if (Model.Flow == Entity.Dto.Flow.Input)
+                            {
+                                <label style="border-bottom: solid;width:100px" class="form-control">@product.InStock  +</label>
+                            }
+                            else
+                            {
+                                <label style="border-bottom: solid;width:100px" class="form-control">@product.InStock  -</label>
+                            }
+                        </td>
+                        <td >
+                            <input type="hidden" name='CreateStock[@i].OldQuantity' value="@product.InStock" style="width:100px"/>
+                            <input style="border-bottom: solid;width:100px" type="number" name='CreateStock[@i].Quantity' placeholder='Cantidad' value="0" class="form-control" />
+                        </td>
+                    </tr>
+                    i = i + 1;
+                }*@
+            </tbody>
+        </table>
+    </div>
+    <button class="btn btn-primary pull-left" type="submit"><i class='bx bx-save'></i> Guardar</button>
+</form>

@@ -1,6 +1,6 @@
 ﻿namespace OamCake.Entity
 {
-    public class Catalog
+    public class Catalog : BaseEntity
     {
         public long Id { get; set; }
         public short CakeId { get; set; }

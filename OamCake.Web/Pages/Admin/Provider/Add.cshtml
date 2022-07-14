@@ -1,0 +1,54 @@
+﻿@page
+@model OamCake.Web.Pages.Admin.Provider.AddModel
+@{
+    ViewData["Page"] = "Formulario de Proveedores";
+    ViewData[nameof(PageTypes)] = PageTypes.ProviderEntry;
+}
+
+<section class="section">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Formulario de Proveedores</h5>
+                    <form class="row g-3" method="post" enctype="multipart/form-data">
+                        <input type="hidden" asp-for="Provider.Id" />
+                        <div class="col-12">
+                            <label asp-for="Provider.Name" class="form-label">Nombre</label>
+                            <div class="input-group input-group-outline">
+                                <input type="text" asp-for="Provider.Name" class="form-control">
+                                <span asp-validation-for="Provider.Name"></span>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label asp-for="Provider.Email" class="form-label">Email</label>
+                            <div class="input-group input-group-outline">
+                                <input type="email" asp-for="Provider.Email" class="form-control">
+                                <span asp-validation-for="Provider.Email"></span>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label asp-for="Provider.Phone" class="form-label">Teléfono</label>
+                            <div class="input-group input-group-outline">
+                                <input type="text" asp-for="Provider.Phone" class="form-control">
+                                <span asp-validation-for="Provider.Phone"></span>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label asp-for="Provider.Address" class="form-label">Dirección</label>
+                            <div class="input-group input-group-outline">
+                                <input type="text" asp-for="Provider.Address" class="form-control">
+                                <span asp-validation-for="Provider.Address"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary"><i class='bx bx-save'></i> Guardar</button>
+                            <a href="/admin/provider/list" class="btn btn-light"><i class='bx bx-window-close'></i> Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

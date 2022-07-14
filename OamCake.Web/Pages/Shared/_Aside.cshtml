@@ -90,23 +90,6 @@
             </ul>
         </li>
 
-        <li class="nav-item">
-            <a class="nav-link " data-bs-target="#client-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-people-fill"></i><span>Cliente</span><i class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul id="client-nav" class="nav-content @(CollapseMenuUl(PageTypes.ClientList)) @(CollapseMenuUl(PageTypes.ClientEntry))" data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="/App/Client" class="@(MarkLinkAsActive(PageTypes.ClientList))">
-                        <i class="bi bi-layout-text-window-reverse"></i><span>Lista</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="/App/AddClient" class="@(MarkLinkAsActive(PageTypes.ClientEntry))">
-                        <i class="bi bi-circle"></i><span>Formulario</span>
-                    </a>
-                </li>
-            </ul>
-        </li>
 
         <li class="nav-item">
             <a class="nav-link " data-bs-target="#cake-nav" data-bs-toggle="collapse" href="#">
@@ -138,6 +121,77 @@
                 </li>
                 <li>
                     <a href="/admin/category/add" class="@(MarkLinkAsActive(PageTypes.CategoryEntry))">
+                        <i class="bi bi-circle"></i><span>Formulario</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " data-bs-target="#provider-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-people-fill"></i><span>Proveedor</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="provider-nav" class="nav-content @(CollapseMenuUl(PageTypes.ProviderList)) @(CollapseMenuUl(PageTypes.ProviderEntry))" data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="/admin/provider/list" class="@(MarkLinkAsActive(PageTypes.ProviderList))">
+                        <i class="bi bi-layout-text-window-reverse"></i><span>Lista</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/provider/add" class="@(MarkLinkAsActive(PageTypes.ProviderEntry))">
+                        <i class="bi bi-circle"></i><span>Formulario</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link " data-bs-target="#projection-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-people-fill"></i><span>Proyección</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="projection-nav" class="nav-content @(CollapseMenuUl(PageTypes.ProjectionList)) @(CollapseMenuUl(PageTypes.ProjectionEntry))" data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="/admin/projection/list" class="@(MarkLinkAsActive(PageTypes.ProjectionList))">
+                        <i class="bi bi-layout-text-window-reverse"></i><span>Lista</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/projection/add" class="@(MarkLinkAsActive(PageTypes.ProjectionEntry))">
+                        <i class="bi bi-circle"></i><span>Formulario</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link " data-bs-target="#orderdelivery-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-people-fill"></i><span>Ordenes por Delivery</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="orderdelivery-nav" class="nav-content @(CollapseMenuUl(PageTypes.OrderDeliveryList)) @(CollapseMenuUl(PageTypes.OrderDeliveryEntry))" data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="/admin/delivery/orderdeliverylist" class="@(MarkLinkAsActive(PageTypes.OrderDeliveryList))">
+                        <i class="bi bi-layout-text-window-reverse"></i><span>Lista</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/delivery/add" class="@(MarkLinkAsActive(PageTypes.OrderDeliveryEntry))">
+                        <i class="bi bi-circle"></i><span>Formulario</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link " data-bs-target="#catalog-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-people-fill"></i><span>Catálogos</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="catalog-nav" class="nav-content @(CollapseMenuUl(PageTypes.CatalogList)) @(CollapseMenuUl(PageTypes.CatalogEntry))" data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="/admin/catalog/list" class="@(MarkLinkAsActive(PageTypes.CatalogList))">
+                        <i class="bi bi-layout-text-window-reverse"></i><span>Lista</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/catalog/add" class="@(MarkLinkAsActive(PageTypes.CatalogEntry))">
                         <i class="bi bi-circle"></i><span>Formulario</span>
                     </a>
                 </li>

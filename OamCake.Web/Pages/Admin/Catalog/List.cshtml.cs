@@ -6,13 +6,13 @@ using OamCake.Common;
 using OamCake.Data;
 using OamCake.Data.Dto;
 
-namespace OamCake.Web.Pages.Admin.Product
+namespace OamCake.Web.Pages.Admin.Catalog
 {
     [Authorize]
     public class ListModel : PageModel
     {
         private readonly OamCakeContext _db;
-        public TableResponse<Entity.Product> ProductTable { get; set; } = new TableResponse<Entity.Product>();
+        public TableResponse<Entity.Catalog> CatalogTable { get; set; } = new();
 
         [BindProperty(SupportsGet = true)]
         public int Pages { get; set; }
@@ -30,32 +30,32 @@ namespace OamCake.Web.Pages.Admin.Product
 
         public async Task OnGetAsync()
         {
-            var query = _db.Product.Where(x => x.DeletedAt == null);
+            var query = _db.Catalog.Where(x => x.DeletedAt == null);
 
             if (!String.IsNullOrWhiteSpace(Search))
             {
-                query = query.Where(x => x.Name.Contains(Search) || x.Description.Contains(Search));
+                query = query.Where(x => x.Description.Contains(Search));
             }
 
-            ProductTable.Data = await query
+            CatalogTable.Data = await query
                                         .Skip((Pages) * 20)
                                         .Take(20).ToListAsync();
-            ProductTable.Count = await query.CountAsync();
+            CatalogTable.Count = await query.CountAsync();
         }
 
         public async Task<IActionResult> OnPostDeleteAsync()
         {
             var userId = Int32.Parse(User.Claims.FirstOrDefault(p => p.Type == Constants.CLAIM_ID).Value);
-            var product = await _db.Provider.FirstOrDefaultAsync(x => x.Id == Id);
-            if (product != null)
+            var catalog = await _db.Catalog.FirstOrDefaultAsync(x => x.Id == Id);
+            if (catalog != null)
             {
-                product.DeletedBy = userId;
-                product.DeletedAt = DateTime.UtcNow;
-                _db.Update(product);
+                catalog.DeletedBy = userId;
+                catalog.DeletedAt = DateTime.UtcNow;
+                _db.Update(catalog);
                 await _db.SaveChangesAsync();
             }
 
-            return RedirectToPage("/admin/product/list", new { Pages, Search });
+            return RedirectToPage("/admin/catalog/list", new { Pages, Search });
         }
     }
 }

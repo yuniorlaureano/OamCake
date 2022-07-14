@@ -10,6 +10,27 @@ namespace OamCake.Web.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Catalog",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PublishDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedBy = table.Column<long>(type: "bigint", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedBy = table.Column<long>(type: "bigint", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdatedBy = table.Column<long>(type: "bigint", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Catalog", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Category",
                 columns: table => new
                 {
@@ -54,6 +75,27 @@ namespace OamCake.Web.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Client", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Delivery",
+                columns: table => new
+                {
+                    Id = table.Column<short>(type: "smallint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AssignedUserId = table.Column<int>(type: "int", nullable: false),
+                    VehicleDetail = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    VehiclePhoto = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedBy = table.Column<long>(type: "bigint", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedBy = table.Column<long>(type: "bigint", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdatedBy = table.Column<long>(type: "bigint", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Delivery", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -165,12 +207,32 @@ namespace OamCake.Web.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Projection",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedBy = table.Column<long>(type: "bigint", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedBy = table.Column<long>(type: "bigint", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdatedBy = table.Column<long>(type: "bigint", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Projection", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Provider",
                 columns: table => new
                 {
                     Id = table.Column<short>(type: "smallint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -249,6 +311,34 @@ namespace OamCake.Web.Migrations
                         column: x => x.CategoryId,
                         principalTable: "Category",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Order",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Payment = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(1)", nullable: false),
+                    ClientId = table.Column<long>(type: "bigint", nullable: false),
+                    ClientId1 = table.Column<int>(type: "int", nullable: false),
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedBy = table.Column<long>(type: "bigint", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedBy = table.Column<long>(type: "bigint", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdatedBy = table.Column<long>(type: "bigint", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Order", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Order_Client_ClientId1",
+                        column: x => x.ClientId1,
+                        principalTable: "Client",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -340,33 +430,6 @@ namespace OamCake.Web.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Catalog",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CakeId = table.Column<short>(type: "smallint", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Photo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeletedBy = table.Column<long>(type: "bigint", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<long>(type: "bigint", nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    UpdatedBy = table.Column<long>(type: "bigint", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Catalog", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Catalog_Cake_CakeId",
-                        column: x => x.CakeId,
-                        principalTable: "Cake",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "CustomCake",
                 columns: table => new
                 {
@@ -426,12 +489,13 @@ namespace OamCake.Web.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Proyection",
+                name: "ProjectionDetail",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CakeId = table.Column<short>(type: "smallint", nullable: false),
+                    ProjectionId = table.Column<long>(type: "bigint", nullable: false),
                     Quantity = table.Column<short>(type: "smallint", nullable: false),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedBy = table.Column<long>(type: "bigint", nullable: true),
@@ -442,54 +506,32 @@ namespace OamCake.Web.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Proyection", x => x.Id);
+                    table.PrimaryKey("PK_ProjectionDetail", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Proyection_Cake_CakeId",
+                        name: "FK_ProjectionDetail_Cake_CakeId",
                         column: x => x.CakeId,
                         principalTable: "Cake",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Delivery",
-                columns: table => new
-                {
-                    Id = table.Column<short>(type: "smallint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<long>(type: "bigint", nullable: true),
-                    VehicleDetail = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    VehiclePhoto = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UserId1 = table.Column<int>(type: "int", nullable: true),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeletedBy = table.Column<long>(type: "bigint", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<long>(type: "bigint", nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    UpdatedBy = table.Column<long>(type: "bigint", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Delivery", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Delivery_User_UserId1",
-                        column: x => x.UserId1,
-                        principalTable: "User",
-                        principalColumn: "Id");
+                        name: "FK_ProjectionDetail_Projection_ProjectionId",
+                        column: x => x.ProjectionId,
+                        principalTable: "Projection",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Order",
+                name: "OrderDelivery",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<long>(type: "bigint", nullable: true),
-                    Payment = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    OrderId = table.Column<long>(type: "bigint", nullable: false),
+                    DeliveryId = table.Column<short>(type: "smallint", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(1)", nullable: false),
-                    ClientId = table.Column<long>(type: "bigint", nullable: false),
-                    UserId1 = table.Column<int>(type: "int", nullable: true),
-                    ClientId1 = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedBy = table.Column<long>(type: "bigint", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -499,18 +541,19 @@ namespace OamCake.Web.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Order", x => x.Id);
+                    table.PrimaryKey("PK_OrderDelivery", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Order_Client_ClientId1",
-                        column: x => x.ClientId1,
-                        principalTable: "Client",
+                        name: "FK_OrderDelivery_Delivery_DeliveryId",
+                        column: x => x.DeliveryId,
+                        principalTable: "Delivery",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Order_User_UserId1",
-                        column: x => x.UserId1,
-                        principalTable: "User",
-                        principalColumn: "Id");
+                        name: "FK_OrderDelivery_Order_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Order",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -610,41 +653,6 @@ namespace OamCake.Web.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "OrderDelivery",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    OrderId = table.Column<long>(type: "bigint", nullable: false),
-                    DeliveryId = table.Column<short>(type: "smallint", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(1)", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeletedBy = table.Column<long>(type: "bigint", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<long>(type: "bigint", nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    UpdatedBy = table.Column<long>(type: "bigint", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_OrderDelivery", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_OrderDelivery_Delivery_DeliveryId",
-                        column: x => x.DeliveryId,
-                        principalTable: "Delivery",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_OrderDelivery_Order_OrderId",
-                        column: x => x.OrderId,
-                        principalTable: "Order",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "OrderDetail",
                 columns: table => new
                 {
@@ -689,19 +697,9 @@ namespace OamCake.Web.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Catalog_CakeId",
-                table: "Catalog",
-                column: "CakeId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_CustomCake_CakeId",
                 table: "CustomCake",
                 column: "CakeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Delivery_UserId1",
-                table: "Delivery",
-                column: "UserId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ingredient_CakeId",
@@ -754,11 +752,6 @@ namespace OamCake.Web.Migrations
                 column: "ClientId1");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Order_UserId1",
-                table: "Order",
-                column: "UserId1");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_OrderDelivery_DeliveryId",
                 table: "OrderDelivery",
                 column: "DeliveryId");
@@ -784,9 +777,14 @@ namespace OamCake.Web.Migrations
                 column: "OrderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Proyection_CakeId",
-                table: "Proyection",
+                name: "IX_ProjectionDetail_CakeId",
+                table: "ProjectionDetail",
                 column: "CakeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProjectionDetail_ProjectionId",
+                table: "ProjectionDetail",
+                column: "ProjectionId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_User_EmployeeId",
@@ -823,7 +821,7 @@ namespace OamCake.Web.Migrations
                 name: "OrderDetail");
 
             migrationBuilder.DropTable(
-                name: "Proyection");
+                name: "ProjectionDetail");
 
             migrationBuilder.DropTable(
                 name: "Sell");
@@ -853,6 +851,12 @@ namespace OamCake.Web.Migrations
                 name: "Order");
 
             migrationBuilder.DropTable(
+                name: "Projection");
+
+            migrationBuilder.DropTable(
+                name: "User");
+
+            migrationBuilder.DropTable(
                 name: "Provider");
 
             migrationBuilder.DropTable(
@@ -868,13 +872,10 @@ namespace OamCake.Web.Migrations
                 name: "Client");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "Employee");
 
             migrationBuilder.DropTable(
                 name: "Category");
-
-            migrationBuilder.DropTable(
-                name: "Employee");
         }
     }
 }

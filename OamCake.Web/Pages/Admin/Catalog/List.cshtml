@@ -1,0 +1,80 @@
+﻿@page
+@model OamCake.Web.Pages.Admin.Catalog.ListModel
+@{
+    ViewData["Page"] = "Listado de Catálogos";
+    ViewData[nameof(PageTypes)] = PageTypes.CatalogList;
+}
+
+<section class="section dashboard">
+    <div class="row">
+        <div class="col-12">
+            <div class="card recent-sales overflow-auto">
+
+                <div class="filter">
+                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                        <li class="dropdown-header text-start">
+                            <h6>Filter</h6>
+                        </li>
+
+                        <li><a class="dropdown-item" href="/admin/catalog/Add">Nuevo</a></li>
+                    </ul>
+                </div>
+
+                <div class="card-body">
+                    <h5 class="card-title">Catálogos</h5>
+                    <div class="input-group mb-3 d-flex justify-content-end">
+                        <form class="d-flex justify-content-end" method="get" asp-page-handler="OnGet">
+                            <input type="text" class="form-control" asp-for="Search" placeholder="Buscar por nombre">
+                            <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-search"></i></button>
+                        </form>
+                    </div>
+                    <table class="table table-borderless">
+                        <thead>
+                            <tr>
+                                <th scope="col">Descripción</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Fecha de Publicación</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var catalog in Model.CatalogTable.Data)
+                            {
+                                <tr>
+                                    <td>@catalog.Description</td>
+                                    <td>@catalog.Status</td>
+                                    <td>@catalog.PublishDate</td>
+                                    <td style="text-align:right">
+                                        <a href="/admin/catalog/add?Id=@catalog.Id" class="btn btn-warning">
+                                            <i class='bx bx-edit'></i>
+                                        </a>
+                                        <partial name="_DeleteForm" model="@catalog.Id" />
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan=4">
+                                    <nav aria-label="Page navigation">
+                                        <ul class="pagination pagination-sm justify-content-end">
+                                            @for (var i = 0; i < Model.CatalogTable.CalcPage(20); i++)
+                                            {
+                                                <li class="page-item @(i == Model.Pages ? "active": "")" aria-current="page">
+                                                    <a class="page-link" href="/admin/catalog/List?pages=@i&Search=@Model.Search">@(i+1)</a>
+                                                </li>
+                                            }
+                                        </ul>
+                                    </nav>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+
+                </div>
+
+            </div>
+        </div><!-- End Recent Sales -->
+    </div>
+</section>

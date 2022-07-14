@@ -13,8 +13,14 @@
         ClientEntry,
 
 
-
-
+        CatalogList,
+        CatalogEntry,
+        OrderDeliveryList,
+        OrderDeliveryEntry,
+        ProjectionList,
+        ProjectionEntry,
+        ProviderList,
+        ProviderEntry,
         ProductList,
         ProductEntry,
         CakeEntry,

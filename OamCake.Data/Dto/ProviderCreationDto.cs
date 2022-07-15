@@ -5,7 +5,7 @@ namespace OamCake.Data.Dto
 {
     public class ProviderCreationDto
     {
-        public short Id { get; set; }
+        public long Id { get; set; }
         [Required(ErrorMessage ="El nombre es requerido")]
         public string Name { get; set; }
 

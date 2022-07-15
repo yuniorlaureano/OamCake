@@ -3,6 +3,7 @@ using Microsoft.Extensions.FileProviders;
 using OamCake.Common;
 using OamCake.Common.Helpers;
 using OamCake.Data;
+using OamCake.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,7 @@ builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 builder.Services.AddDbContext<OamCakeContext>(options => options
         .UseSqlServer(builder.Configuration.GetConnectionString("Default"), x => x.MigrationsAssembly("OamCake.Web")));
 
+builder.Services.AddScoped<IInventoryRepository, InventoryRepository>();
 builder.Services.AddScoped<IConnection, Connection>();
 builder.Services.AddScoped<IDapperHelper, DapperHelper>();
 

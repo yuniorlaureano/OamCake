@@ -1,0 +1,80 @@
+﻿@page
+@model OamCake.Web.Pages.Admin.Client.ListModel
+@{
+    ViewData["Page"] = "Listado de Clientes";
+    ViewData[nameof(PageTypes)] = PageTypes.ClientList;
+}
+
+<section class="section dashboard">
+    <div class="row">
+        <div class="col-12">
+            <div class="card recent-sales overflow-auto">
+
+                <div class="filter">
+                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                        <li class="dropdown-header text-start">
+                            <h6>Filter</h6>
+                        </li>
+
+                        <li><a class="dropdown-item" href="/admin/client/Add">Nuevo</a></li>
+                    </ul>
+                </div>
+
+                <div class="card-body">
+                    <h5 class="card-title">Clientes</h5>
+                    <div class="input-group mb-3 d-flex justify-content-end">
+                        <form class="d-flex justify-content-end" method="get" asp-page-handler="OnGet">
+                            <input type="text" class="form-control" asp-for="Search" placeholder="Buscar por nombre">
+                            <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-search"></i></button>
+                        </form>
+                    </div>
+                    <table class="table table-borderless">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Teléfono</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var client in Model.ClientTable.Data)
+                            {
+                                <tr>
+                                    <td>@($"{client.Name} {client.LastName}")</td>
+                                    <td>@client.Email</td>
+                                    <td>@client.Phone</td>
+                                    <td style="text-align:right">
+                                        <a href="/admin/client/add?Id=@client.Id" class="btn btn-warning">
+                                            <i class='bx bx-edit'></i>
+                                        </a>
+                                        <partial name="_DeleteForm" model="@client.Id" />
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan=4">
+                                    <nav aria-label="Page navigation">
+                                        <ul class="pagination pagination-sm justify-content-end">
+                                            @for (var i = 0; i < Model.ClientTable.CalcPage(20); i++)
+                                            {
+                                                <li class="page-item @(i == Model.Pages ? "active": "")" aria-current="page">
+                                                    <a class="page-link" href="/admin/client/List?pages=@i&Search=@Model.Search">@(i+1)</a>
+                                                </li>
+                                            }
+                                        </ul>
+                                    </nav>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+
+                </div>
+
+            </div>
+        </div><!-- End Recent Sales -->
+    </div>
+</section>

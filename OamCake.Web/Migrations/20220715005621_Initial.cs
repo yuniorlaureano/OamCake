@@ -34,7 +34,7 @@ namespace OamCake.Web.Migrations
                 name: "Category",
                 columns: table => new
                 {
-                    Id = table.Column<short>(type: "smallint", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -53,7 +53,7 @@ namespace OamCake.Web.Migrations
                 name: "Client",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -78,31 +78,10 @@ namespace OamCake.Web.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Delivery",
-                columns: table => new
-                {
-                    Id = table.Column<short>(type: "smallint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    AssignedUserId = table.Column<int>(type: "int", nullable: false),
-                    VehicleDetail = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    VehiclePhoto = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeletedBy = table.Column<long>(type: "bigint", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<long>(type: "bigint", nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    UpdatedBy = table.Column<long>(type: "bigint", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Delivery", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Employee",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -127,7 +106,7 @@ namespace OamCake.Web.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CakeId = table.Column<short>(type: "smallint", nullable: false),
+                    CakeId = table.Column<long>(type: "bigint", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(1)", nullable: false),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -146,7 +125,7 @@ namespace OamCake.Web.Migrations
                 name: "Menu",
                 columns: table => new
                 {
-                    Id = table.Column<short>(type: "smallint", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -168,7 +147,7 @@ namespace OamCake.Web.Migrations
                 name: "Permit",
                 columns: table => new
                 {
-                    Id = table.Column<short>(type: "smallint", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -189,10 +168,11 @@ namespace OamCake.Web.Migrations
                 name: "Product",
                 columns: table => new
                 {
-                    Id = table.Column<short>(type: "smallint", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedBy = table.Column<long>(type: "bigint", nullable: true),
@@ -230,7 +210,7 @@ namespace OamCake.Web.Migrations
                 name: "Provider",
                 columns: table => new
                 {
-                    Id = table.Column<short>(type: "smallint", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -252,7 +232,7 @@ namespace OamCake.Web.Migrations
                 name: "Role",
                 columns: table => new
                 {
-                    Id = table.Column<short>(type: "smallint", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -273,7 +253,7 @@ namespace OamCake.Web.Migrations
                 name: "Sell",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedBy = table.Column<long>(type: "bigint", nullable: true),
@@ -291,11 +271,11 @@ namespace OamCake.Web.Migrations
                 name: "Cake",
                 columns: table => new
                 {
-                    Id = table.Column<short>(type: "smallint", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Photo = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CategoryId = table.Column<short>(type: "smallint", nullable: true),
+                    CategoryId = table.Column<long>(type: "bigint", nullable: true),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedBy = table.Column<long>(type: "bigint", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -322,7 +302,6 @@ namespace OamCake.Web.Migrations
                     Payment = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(1)", nullable: false),
                     ClientId = table.Column<long>(type: "bigint", nullable: false),
-                    ClientId1 = table.Column<int>(type: "int", nullable: false),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedBy = table.Column<long>(type: "bigint", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -334,9 +313,36 @@ namespace OamCake.Web.Migrations
                 {
                     table.PrimaryKey("PK_Order", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Order_Client_ClientId1",
-                        column: x => x.ClientId1,
+                        name: "FK_Order_Client_ClientId",
+                        column: x => x.ClientId,
                         principalTable: "Client",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Delivery",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    VehicleDetail = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    VehiclePhoto = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EmployeeId = table.Column<long>(type: "bigint", nullable: false),
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedBy = table.Column<long>(type: "bigint", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedBy = table.Column<long>(type: "bigint", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdatedBy = table.Column<long>(type: "bigint", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Delivery", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Delivery_Employee_EmployeeId",
+                        column: x => x.EmployeeId,
+                        principalTable: "Employee",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -345,9 +351,9 @@ namespace OamCake.Web.Migrations
                 name: "User",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    EmployeeId = table.Column<int>(type: "int", nullable: false),
+                    EmployeeId = table.Column<long>(type: "bigint", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
@@ -373,10 +379,10 @@ namespace OamCake.Web.Migrations
                 name: "MenuPermit",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    MenuId = table.Column<short>(type: "smallint", nullable: false),
-                    PermitId = table.Column<short>(type: "smallint", nullable: false),
+                    MenuId = table.Column<long>(type: "bigint", nullable: false),
+                    PermitId = table.Column<long>(type: "bigint", nullable: false),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedBy = table.Column<long>(type: "bigint", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -410,7 +416,7 @@ namespace OamCake.Web.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Mode = table.Column<string>(type: "nvarchar(1)", nullable: false),
                     TotalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    ProviderId = table.Column<short>(type: "smallint", nullable: false),
+                    ProviderId = table.Column<long>(type: "bigint", nullable: false),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedBy = table.Column<long>(type: "bigint", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -435,7 +441,7 @@ namespace OamCake.Web.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CakeId = table.Column<short>(type: "smallint", nullable: true),
+                    CakeId = table.Column<long>(type: "bigint", nullable: true),
                     Photo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Detail = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -463,8 +469,8 @@ namespace OamCake.Web.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Quantity = table.Column<byte>(type: "tinyint", nullable: false),
                     Unid = table.Column<string>(type: "nvarchar(1)", nullable: false),
-                    ProductId = table.Column<short>(type: "smallint", nullable: true),
-                    CakeId = table.Column<short>(type: "smallint", nullable: false),
+                    ProductId = table.Column<long>(type: "bigint", nullable: true),
+                    CakeId = table.Column<long>(type: "bigint", nullable: false),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedBy = table.Column<long>(type: "bigint", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -494,9 +500,9 @@ namespace OamCake.Web.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CakeId = table.Column<short>(type: "smallint", nullable: false),
+                    CakeId = table.Column<long>(type: "bigint", nullable: false),
                     ProjectionId = table.Column<long>(type: "bigint", nullable: false),
-                    Quantity = table.Column<short>(type: "smallint", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedBy = table.Column<long>(type: "bigint", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -528,7 +534,7 @@ namespace OamCake.Web.Migrations
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     OrderId = table.Column<long>(type: "bigint", nullable: false),
-                    DeliveryId = table.Column<short>(type: "smallint", nullable: false),
+                    DeliveryId = table.Column<long>(type: "bigint", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(1)", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -560,10 +566,10 @@ namespace OamCake.Web.Migrations
                 name: "UserRol",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleId = table.Column<byte>(type: "tinyint", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
+                    RoleId = table.Column<long>(type: "bigint", nullable: false),
+                    UserId = table.Column<long>(type: "bigint", nullable: false),
                     AssignedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedBy = table.Column<long>(type: "bigint", nullable: true),
@@ -587,11 +593,10 @@ namespace OamCake.Web.Migrations
                 name: "MenuRolPermit",
                 columns: table => new
                 {
-                    Id = table.Column<short>(type: "smallint", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    MenuPermitId = table.Column<short>(type: "smallint", nullable: false),
-                    RoleId = table.Column<short>(type: "smallint", nullable: false),
-                    MenuPermitId1 = table.Column<int>(type: "int", nullable: false),
+                    MenuPermitId = table.Column<long>(type: "bigint", nullable: false),
+                    RoleId = table.Column<long>(type: "bigint", nullable: false),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedBy = table.Column<long>(type: "bigint", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -603,8 +608,8 @@ namespace OamCake.Web.Migrations
                 {
                     table.PrimaryKey("PK_MenuRolPermit", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_MenuRolPermit_MenuPermit_MenuPermitId1",
-                        column: x => x.MenuPermitId1,
+                        name: "FK_MenuRolPermit_MenuPermit_MenuPermitId",
+                        column: x => x.MenuPermitId,
                         principalTable: "MenuPermit",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -623,10 +628,10 @@ namespace OamCake.Web.Migrations
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IventoryProviderId = table.Column<long>(type: "bigint", nullable: false),
-                    ProductId = table.Column<short>(type: "smallint", nullable: false),
+                    ProductId = table.Column<long>(type: "bigint", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Quantity = table.Column<short>(type: "smallint", nullable: false),
-                    Action = table.Column<string>(type: "nvarchar(1)", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     InventoryProviderId = table.Column<long>(type: "bigint", nullable: false),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedBy = table.Column<long>(type: "bigint", nullable: true),
@@ -662,7 +667,6 @@ namespace OamCake.Web.Migrations
                     OrderId = table.Column<long>(type: "bigint", nullable: false),
                     CustomCakeId = table.Column<long>(type: "bigint", nullable: true),
                     Quantity = table.Column<short>(type: "smallint", nullable: false),
-                    CakeId1 = table.Column<short>(type: "smallint", nullable: true),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedBy = table.Column<long>(type: "bigint", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -674,8 +678,8 @@ namespace OamCake.Web.Migrations
                 {
                     table.PrimaryKey("PK_OrderDetail", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_OrderDetail_Cake_CakeId1",
-                        column: x => x.CakeId1,
+                        name: "FK_OrderDetail_Cake_CakeId",
+                        column: x => x.CakeId,
                         principalTable: "Cake",
                         principalColumn: "Id");
                     table.ForeignKey(
@@ -700,6 +704,11 @@ namespace OamCake.Web.Migrations
                 name: "IX_CustomCake_CakeId",
                 table: "CustomCake",
                 column: "CakeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Delivery_EmployeeId",
+                table: "Delivery",
+                column: "EmployeeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ingredient_CakeId",
@@ -737,9 +746,9 @@ namespace OamCake.Web.Migrations
                 column: "PermitId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MenuRolPermit_MenuPermitId1",
+                name: "IX_MenuRolPermit_MenuPermitId",
                 table: "MenuRolPermit",
-                column: "MenuPermitId1");
+                column: "MenuPermitId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_MenuRolPermit_RoleId",
@@ -747,9 +756,9 @@ namespace OamCake.Web.Migrations
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Order_ClientId1",
+                name: "IX_Order_ClientId",
                 table: "Order",
-                column: "ClientId1");
+                column: "ClientId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderDelivery_DeliveryId",
@@ -762,9 +771,9 @@ namespace OamCake.Web.Migrations
                 column: "OrderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrderDetail_CakeId1",
+                name: "IX_OrderDetail_CakeId",
                 table: "OrderDetail",
-                column: "CakeId1");
+                column: "CakeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderDetail_CustomCakeId",

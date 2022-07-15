@@ -2,6 +2,6 @@
 {
     public class Sell : BaseEntity
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
     }
 }

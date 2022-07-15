@@ -1,0 +1,25 @@
+﻿@page
+@model OamCake.Web.Pages.Admin.Inventory.Output.Add
+@{
+    ViewData["Page"] = "Formulario de Salida";
+    ViewData[nameof(PageTypes)] = PageTypes.OutputEntry;
+}
+<section class="section">
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Formulario de Salidas</h5>
+                    <div class="input-group mb-3 d-flex justify-content-end">
+                        <form class="d-flex justify-content-end" method="get" asp-page-handler="OnGet">
+                            <input type="text" class="form-control" asp-for="Search" placeholder="Nombre Producto">
+                            <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-search"></i></button>
+                        </form>
+                    </div>
+                    <partial name="_InventoryFlowForm" model="Model.InventoryFlowDto"></partial>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

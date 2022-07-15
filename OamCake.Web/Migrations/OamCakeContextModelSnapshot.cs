@@ -24,14 +24,14 @@ namespace OamCake.Web.Migrations
 
             modelBuilder.Entity("OamCake.Entity.Cake", b =>
                 {
-                    b.Property<short>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("smallint");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<short>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
-                    b.Property<short?>("CategoryId")
-                        .HasColumnType("smallint");
+                    b.Property<long?>("CategoryId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -109,11 +109,11 @@ namespace OamCake.Web.Migrations
 
             modelBuilder.Entity("OamCake.Entity.Category", b =>
                 {
-                    b.Property<short>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("smallint");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<short>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -144,11 +144,11 @@ namespace OamCake.Web.Migrations
 
             modelBuilder.Entity("OamCake.Entity.Client", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -219,8 +219,8 @@ namespace OamCake.Web.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
-                    b.Property<short?>("CakeId")
-                        .HasColumnType("smallint");
+                    b.Property<long?>("CakeId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -257,14 +257,11 @@ namespace OamCake.Web.Migrations
 
             modelBuilder.Entity("OamCake.Entity.Delivery", b =>
                 {
-                    b.Property<short>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("smallint");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<short>("Id"), 1L, 1);
-
-                    b.Property<int>("AssignedUserId")
-                        .HasColumnType("int");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -276,6 +273,9 @@ namespace OamCake.Web.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<long?>("DeletedBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("EmployeeId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime?>("UpdatedAt")
@@ -294,16 +294,18 @@ namespace OamCake.Web.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("EmployeeId");
+
                     b.ToTable("Delivery");
                 });
 
             modelBuilder.Entity("OamCake.Entity.Employee", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -355,8 +357,8 @@ namespace OamCake.Web.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<short>("Id"), 1L, 1);
 
-                    b.Property<short>("CakeId")
-                        .HasColumnType("smallint");
+                    b.Property<long>("CakeId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -370,8 +372,8 @@ namespace OamCake.Web.Migrations
                     b.Property<long?>("DeletedBy")
                         .HasColumnType("bigint");
 
-                    b.Property<short?>("ProductId")
-                        .HasColumnType("smallint");
+                    b.Property<long?>("ProductId")
+                        .HasColumnType("bigint");
 
                     b.Property<byte>("Quantity")
                         .HasColumnType("tinyint");
@@ -403,10 +405,6 @@ namespace OamCake.Web.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
-                    b.Property<string>("Action")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(1)");
-
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -428,11 +426,14 @@ namespace OamCake.Web.Migrations
                     b.Property<long>("IventoryProviderId")
                         .HasColumnType("bigint");
 
-                    b.Property<short>("ProductId")
-                        .HasColumnType("smallint");
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<short>("Quantity")
-                        .HasColumnType("smallint");
+                    b.Property<long>("ProductId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -477,8 +478,8 @@ namespace OamCake.Web.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(1)");
 
-                    b.Property<short>("ProviderId")
-                        .HasColumnType("smallint");
+                    b.Property<long>("ProviderId")
+                        .HasColumnType("bigint");
 
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("decimal(18,2)");
@@ -504,8 +505,8 @@ namespace OamCake.Web.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
-                    b.Property<short>("CakeId")
-                        .HasColumnType("smallint");
+                    b.Property<long>("CakeId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -539,11 +540,11 @@ namespace OamCake.Web.Migrations
 
             modelBuilder.Entity("OamCake.Entity.Menu", b =>
                 {
-                    b.Property<short>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("smallint");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<short>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -586,11 +587,11 @@ namespace OamCake.Web.Migrations
 
             modelBuilder.Entity("OamCake.Entity.MenuPermit", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -604,11 +605,11 @@ namespace OamCake.Web.Migrations
                     b.Property<long?>("DeletedBy")
                         .HasColumnType("bigint");
 
-                    b.Property<short>("MenuId")
-                        .HasColumnType("smallint");
+                    b.Property<long>("MenuId")
+                        .HasColumnType("bigint");
 
-                    b.Property<short>("PermitId")
-                        .HasColumnType("smallint");
+                    b.Property<long>("PermitId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -627,11 +628,11 @@ namespace OamCake.Web.Migrations
 
             modelBuilder.Entity("OamCake.Entity.MenuRolPermit", b =>
                 {
-                    b.Property<short>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("smallint");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<short>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -645,14 +646,11 @@ namespace OamCake.Web.Migrations
                     b.Property<long?>("DeletedBy")
                         .HasColumnType("bigint");
 
-                    b.Property<short>("MenuPermitId")
-                        .HasColumnType("smallint");
+                    b.Property<long>("MenuPermitId")
+                        .HasColumnType("bigint");
 
-                    b.Property<int>("MenuPermitId1")
-                        .HasColumnType("int");
-
-                    b.Property<short>("RoleId")
-                        .HasColumnType("smallint");
+                    b.Property<long>("RoleId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -662,7 +660,7 @@ namespace OamCake.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MenuPermitId1");
+                    b.HasIndex("MenuPermitId");
 
                     b.HasIndex("RoleId");
 
@@ -679,9 +677,6 @@ namespace OamCake.Web.Migrations
 
                     b.Property<long>("ClientId")
                         .HasColumnType("bigint");
-
-                    b.Property<int>("ClientId1")
-                        .HasColumnType("int");
 
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -710,7 +705,7 @@ namespace OamCake.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClientId1");
+                    b.HasIndex("ClientId");
 
                     b.ToTable("Order");
                 });
@@ -738,8 +733,8 @@ namespace OamCake.Web.Migrations
                     b.Property<long?>("DeletedBy")
                         .HasColumnType("bigint");
 
-                    b.Property<short>("DeliveryId")
-                        .HasColumnType("smallint");
+                    b.Property<long>("DeliveryId")
+                        .HasColumnType("bigint");
 
                     b.Property<long>("OrderId")
                         .HasColumnType("bigint");
@@ -777,9 +772,6 @@ namespace OamCake.Web.Migrations
                     b.Property<long?>("CakeId")
                         .HasColumnType("bigint");
 
-                    b.Property<short?>("CakeId1")
-                        .HasColumnType("smallint");
-
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -809,7 +801,7 @@ namespace OamCake.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CakeId1");
+                    b.HasIndex("CakeId");
 
                     b.HasIndex("CustomCakeId");
 
@@ -820,11 +812,11 @@ namespace OamCake.Web.Migrations
 
             modelBuilder.Entity("OamCake.Entity.Permit", b =>
                 {
-                    b.Property<short>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("smallint");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<short>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -863,11 +855,11 @@ namespace OamCake.Web.Migrations
 
             modelBuilder.Entity("OamCake.Entity.Product", b =>
                 {
-                    b.Property<short>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("smallint");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<short>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<string>("Code")
                         .IsRequired()
@@ -892,6 +884,9 @@ namespace OamCake.Web.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -951,8 +946,8 @@ namespace OamCake.Web.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
-                    b.Property<short>("CakeId")
-                        .HasColumnType("smallint");
+                    b.Property<long>("CakeId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -969,8 +964,8 @@ namespace OamCake.Web.Migrations
                     b.Property<long>("ProjectionId")
                         .HasColumnType("bigint");
 
-                    b.Property<short>("Quantity")
-                        .HasColumnType("smallint");
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -989,11 +984,11 @@ namespace OamCake.Web.Migrations
 
             modelBuilder.Entity("OamCake.Entity.Provider", b =>
                 {
-                    b.Property<short>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("smallint");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<short>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -1036,11 +1031,11 @@ namespace OamCake.Web.Migrations
 
             modelBuilder.Entity("OamCake.Entity.Role", b =>
                 {
-                    b.Property<short>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("smallint");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<short>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -1079,11 +1074,11 @@ namespace OamCake.Web.Migrations
 
             modelBuilder.Entity("OamCake.Entity.Sell", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -1110,11 +1105,11 @@ namespace OamCake.Web.Migrations
 
             modelBuilder.Entity("OamCake.Entity.User", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -1132,8 +1127,8 @@ namespace OamCake.Web.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
+                    b.Property<long>("EmployeeId")
+                        .HasColumnType("bigint");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
@@ -1157,11 +1152,11 @@ namespace OamCake.Web.Migrations
 
             modelBuilder.Entity("OamCake.Entity.UserRol", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<DateTime>("AssignedDate")
                         .HasColumnType("datetime2");
@@ -1178,8 +1173,8 @@ namespace OamCake.Web.Migrations
                     b.Property<long?>("DeletedBy")
                         .HasColumnType("bigint");
 
-                    b.Property<byte>("RoleId")
-                        .HasColumnType("tinyint");
+                    b.Property<long>("RoleId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -1187,8 +1182,8 @@ namespace OamCake.Web.Migrations
                     b.Property<long?>("UpdatedBy")
                         .HasColumnType("bigint");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -1213,6 +1208,17 @@ namespace OamCake.Web.Migrations
                         .HasForeignKey("CakeId");
 
                     b.Navigation("Cake");
+                });
+
+            modelBuilder.Entity("OamCake.Entity.Delivery", b =>
+                {
+                    b.HasOne("OamCake.Entity.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
                 });
 
             modelBuilder.Entity("OamCake.Entity.Ingredient", b =>
@@ -1285,7 +1291,7 @@ namespace OamCake.Web.Migrations
                 {
                     b.HasOne("OamCake.Entity.MenuPermit", "MenuPermit")
                         .WithMany()
-                        .HasForeignKey("MenuPermitId1")
+                        .HasForeignKey("MenuPermitId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1304,7 +1310,7 @@ namespace OamCake.Web.Migrations
                 {
                     b.HasOne("OamCake.Entity.Client", "Client")
                         .WithMany()
-                        .HasForeignKey("ClientId1")
+                        .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1334,7 +1340,7 @@ namespace OamCake.Web.Migrations
                 {
                     b.HasOne("OamCake.Entity.Cake", "Cake")
                         .WithMany()
-                        .HasForeignKey("CakeId1");
+                        .HasForeignKey("CakeId");
 
                     b.HasOne("OamCake.Entity.CustomCake", "CustomCake")
                         .WithMany()

@@ -13,7 +13,6 @@ namespace OamCake.Web.Pages.Admin.Delivery
     {
         private readonly OamCakeContext _db;
         public TableResponse<Entity.OrderDelivery> OrderDeliveryTable { get; set; } = new();
-        public Dictionary<int, Entity.Employee> Users = new();
 
         [BindProperty(SupportsGet = true)]
         public int Pages { get; set; }
@@ -32,9 +31,11 @@ namespace OamCake.Web.Pages.Admin.Delivery
         public async Task OnGetAsync()
         {
             var query = _db.OrderDelivery
-                           .Include(x => x.Delivery)
                            .Include(x => x.Order)
-                           .ThenInclude(x => x.Client).Where(x => x.DeletedAt == null);
+                           .ThenInclude(x => x.Client)
+                           .Include(x => x.Delivery)
+                           .ThenInclude(x => x.Employee)
+                           .Where(x => x.DeletedAt == null);
 
             if (!String.IsNullOrWhiteSpace(Search))
             {
@@ -45,14 +46,6 @@ namespace OamCake.Web.Pages.Admin.Delivery
                                         .Skip((Pages) * 20)
                                         .Take(20).ToListAsync();
             OrderDeliveryTable.Count = await query.CountAsync();
-
-            var deliveriesId = OrderDeliveryTable.Data
-                .Select(x => x.Delivery.AssignedUserId)
-                .ToList();
-
-            Users = _db.User.Include(x => x.Employee)
-                                .Where(x => deliveriesId.Contains(x.Id))
-                                .ToDictionary(k => k.Id, v => v.Employee);
         }
 
         public async Task<IActionResult> OnPostDeleteAsync()

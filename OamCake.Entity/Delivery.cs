@@ -2,9 +2,11 @@
 {
     public class Delivery : BaseEntity
     {
-        public short Id { get; set; }
-        public int AssignedUserId { get; set; }
+        public long Id { get; set; }
         public string VehicleDetail { get; set; }
         public string VehiclePhoto { get; set; }
+
+        public long EmployeeId { get; set; }
+        public Employee Employee { get; set; }
     }
 }

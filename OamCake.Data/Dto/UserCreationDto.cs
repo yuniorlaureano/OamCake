@@ -5,7 +5,7 @@ namespace OamCake.Data.Dto
 {
     public class UserCreationDto
     {
-        public int? Id { get; set; }
+        public long? Id { get; set; }
 
         [Required(ErrorMessage = "El nombre es requerido")]
         public string Name { get; set; }
@@ -32,6 +32,6 @@ namespace OamCake.Data.Dto
         public string ConfirmPassword { get; set; }
 
         public bool IsActive { get; set; }
-        public int EmployeeId { get; set; }
+        public long EmployeeId { get; set; }
     }
 }

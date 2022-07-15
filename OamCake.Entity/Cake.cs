@@ -2,11 +2,11 @@
 {
     public class Cake : BaseEntity
     {
-        public short Id { get; set; }
+        public long Id { get; set; }
         public string Name { get; set; }
         public string? Photo { get; set; }
 
-        public short? CategoryId { get; set; }
+        public long? CategoryId { get; set; }
         public Category? Category { get; set; }
     }
 }

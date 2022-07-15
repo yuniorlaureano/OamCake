@@ -2,9 +2,9 @@
 {
     public class MenuRolPermit : BaseEntity
     {
-        public short Id { get; set; }
-        public short MenuPermitId { get; set; }
-        public short RoleId { get; set; }
+        public long Id { get; set; }
+        public long MenuPermitId { get; set; }
+        public long RoleId { get; set; }
 
         public MenuPermit MenuPermit { get; set; }
         public Role Role { get; set; }

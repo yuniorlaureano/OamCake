@@ -43,7 +43,7 @@
                             @foreach (var orderDelivery in Model.OrderDeliveryTable.Data)
                             {
                                 <tr>
-                                    <td>@Model.Users[@orderDelivery.Delivery.AssignedUserId].Name</td>
+                                    <td>@($"{orderDelivery.Delivery.Employee.Name} {orderDelivery.Delivery.Employee.Name}")</td>
                                     <td>@($"{orderDelivery.Order.Client.Name} {orderDelivery.Order.Client.LastName}")</td>
                                     <td>@orderDelivery.Status</td>
                                     <td>@orderDelivery.CreatedAt</td>

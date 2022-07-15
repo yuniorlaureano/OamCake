@@ -5,7 +5,7 @@ namespace OamCake.Data.Dto
 {
     public class CategoryDto
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         [Display(Name = "Nombre")]
 

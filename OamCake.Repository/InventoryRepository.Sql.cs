@@ -8,7 +8,6 @@
 			,Pro.[Code]
 			,Pro.[Name]
 			,Pro.[Description]
-			,Pro.[Price]
 			,SUM(IIF([Quantity] < 0, [Quantity], 0)) As OutputQty
 			,SUM(IIF([Quantity] > 0, [Quantity], 0)) As InputQty
 			,SUM(IIF([Quantity] > 0, [Quantity], 0)) + SUM(IIF([Quantity] < 0, [Quantity], 0)) As InStock
@@ -20,7 +19,6 @@
 			,Pro.[Code]
 			,Pro.[Name]
 			,Pro.[Description]
-			,Pro.[Price]
         ";
 
 		private string GetInventoryMovementSql(string where, int? page, int? count)
@@ -36,8 +34,6 @@
 					,Pro.[Description] as ProductDescription
 					,Inv.[Date]
 					,Inv.[Quantity]
-					,Inv.[Price] UnitPrice
-					,(Inv.[Quantity] * Inv.[Price]) TotalPrice
 				FROM [Inventory] Inv INNER JOIN [Product] Pro
 					ON Pro.Id = Inv.[ProductId]
 				{where}
@@ -81,8 +77,6 @@
 					,Pro.[Description] as ProductDescription
 					,SUM(IIF([Quantity] < 0, [Quantity], 0)) As OutputQty
 					,SUM(IIF([Quantity] > 0, [Quantity], 0)) As InputQty
-					,SUM(IIF([Quantity] < 0, Inv.[Price] * [Quantity], 0)) As OutputPrice
-					,SUM(IIF([Quantity] > 0, Inv.[Price] * [Quantity], 0)) As InputPrice
 				FROM [Inventory] Inv INNER JOIN [Product] Pro
 					ON Pro.Id = Inv.[ProductId]
 				{where}

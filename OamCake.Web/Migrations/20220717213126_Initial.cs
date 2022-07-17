@@ -172,7 +172,6 @@ namespace OamCake.Web.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedBy = table.Column<long>(type: "bigint", nullable: true),
@@ -408,6 +407,34 @@ namespace OamCake.Web.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Inventory",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IventoryProviderId = table.Column<long>(type: "bigint", nullable: false),
+                    ProductId = table.Column<long>(type: "bigint", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedBy = table.Column<long>(type: "bigint", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedBy = table.Column<long>(type: "bigint", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdatedBy = table.Column<long>(type: "bigint", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Inventory", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Inventory_Product_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Product",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "InventoryProvider",
                 columns: table => new
                 {
@@ -622,42 +649,6 @@ namespace OamCake.Web.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Inventory",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IventoryProviderId = table.Column<long>(type: "bigint", nullable: false),
-                    ProductId = table.Column<long>(type: "bigint", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    InventoryProviderId = table.Column<long>(type: "bigint", nullable: false),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeletedBy = table.Column<long>(type: "bigint", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<long>(type: "bigint", nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    UpdatedBy = table.Column<long>(type: "bigint", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Inventory", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Inventory_InventoryProvider_InventoryProviderId",
-                        column: x => x.InventoryProviderId,
-                        principalTable: "InventoryProvider",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Inventory_Product_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Product",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "OrderDetail",
                 columns: table => new
                 {
@@ -719,11 +710,6 @@ namespace OamCake.Web.Migrations
                 name: "IX_Ingredient_ProductId",
                 table: "Ingredient",
                 column: "ProductId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Inventory_InventoryProviderId",
-                table: "Inventory",
-                column: "InventoryProviderId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Inventory_ProductId",
@@ -818,6 +804,9 @@ namespace OamCake.Web.Migrations
                 name: "Inventory");
 
             migrationBuilder.DropTable(
+                name: "InventoryProvider");
+
+            migrationBuilder.DropTable(
                 name: "MadeCake");
 
             migrationBuilder.DropTable(
@@ -839,10 +828,10 @@ namespace OamCake.Web.Migrations
                 name: "UserRol");
 
             migrationBuilder.DropTable(
-                name: "InventoryProvider");
+                name: "Product");
 
             migrationBuilder.DropTable(
-                name: "Product");
+                name: "Provider");
 
             migrationBuilder.DropTable(
                 name: "MenuPermit");
@@ -864,9 +853,6 @@ namespace OamCake.Web.Migrations
 
             migrationBuilder.DropTable(
                 name: "User");
-
-            migrationBuilder.DropTable(
-                name: "Provider");
 
             migrationBuilder.DropTable(
                 name: "Menu");

@@ -52,7 +52,6 @@ namespace OamCake.Web.Pages.Admin.Product
                 product.Name = Product.Name;
                 product.Description = Product.Description;
                 product.Code = Product.Code;
-                product.Price = Product.Price;
                 product.UpdatedAt = DateTime.Now;
                 product.UpdatedBy = userId;
 
@@ -65,7 +64,6 @@ namespace OamCake.Web.Pages.Admin.Product
                     Name = Product.Name,
                     Description = Product.Description,
                     Code = Product.Code,
-                    Price = Product.Price,
                     CreatedAt = DateTime.Now,
                     CreatedBy = userId
                 };

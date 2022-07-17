@@ -37,8 +37,6 @@
                                 <th scope="col">Descripción</th>
                                 <th scope="col">Fecha</th>
                                 <th scope="col">Cantidad</th>
-                                <th scope="col">Precio Unidad</th>
-                                <th scope="col">Precio Total</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -51,8 +49,6 @@
                                     <td>@input.ProductDescription</td>
                                     <td>@input.Date.ToString("dd/MM/yyyyy")</td>
                                     <td style="background-color: lightgreen">@input.Quantity</td>
-                                    <td style="background-color: lightgreen">@input.UnitPrice</td>
-                                    <td class="text-sm" style="background-color: lightgreen">@input.TotalPrice</td>
                                     <td>
                                         <partial name="_DeleteForm" model="@input.Id" />
                                     </td>

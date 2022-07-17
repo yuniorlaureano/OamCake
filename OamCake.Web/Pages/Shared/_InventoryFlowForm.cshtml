@@ -10,12 +10,9 @@
                     <th>
                         Producto
                     </th>
-                    <th>
-                        Precio
-                    </th>
                     <th></th>
                     <th>
-                        Cantidad
+                        Libra
                     </th>
                 </tr>
             </thead>
@@ -24,11 +21,10 @@
                 @foreach (var product in Model.Stock)
                 {
                     <tr>
-                        <th>@product.Name</th>
-                        <td>
+                        <th>
+                            @product.Name
                             <input type="hidden" name='CreateStock[@i].ProductId' value="@product.Id" />
-                            <input type="number" name='CreateStock[@i].Price' placeholder='Precio' value="@product.Price" class="form-control" style="width:100px"/>
-                        </td>
+                        </th>
                         <td style="text-align:">
                             @if (Model.Flow == Flow.Input)
                             {

@@ -420,14 +420,8 @@ namespace OamCake.Web.Migrations
                     b.Property<long?>("DeletedBy")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("InventoryProviderId")
-                        .HasColumnType("bigint");
-
                     b.Property<long>("IventoryProviderId")
                         .HasColumnType("bigint");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<long>("ProductId")
                         .HasColumnType("bigint");
@@ -442,8 +436,6 @@ namespace OamCake.Web.Migrations
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("InventoryProviderId");
 
                     b.HasIndex("ProductId");
 
@@ -885,9 +877,6 @@ namespace OamCake.Web.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
@@ -1240,19 +1229,11 @@ namespace OamCake.Web.Migrations
 
             modelBuilder.Entity("OamCake.Entity.Inventory", b =>
                 {
-                    b.HasOne("OamCake.Entity.InventoryProvider", "InventoryProvider")
-                        .WithMany()
-                        .HasForeignKey("InventoryProviderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("OamCake.Entity.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("InventoryProvider");
 
                     b.Navigation("Product");
                 });

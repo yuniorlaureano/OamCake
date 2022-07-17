@@ -45,6 +45,7 @@ namespace OamCake.Web.Pages.Admin.Cake
                          Name = cake.Name,                         
                          Id = cake.Id,
                          CategoryId = cake.CategoryId,
+                         StrPhoto = cake.Photo,
                     };
                 }
             }

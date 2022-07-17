@@ -7,11 +7,14 @@
 
 <section class="section">
     <div class="row">
-        <div class="col-lg-12">
-
+        <div class="col-lg-12">       
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Formulario de Productos</h5>
+                    @if(Model.CakeCreationDto.Id > 0)
+                    {
+                        <img class="img-thumbnail"  src="/photos/@Model.CakeCreationDto.StrPhoto" width="200" height="100" />   
+                    }     
                     <form class="row g-3" method="post" enctype="multipart/form-data">
                         <input type="hidden" asp-for="CakeCreationDto.Id" />
                         <div class="col-md-9">

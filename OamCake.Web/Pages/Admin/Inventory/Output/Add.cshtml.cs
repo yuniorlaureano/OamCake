@@ -46,7 +46,6 @@ namespace OamCake.Web.Pages.Admin.Inventory.Output
                     .Where(p => p.IsValid())
                     .Select(p => new Entity.Inventory
                     {
-                        Price = p.Price,
                         CreatedAt = DateTime.Now,
                         Quantity = p.Quantity > 0 ? p.Quantity * -1 : p.Quantity,
                         ProductId = p.ProductId,

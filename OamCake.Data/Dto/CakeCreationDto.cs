@@ -11,5 +11,7 @@ namespace OamCake.Data.Dto
         [Required(ErrorMessage = "La foto es requerida")]
         public IFormFile? Photo { get; set; }
         public long? CategoryId { get; set; }
+
+        public string? StrPhoto { get; set; }
     }
 }

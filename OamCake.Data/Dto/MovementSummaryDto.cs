@@ -8,7 +8,5 @@
         public string ProductDescription { get; set; }
         public int OutputQty { get; set; }
         public int InputQty { get; set; }
-        public decimal OutputPrice { get; set; }
-        public decimal InputPrice { get; set; }
     }
 }

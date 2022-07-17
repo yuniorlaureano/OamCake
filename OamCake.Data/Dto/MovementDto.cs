@@ -9,7 +9,5 @@
         public string ProductDescription { get; set; }
         public DateTime Date { get; set; }
         public int Quantity { get; set; }
-        public decimal UnitPrice { get; set; }
-        public decimal TotalPrice { get; set; }
     }
 }

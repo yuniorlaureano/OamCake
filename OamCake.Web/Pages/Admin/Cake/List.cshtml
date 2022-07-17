@@ -56,10 +56,9 @@
                     <img src="/photos/@cake.Photo" class="card-img-top" alt="@cake.Name" ti>
                     <div class="card-body">
                         <h5 class="font-weight-bold d-block">@cake.Name</h5>
-                        <h6 class="badge bg-info text-dark">@cake.Category?.Name</h6>
                         @*<span class="font-weight-bold d-block">$ @product.Price</span>*@
-                        @*<p class="weight"> <small>@product.Description</small> </p>*@
-                        <a href="/cake/add?id=@cake.Id" style="color: #ffc107;font-size:25px;vertical-align: middle;">
+                        <p class="weight "> <small class="bg-info">@cake.Category?.Name</small> </p>
+                        <a href="/admin/cake/add?id=@cake.Id" style="color: #ffc107;font-size:25px;vertical-align: middle;">
                             <i class='bx bx-edit'></i>
                         </a>
                         <form style="display:inline-block;" asp-page-handler="Delete" method="post" onsubmit="confirmDelete(event)">

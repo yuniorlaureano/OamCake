@@ -2,8 +2,8 @@
 {
     public class Ingredient : BaseEntity
     {
-        public short Id { get; set; }
-        public byte Quantity { get; set; }
+        public long Id { get; set; }
+        public int Quantity { get; set; }
         public char Unid { get; set; }
         public long? ProductId { get; set; }
         public long CakeId { get; set; }

@@ -13,5 +13,6 @@ namespace OamCake.Data.Dto
         public long? CategoryId { get; set; }
 
         public string? StrPhoto { get; set; }
+        public List<IngredientDto> Ingredients { get; set; } = new();
     }
 }

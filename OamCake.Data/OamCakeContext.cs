@@ -15,6 +15,12 @@ namespace OamCake.Data
             optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.SeedDbAsync();
+        }
+
         public DbSet<Cake> Cake { get; set; }
         public DbSet<Catalog> Catalog { get; set; }
         public DbSet<Client> Client { get; set; }

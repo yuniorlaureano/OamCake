@@ -12,11 +12,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OamCake.Entity", "OamCake.E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OamCake.Repository", "OamCake.Repository\OamCake.Repository.csproj", "{9FB425D7-29B9-4969-AB70-7CFCC51404DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OamCake.Web", "OamCake.Web\OamCake.Web.csproj", "{4E53BBE5-47E0-4DFB-BD20-F5C5EB363685}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OamCake.Web", "OamCake.Web\OamCake.Web.csproj", "{4E53BBE5-47E0-4DFB-BD20-F5C5EB363685}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OamCake.Common", "OamCake.Common\OamCake.Common.csproj", "{3A81614C-BE0E-4B68-8D85-9782E1294575}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OamCake.Common", "OamCake.Common\OamCake.Common.csproj", "{3A81614C-BE0E-4B68-8D85-9782E1294575}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OamCake.Data", "OamCake.Data\OamCake.Data.csproj", "{35141272-217D-4B2E-81D3-1E7DFA2A0E03}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OamCake.Data", "OamCake.Data\OamCake.Data.csproj", "{35141272-217D-4B2E-81D3-1E7DFA2A0E03}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

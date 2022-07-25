@@ -1,5 +1,5 @@
 ﻿@page
-@model OamCake.Web.Pages.Admin.Cake.ListModel
+@model OamCake.Web.Pages.Admin.Catalog.AddModel
 @{
     ViewData["Page"] = "Listado de Pasteles";
     ViewData[nameof(PageTypes)] = PageTypes.CakeList;
@@ -13,16 +13,6 @@
         </div>
     </form>
 </div>
-<nav aria-label="Page navigation example">
-    <ul class="pagination justify-content-center">
-        @for (var i = 0; i < Model.CakeTable.CalcPage(20); i++)
-        {
-            <li class="page-item @(i == Model.Pages ? "active": "")" aria-current="page">
-                <a class="page-link" href="/admin/cake/list?pages=@i&Search=@Model.Search&categoryId=@Model.CategoryId">@(i+1)</a>
-            </li>
-        }
-    </ul>
-</nav>
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         @if (Model.CategoryId == null || Model.CategoryId == 0)

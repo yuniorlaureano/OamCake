@@ -79,7 +79,13 @@ namespace OamCake.Web.Pages.Admin.Cake
 
                 cake.Name = CakeCreationDto.Name;
                 cake.CategoryId = CakeCreationDto.CategoryId;
-                CakeCreationDto.Photo?.UploadPhoto(cake.Photo, _webHostEnvironment.ContentRootPath, (photo) => cake.Photo ??= photo);
+                CakeCreationDto.Photo?.UploadPhoto(cake.Photo, _webHostEnvironment.ContentRootPath, (photo) =>
+                {
+                    if (photo != null)
+                    {
+                        cake.Photo = photo;
+                    }
+                });
 
                 if (CakeCreationDto.Ingredients?.Any() == true || cake.Ingredients.Any())
                 {

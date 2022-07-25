@@ -1,8 +1,12 @@
 ﻿@page
+
 @model OamCake.Web.Pages.Admin.Cake.AddModel
 @{
     ViewData["Page"] = "Formulario de Pasteles";
     ViewData[nameof(PageTypes)] = PageTypes.CakeEntry;
+
+    var serializerSettings = new JsonSerializerSettings();
+    serializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 }
 
 <section class="section">
@@ -62,59 +66,11 @@
                             </div>
                         </div>
                         <hr />
-                        <fieldset style="border: solid 1px lightgray; padding-bottom: 4px;">
-                            <legend>Ingredientes</legend>
-
-
-
-                            <div class="row gx-3 gy-2 align-items-center mb-2">
-                                <div class="col-sm-6">
-                                    <select class="form-select" id="product-select">
-                                        <option selected value="">Ingrediente</option>
-                                        @foreach (var product in Model.Products)
-                                        {
-                                            <option value="@product.Id">@($"{product.Name} {product.Description}")</option>
-                                        }
-                                    </select>
-                                </div>
-                                <div class="col-sm-5">
-                                    <div class="input-group">
-                                        <select class="form-select form-control-sm" id="unit-select">
-                                            <option selected value="">Unidad</option>
-                                            <option value="l">Libra</option>
-                                            <option value="g">Gramo</option>
-                                        </select>
-                                        <input type="number" class="form-control form-control-sm" placeholder="Unidad" id="quantity-select">
-                                    </div>
-                                </div>
-                                <div class="col-auto">
-                                    <button class="btn btn-info btn-sm" type="button" onclick="addIngredient()"><i class="bi bi-plus-square"></i></button>
-                                </div>
-                            </div>
-                            <hr />
-                            <div>
-                                <div class="list-group" id="ingredients">
-
-                                    @for (var i = 0; i < (Model.CakeCreationDto?.Ingredients?.Count ?? 0); i++)
-                                    {
-                                        <a href="#" class="list-group-item list-group-item-action">
-                                            <input type="hidden" name="CakeCreationDto.Ingredients[@i].ProductId" value="@Model.CakeCreationDto?.Ingredients[i].ProductId" />
-                                            <input type="hidden" name="CakeCreationDto.Ingredients[@i].Unit" value="@Model.CakeCreationDto?.Ingredients[i].Unit" />
-                                            <input type="hidden" name="CakeCreationDto.Ingredients[@i].Quantity" value="@Model.CakeCreationDto?.Ingredients[i].Quantity" />
-                                            <div class="d-flex w-100 justify-content-between">
-                                                <h6 class="mb-1">@Model.CakeCreationDto?.Ingredients[i].ProductName</h6>
-                                                <small>@($"{Model.CakeCreationDto?.Ingredients[i].Quantity} {Model.CakeCreationDto?.Ingredients[i].Unit}")<button onclick="removeIngredient(this)" class="btn btn-danger btn-sm" type="button"><i class="bi bi-trash"></i></button></small>
-                                            </div>
-                                        </a>
-                                    }
-                                </div>
-
-                            </div>
-                        </fieldset>
+                        <div id="root-react-app"></div>
                         <hr />
                         <div class="col-12">
                             <button type="submit" class="btn btn-primary"><i class='bx bx-save'></i> Guardar</button>
-                            <a href="/App/Products" class="btn btn-light"><i class='bx bx-window-close'></i> Cancelar</a>
+                            <a href="/admin/cake/list" class="btn btn-light"><i class='bx bx-window-close'></i> Cancelar</a>
                         </div>
                     </form>
                 </div>
@@ -124,55 +80,10 @@
 </section>
 
 @section Scripts {
-<script type="text/javascript">
-
-    function IngredientViewModel(){
-        var self = this;
-        self.ingredients = @Html.Raw(@Newtonsoft.Json.JsonConvert.SerializeObject(Model.CakeCreationDto?.Ingredients));
-        console.log(self.ingredients);
-        return self;
-    }
-
-
-    IngredientViewModel();
-
-    function removeIngredient(element) {
-        var ingredients = document.getElementById("ingredients");
-        ingredients.removeChild(element.parentElement.parentElement.parentElement);
-    }
-
-    function addIngredient() {
-        var productSelect = document.getElementById("product-select");
-        var unitSelect = document.getElementById("unit-select");
-        var quantityInput = document.getElementById("quantity-select");
-        var ingredients = document.getElementById("ingredients");
-
-        var productValue = productSelect.options[productSelect.selectedIndex].value;
-        var unitValue = unitSelect.options[unitSelect.selectedIndex].value;
-        var quantity = quantityInput.value;
-
-        var productText = productSelect.options[productSelect.selectedIndex].text;
-        var unitText = unitSelect.options[unitSelect.selectedIndex].text;
-
-        if(productValue && unitValue && quantity) {
-            var count = ingredients.children.length;
-            var html = "";
-            html += '<a href="#" class="list-group-item list-group-item-action">';
-            html += '<input type="hidden" name="CakeCreationDto.Ingredients['+ count +'].ProductId" value="'+ productValue +'" />';
-            html += '<input type="hidden" name="CakeCreationDto.Ingredients['+ count +'].Unit" value="'+ unitValue +'" />';
-            html += '<input type="hidden" name="CakeCreationDto.Ingredients['+ count +'].Quantity" value="'+ quantity +'" />';
-            html += '<div class="d-flex w-100 justify-content-between">';
-            html += '<h6 class="mb-1">' + productText + '</h6>';
-            html += '<small>' + quantity + ' ' + unitText + ' <button onclick="removeIngredient(this)" class="btn btn-danger" type="button"><i class="bi bi-x"></i></button></small>';
-            html += '</div>';
-            html += '</a>';
-            ingredients.insertAdjacentHTML('beforeend', html);
-
-            productSelect.value = "";
-            unitSelect.value = "";
-            quantityInput.value = "";
-        }
-
-    }
-</script>
+    <script type="text/javascript">
+        window.ingredients = @Html.Raw(JsonConvert.SerializeObject(Model.CakeCreationDto?.Ingredients, serializerSettings));
+        window.products = @Html.Raw(JsonConvert.SerializeObject(Model.Products, serializerSettings));
+    </script>
+    <script src="~/js/app/vendor.js" asp-append-version="true"></script>
+    <script src="~/js/app/Ingredient.js" asp-append-version="true"></script>
 }

@@ -3,6 +3,9 @@
 @{
     ViewData["Page"] = "Catálogo";
     ViewData[nameof(PageTypes)] = PageTypes.CakeList;
+
+    var serializerSettings = new JsonSerializerSettings();
+    serializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 }
 
 @section Style {
@@ -38,83 +41,16 @@
 </style>
 }
 
-<div class="row">
-    <div class="card p-5">
-        <div class="col-12">
-            <form>
-                <div class="row mb-3">
-                    <label for="input-description" class="col-sm-2 col-form-label">Descripción</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="input-description">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-sm-10 offset-sm-2">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="gridCheck1">
-                            <label class="form-check-label" for="gridCheck1">
-                                Está publicado
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary">Guardar</button>
-            </form>
-        </div>
-    </div>
-    <hr />
-    <form class="d-flex justify-content-end" method="get" asp-page-handler="OnGet">
-        <div class="input-group mb-3">
-            <input type="text" class="form-control" asp-for="Search" placeholder="Nombre del Pastel">
-            <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-search"></i></button>
-        </div>
-    </form>
-</div>
-<nav aria-label="breadcrumb">
-    <h4>Categoría</h4>
-    <ol class="breadcrumb">
-        @if (Model.CategoryId == null || Model.CategoryId == 0)
-        {
-            <li class="breadcrumb-item active" aria-current="page">Todos</li>
-        }
-        else
-        {
-            <li class="breadcrumb-item"><a href="/admin/catalog/add?Search=@Model.Search">Todas</a></li>
-        }
+<div id="root-react-app"></div>
 
-        @foreach (var category in Model.Categories)
-        {
-            @if (category.Id == Model.CategoryId)
-            {
-                <li class="breadcrumb-item active" aria-current="page">@category.Name</li>
-            }
-            else
-            {
-                <li class="breadcrumb-item"><a href="/admin/catalog/add?categoryId=@category.Id&Search=@Model.Search">@category.Name</a></li>
-            }
-        }
-    </ol>
-</nav>
-<nav aria-label="breadcrumb">
-    <h4>Origen</h4>
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/admin/catalog/add?categoryId=@Model.CategoryId&Search=@Model.Search&origin=catalog">En catálogo</a></li>
-        <li class="breadcrumb-item"><a href="/admin/catalog/add?categoryId=@Model.CategoryId&Search=@Model.Search&origin=product">Productos</a></li>
-    </ol>
-</nav>
-<hr />
-<div class="row">
-    <main class="catalog-cards">
-         @foreach (var cake in Model.CakeTable.Data)
-        {
-            <article class="catalog-card">
-                <img src="/photos/@cake.Photo" alt="@cake.Name">
-                <div class="text">
-                    <h3>@cake.Name</h3>
-                    <h5>Example heading <span class="badge bg-secondary">@cake.Category?.Name</span></h5>
-                    <i class="bi bi-trash3"></i>
-                </div>
-            </article>
-        }
-    </main>
-</div>
+@section Scripts {
+    <script type="text/javascript">
+        window.bcategoryId = "@Model.CategoryId";
+        window.bsearch = "@Model.Search";
+        window.bcatalog = @Html.Raw(JsonConvert.SerializeObject(Model.Catalog, serializerSettings));
+        window.bcategories = @Html.Raw(JsonConvert.SerializeObject(Model.Categories, serializerSettings));
+        window.bcakes = @Html.Raw(JsonConvert.SerializeObject(Model.CakeTable.Data, serializerSettings));
+    </script>
+    <script src="~/js/app/vendor.js" asp-append-version="true"></script>
+    <script src="~/js/app/Catalog.js" asp-append-version="true"></script>
+}

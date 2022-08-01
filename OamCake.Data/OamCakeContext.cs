@@ -42,6 +42,7 @@ namespace OamCake.Data
         public DbSet<Provider> Provider { get; set; }
         public DbSet<Projection> Projection { get; set; }
         public DbSet<ProjectionDetail> ProjectionDetail { get; set; }
+        public DbSet<CatalogDetail> CatalogDetail { get; set; }
         public DbSet<Role> Role { get; set; }
         public DbSet<Sell> Sell { get; set; }
         public DbSet<User> User { get; set; }

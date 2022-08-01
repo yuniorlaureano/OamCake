@@ -14,7 +14,7 @@ namespace OamCake.Web.Pages.Admin.Catalog
         private readonly OamCakeContext _db;
         public TableResponse<OamCake.Entity.Cake> CakeTable { get; set; } = new();
         public IEnumerable<Entity.Category> Categories { get; set; } = Enumerable.Empty<Entity.Category>();
-
+        public Entity.Catalog Catalog { get; set; } = new();
 
         [BindProperty]
         public int Id { get; set; }
@@ -33,9 +33,27 @@ namespace OamCake.Web.Pages.Admin.Catalog
         [BindProperty(SupportsGet = true)]
         public int? CategoryId { get; set; }
 
+        [BindProperty(SupportsGet = true)]
+        public int? CatalogId { get; set; }
+
+        public string Errors { get; set; }
+
         public async Task OnGet()
         {
-            var query = _db.Cake.Include(x => x.Category).Where(x => x.DeletedAt == null);
+            IQueryable<Entity.Cake> query = null;
+
+            if (CatalogId == null || CatalogId == 0)
+            {
+                query = _db.Cake.Include(x => x.Category).Where(x => x.DeletedAt == null);
+            }
+            else
+            {
+                query = _db.CatalogDetail
+                            .Include(x => x.Cake)
+                            .ThenInclude(x => x.Category)
+                            .Where(x => x.Cake.DeletedAt == null)
+                            .Select(x => x.Cake);
+            }
 
             if (!String.IsNullOrWhiteSpace(Search))
             {
@@ -50,24 +68,31 @@ namespace OamCake.Web.Pages.Admin.Catalog
             CakeTable.Data = await query
                             .Skip((Pages) * 20)
                             .Take(20).ToListAsync();
+
             CakeTable.Count = await query.CountAsync();
 
             Categories = await _db.Category.ToListAsync();
         }
 
-        public async Task<IActionResult> OnPostDeleteAsync()
+        public async Task<IActionResult> OnPost()
         {
-            var userId = Int32.Parse(User.Claims.FirstOrDefault(p => p.Type == Constants.CLAIM_ID).Value);
-            var cake = await _db.Cake.FirstOrDefaultAsync(x => x.Id == Id);
-            if (cake != null)
+            if (String.IsNullOrWhiteSpace(Catalog.Description))
             {
-                cake.DeletedBy = userId;
-                cake.DeletedAt = DateTime.UtcNow;
-                _db.Update(cake);
-                await _db.SaveChangesAsync();
+                Errors = "Debe proveer la descripción";
+                return Page();
             }
 
-            return RedirectToPage("/Cake/List", new { Pages, Search });
+            if (Catalog.Id > 0)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            return Page();
+
         }
     }
 }

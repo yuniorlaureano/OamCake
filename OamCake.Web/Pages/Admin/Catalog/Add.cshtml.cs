@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using OamCake.Common;
 using OamCake.Data;
 using OamCake.Data.Dto;
 
@@ -14,19 +13,15 @@ namespace OamCake.Web.Pages.Admin.Catalog
         private readonly OamCakeContext _db;
         public TableResponse<OamCake.Entity.Cake> CakeTable { get; set; } = new();
         public IEnumerable<Entity.Category> Categories { get; set; } = Enumerable.Empty<Entity.Category>();
-        public Entity.Catalog Catalog { get; set; } = new();
 
         [BindProperty]
-        public int Id { get; set; }
-
+        public CatalogCreationDto Catalog { get; set; } = new();
+                
         public AddModel(OamCakeContext db)
         {
             _db = db;
         }
-
-        [BindProperty(SupportsGet = true)]
-        public int Pages { get; set; }
-
+                
         [BindProperty(SupportsGet = true)]
         public string? Search { get; set; }
 
@@ -65,17 +60,14 @@ namespace OamCake.Web.Pages.Admin.Catalog
                 query = query.Where(x => x.CategoryId == CategoryId);
             }
 
-            CakeTable.Data = await query
-                            .Skip((Pages) * 20)
-                            .Take(20).ToListAsync();
-
-            CakeTable.Count = await query.CountAsync();
-
+            CakeTable.Data = await query.ToListAsync();
             Categories = await _db.Category.ToListAsync();
         }
 
-        public async Task<IActionResult> OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
+            var x = await Task.FromResult(0);
+
             if (String.IsNullOrWhiteSpace(Catalog.Description))
             {
                 Errors = "Debe proveer la descripción";

@@ -1,5 +1,7 @@
 ﻿@page
 @model OamCake.Web.Pages.Admin.Catalog.AddModel
+@inject IAntiforgery antiforgery
+
 @{
     ViewData["Page"] = "Catálogo";
     ViewData[nameof(PageTypes)] = PageTypes.CakeList;
@@ -40,11 +42,12 @@
             }
 </style>
 }
-
 <div id="root-react-app"></div>
 
 @section Scripts {
     <script type="text/javascript">
+        
+        window.antiForgeryToken = "@antiforgery.GetTokens(HttpContext).RequestToken";
         window.bcategoryId = "@Model.CategoryId";
         window.bsearch = "@Model.Search";
         window.bcatalog = @Html.Raw(JsonConvert.SerializeObject(Model.Catalog, serializerSettings));

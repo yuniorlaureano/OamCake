@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 
 const SELECTION_ALL = 1;
 const SELECTION_SELECTED = 2;
@@ -6,11 +6,27 @@ const SELECTION_NOT_SELECTED = 3;
 
 export default function CakeDetail({cakes, addProduct}) {
     const [selection, setSelection] = useState(0);
+    const [currentCakes, setCurrentCakes] = useState([...cakes]);
 
+    function setSetlectionOptions(option){
+        switch(option) {
+            case SELECTION_ALL: setCurrentCakes([...cakes])
+                break;
+            case SELECTION_SELECTED: setCurrentCakes(cakes.filter(x => x.isSet))
+                break;
+            case SELECTION_NOT_SELECTED: setCurrentCakes(cakes.filter(x => !x.isSet))
+                break; 
+        } 
+    }
     function setSelectionHandler(e, option) {
         setSelection(option);
+        setSetlectionOptions(option);  
     }
   
+    useEffect(() => {
+        setSetlectionOptions(selection);
+    }, [cakes]);
+
   return (
     <div className="row">
         <div className='mb-3'>
@@ -30,16 +46,26 @@ export default function CakeDetail({cakes, addProduct}) {
         <hr/>
         <main className="catalog-cards">
             {
-                cakes.map(x => (
+                currentCakes.map(x => (
                     <article key={x.id} className="catalog-card" style={{'position': 'relative'}}>
-                        <img src={`/photos/${x.photo}`} alt="@cake.Name" />
+                        <img src={`/photos/${x.photo}`} alt={x.name} />
                         <div className="text">
-                            <h3>{x.name}</h3>
-                            <h5>Example heading <span className="badge bg-secondary">{x.category?.name}</span></h5>
-                            <i className="bi bi-trash3"></i>                            
+                            <h3>{x.name}</h3>                            
+                            <div className="input-group">
+                                <div className="input-group-text">$</div>
+                                <input type="number" className="form-control" placeholder="Precio"/>
+                            </div>      
+                            <span className="badge bg-secondary">{x.categoryName}</span>       
                         </div>
                         <div className="form-check" style={{'position': 'absolute', 'bottom': '0'}}>
-                            <input className="form-check-input" type="checkbox" name={`check-add-catalog-input-${x.id}`} id={`check-add-catalog-input-${x.id}`} onClick={(e) => addProduct(e, x.id)}/>
+                            <input 
+                                className="form-check-input" 
+                                type="checkbox" 
+                                name={`check-add-catalog-input-${x.id}`} 
+                                id={`check-add-catalog-input-${x.id}`}
+                                onClick={(e) => addProduct(e, x.id)}
+                                defaultChecked={x.isSet}
+                                />
                             <label className="form-check-label" htmlFor={`check-add-catalog-input-${x.id}`}>
                                 Agregar
                             </label>

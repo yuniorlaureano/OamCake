@@ -14,6 +14,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -39,8 +47,31 @@ function CakeDetail(_ref) {
       selection = _useState2[0],
       setSelection = _useState2[1];
 
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(_toConsumableArray(cakes)),
+      _useState4 = _slicedToArray(_useState3, 2),
+      currentCakes = _useState4[0],
+      setCurrentCakes = _useState4[1];
+
   function setSelectionHandler(e, option) {
     setSelection(option);
+
+    switch (option) {
+      case SELECTION_ALL:
+        setCurrentCakes(_toConsumableArray(cakes));
+        break;
+
+      case SELECTION_SELECTED:
+        setCurrentCakes(cakes.filter(function (x) {
+          return x.isSet;
+        }));
+        break;
+
+      case SELECTION_NOT_SELECTED:
+        setCurrentCakes(cakes.filter(function (x) {
+          return !x.isSet;
+        }));
+        break;
+    }
   }
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -91,9 +122,7 @@ function CakeDetail(_ref) {
     htmlFor: "all-check"
   }, "Todos"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("hr", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", {
     className: "catalog-cards"
-  }, cakes.map(function (x) {
-    var _x$category;
-
+  }, currentCakes.map(function (x) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("article", {
       key: x.id,
       className: "catalog-card",
@@ -102,14 +131,20 @@ function CakeDetail(_ref) {
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
       src: "/photos/".concat(x.photo),
-      alt: "@cake.Name"
+      alt: x.name
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       className: "text"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, x.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h5", null, "Example heading ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, x.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "input-group"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "input-group-text"
+    }, "$"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+      type: "number",
+      className: "form-control",
+      placeholder: "Precio"
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
       className: "badge bg-secondary"
-    }, (_x$category = x.category) === null || _x$category === void 0 ? void 0 : _x$category.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("i", {
-      className: "bi bi-trash3"
-    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    }, x.categoryName)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       className: "form-check",
       style: {
         'position': 'absolute',
@@ -122,7 +157,8 @@ function CakeDetail(_ref) {
       id: "check-add-catalog-input-".concat(x.id),
       onClick: function onClick(e) {
         return addProduct(e, x.id);
-      }
+      },
+      defaultChecked: x.isSet
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
       className: "form-check-label",
       htmlFor: "check-add-catalog-input-".concat(x.id)
@@ -172,32 +208,41 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function Ingredient() {
-  var _window$bcatalog;
+  var _window$bcatalog2;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
       _useState2 = _slicedToArray(_useState, 2),
-      productsId = _useState2[0],
-      setProductsId = _useState2[1];
+      cakesId = _useState2[0],
+      setCakesId = _useState2[1];
 
   function addProduct(e, id) {
-    console.log(e.target.checked);
-
     if (e.target.checked) {
-      setProductsId(_objectSpread(_objectSpread({}, productsId), {}, _defineProperty({}, "".concat(id), id)));
+      setCakesId(_objectSpread(_objectSpread({}, cakesId), {}, _defineProperty({}, "".concat(id), id)));
     } else {
-      setProductsId(_objectSpread(_objectSpread({}, productsId), {}, _defineProperty({}, "".concat(id), null)));
+      setCakesId(_objectSpread(_objectSpread({}, cakesId), {}, _defineProperty({}, "".concat(id), null)));
     }
   }
 
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    var _window$bcatalog;
+
+    if ((_window$bcatalog = window.bcatalog) !== null && _window$bcatalog !== void 0 && _window$bcatalog.cakesId) {
+      var cakes = {};
+      window.bcatalog.cakesId.forEach(function (id) {
+        cakes["".concat(id)] = id;
+      });
+      setCakesId(cakes);
+    }
+  }, []);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_CatalogDetailForm__WEBPACK_IMPORTED_MODULE_1__["default"], {
     catalog: window.bcatalog,
-    productsId: productsId
+    cakesId: cakesId
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("hr", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SerachForm__WEBPACK_IMPORTED_MODULE_2__["default"], {
     search: window.bsearch
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Categorybar__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    catalogId: (_window$bcatalog = window.bcatalog) === null || _window$bcatalog === void 0 ? void 0 : _window$bcatalog.id,
+    catalogId: (_window$bcatalog2 = window.bcatalog) === null || _window$bcatalog2 === void 0 ? void 0 : _window$bcatalog2.id,
     categoryId: window.bcategoryId,
     categories: window.bcategories,
     search: window.bsearch
@@ -236,8 +281,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function CatalogDetailForm(_ref) {
   var catalog = _ref.catalog,
-      _ref$productsId = _ref.productsId,
-      productsId = _ref$productsId === void 0 ? {} : _ref$productsId;
+      _ref$cakesId = _ref.cakesId,
+      cakesId = _ref$cakesId === void 0 ? {} : _ref$cakesId;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -252,23 +297,38 @@ function CatalogDetailForm(_ref) {
     setIsPublishedState(e.target.checked);
   }
 
+  function selectedCakeCaptions() {
+    var selectedCakes = Object.keys(cakesId).length;
+
+    if (selectedCakes > 1) {
+      return "Tiene ".concat(selectedCakes, " seleccionados");
+    } else {
+      return "Tiene ".concat(selectedCakes, " seleccionado");
+    }
+  }
+
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    console.log(isPublished);
     setIsPublishedState(isPublished);
   }, []);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "card p-5"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "col-12"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h6", {
+    style: {
+      'fontWeight': 'bold'
+    }
+  }, selectedCakeCaptions()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
     method: "POST"
-  }, Object.keys(productsId).filter(function (x) {
-    return productsId[x] != null;
+  }, Object.keys(cakesId).filter(function (x) {
+    return cakesId[x] != null;
   }).map(function (x, i) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
-      key: productsId[x],
+      key: cakesId[x],
       type: "hidden",
-      defaultValue: productsId[x],
-      name: "Catalog.ProductsId[".concat(i, "]")
+      defaultValue: cakesId[x],
+      name: "Catalog.CakesId[".concat(i, "]")
     });
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     type: "hidden",
@@ -303,7 +363,8 @@ function CatalogDetailForm(_ref) {
     name: "Catalog.IsPublished",
     id: "Catalog.IsPublished",
     onChange: isPublishedHandler,
-    value: isPublishedState
+    value: isPublishedState,
+    checked: isPublishedState
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
     className: "form-check-label",
     htmlFor: "Catalog.IsPublished"

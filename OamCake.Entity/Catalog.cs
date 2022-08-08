@@ -6,5 +6,7 @@
         public string Description { get; set; }
         public bool IsPublished { get; set; }
         public DateTime PublishDate { get; set; }
+
+        public List<CatalogDetail> CatalogDetails { get; set; }
     }
 }

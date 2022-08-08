@@ -45,7 +45,7 @@ namespace OamCake.Repository
 
             return new TableResponse<MovementDto>()
             {
-                Data = data,
+                Data = data.ToList(),
                 Count = rowCount
             };
         }
@@ -63,7 +63,7 @@ namespace OamCake.Repository
 
             return new TableResponse<MovementDto>()
             {
-                Data = data,
+                Data = data.ToList(),
                 Count = rowCount
             };
         }
@@ -93,7 +93,7 @@ namespace OamCake.Repository
 
             return new TableResponse<MovementSummaryDto>()
             {
-                Data = data,
+                Data = data.ToList(),
                 Count = rowCount
             };
         }

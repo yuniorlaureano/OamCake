@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OamCake.Data.Dto
+﻿namespace OamCake.Data.Dto
 {
+    public class CatalogDetailsCakes
+    {
+        public long CakeId { get; set; }
+        public decimal Price { get; set; }
+    }
+
     public class CatalogCreationDto
     {
         public long Id { get; set; }
         public string Description { get; set; }
         public bool IsPublished { get; set; }
-        public long[] ProductsId { get; set; }
+        public CatalogDetailsCakes[] CakesId { get; set; }
     }
 }

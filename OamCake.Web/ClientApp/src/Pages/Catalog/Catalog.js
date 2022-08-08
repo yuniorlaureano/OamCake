@@ -5,22 +5,42 @@ import Categorybar from "./Categorybar";
 import CakeDetail from "./CakeDetail";
 
 export default function Ingredient() {
-  const [productsId, setProductsId] = useState({});
+  const [cakesId, setCakesId] = useState({});
   
-  function addProduct(e, id){
-    console.log(e.target.checked)
+  function addProduct(e, id){    
     if(e.target.checked) {
-      setProductsId({...productsId, [`${id}`]: id})
+      setCakesId({...cakesId, [`${id}`]: id})
     } else {
-      setProductsId({...productsId, [`${id}`]: null})
+      setCakesId({...cakesId, [`${id}`]: null})
+    }    
+  }
+
+  function addPrice(e, id){   
+    if(cakesId[id]) {
+
+    }
+    if(e.target.checked) {
+      setCakesId({...cakesId, [`${id}`]: id})
+    } else {
+      setCakesId({...cakesId, [`${id}`]: null})
+    }    
+  }
+
+  useEffect(() => {
+    if(window.bcatalog?.cakesId) {
+      var cakes = {};
+      window.bcatalog.cakesId.forEach(id => {
+        cakes[`${id}`] = id;
+      });
+      setCakesId(cakes)
     }
     
-  }
+  }, []);
 
   return (
     <div>
         <div className="row">
-            <CatalogDetailForm catalog={window.bcatalog} productsId={productsId}/>
+            <CatalogDetailForm catalog={window.bcatalog} cakesId={cakesId}/>
             <hr/>
             <SerachForm search={window.bsearch}/>
         </div>

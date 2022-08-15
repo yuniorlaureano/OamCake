@@ -14,18 +14,7 @@ export default function Ingredient() {
       setCakesId({...cakesId, [`${id}`]: null})
     }    
   }
-
-  function addPrice(e, id){   
-    if(cakesId[id]) {
-
-    }
-    if(e.target.checked) {
-      setCakesId({...cakesId, [`${id}`]: id})
-    } else {
-      setCakesId({...cakesId, [`${id}`]: null})
-    }    
-  }
-
+  
   useEffect(() => {
     if(window.bcatalog?.cakesId) {
       var cakes = {};

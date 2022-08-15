@@ -36,25 +36,25 @@ namespace OamCake.Web.Pages.Admin.Catalog
 
         public async Task OnGet()
         {
-            IQueryable<Entity.Cake> query = _db.Cake.Include(x => x.Category).Where(x => x.DeletedAt == null);
-            Dictionary<long, Entity.CatalogDetail> catalogDetails = new();
+            var query = _db.Cake.Include(x => x.Category).Where(x => x.DeletedAt == null);
+            var catalogDetails = new Dictionary<long, Entity.CatalogDetail>();
 
             if (Id != null && Id != 0)
             {
-                catalogDetails = _db.CatalogDetail
+                catalogDetails = await _db.CatalogDetail
                             .Include(x => x.Cake)
-                            .Where(x => x.Cake.DeletedAt == null)
-                            .ToDictionary(x => x.CakeId);
+                            .Where(x => x.CatalogId == Id)
+                            .ToDictionaryAsync(x => x.CakeId);
 
-                var catalog = _db.Catalog.FirstOrDefault(x => x.Id == Id);
-                Catalog.Id = catalog.Id;
-                Catalog.Description = catalog.Description;
-                Catalog.IsPublished = catalog.IsPublished;
-                Catalog.CakesId = catalogDetails.Values.Select(x => new CatalogDetailsCakes
+                var catalog = await _db.Catalog.FirstOrDefaultAsync(x => x.Id == Id);
+
+                Catalog = new()
                 {
-                    CakeId = x.CakeId,
-                    Price = x.Price
-                }).ToArray();
+                    Id = catalog.Id,
+                    Description = catalog.Description,
+                    IsPublished = catalog.IsPublished,
+                    CakesId = catalogDetails.Values.Select(x => x.CakeId).ToArray()
+                };
             }
 
             if (!String.IsNullOrWhiteSpace(Search))
@@ -104,12 +104,35 @@ namespace OamCake.Web.Pages.Admin.Catalog
 
             if (Catalog.Id > 0)
             {
-                var catalog = await _db.Catalog.Include(x => x.CatalogDetails).FirstOrDefaultAsync();
+                var catalog = await _db.Catalog.Where(x => x.Id == Catalog.Id).FirstOrDefaultAsync();
+                var details = await _db.CatalogDetail.Where(x => x.CatalogId == Catalog.Id).ToListAsync();
+
                 if (catalog != null)
                 {
-                    if (catalog.CatalogDetails != null)
+                    if (details != null)
                     {
-                        _db.CatalogDetail.RemoveRange(catalog.CatalogDetails);
+                        
+                        var existing = details.Where(x => Catalog.CakesId.Contains(x.CakeId)).ToList();
+                        var removed = details.Where(x => !Catalog.CakesId.Contains(x.CakeId)).ToList();
+                        var news = Catalog.CakesId.Where(x => !existing.Any(j => j.CakeId == x)).ToList();
+
+                        if (removed.Any())
+                        {
+                            _db.CatalogDetail.RemoveRange(removed);
+                        }
+
+                        if (news.Any())
+                        {
+                            _db.CatalogDetail.AddRange(news.Select(x => new Entity.CatalogDetail
+                            {
+                                CakeId = x,
+                                CreatedAt = DateTime.Now,
+                                CreatedBy = userId,
+                                CatalogId = catalog.Id,
+                                Photo = "",
+                                Price = 0
+                            }).ToList());
+                        }
                     }
 
                     catalog.Description = Catalog.Description;
@@ -117,15 +140,6 @@ namespace OamCake.Web.Pages.Admin.Catalog
                     catalog.UpdatedAt = DateTime.Now;
                     catalog.UpdatedBy = userId;
 
-                    _db.CatalogDetail.AddRange(Catalog.CakesId.Select(x => new Entity.CatalogDetail
-                    {
-                        CakeId = x.CakeId,
-                        CreatedAt = DateTime.Now,
-                        CreatedBy = userId,
-                        CatalogId = catalog.Id,
-                        Photo = "",
-                        Price = x.Price
-                    }).ToList());
                     _db.Catalog.Update(catalog);
                     await _db.SaveChangesAsync();
                 }
@@ -141,11 +155,10 @@ namespace OamCake.Web.Pages.Admin.Catalog
                     PublishDate = DateTime.Now,
                     CatalogDetails = Catalog.CakesId.Select(x => new Entity.CatalogDetail
                     {
-                        CakeId = x.CakeId,
+                        CakeId = x,
                         CreatedAt = DateTime.Now,
                         CreatedBy = userId,
                         Photo = "",
-                        Price = x.Price
                     }).ToList(),
                 };
 

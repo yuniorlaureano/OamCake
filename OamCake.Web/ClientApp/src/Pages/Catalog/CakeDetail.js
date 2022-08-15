@@ -22,7 +22,7 @@ export default function CakeDetail({cakes, addProduct}) {
         setSelection(option);
         setSetlectionOptions(option);  
     }
-  
+
     useEffect(() => {
         setSetlectionOptions(selection);
     }, [cakes]);
@@ -50,11 +50,7 @@ export default function CakeDetail({cakes, addProduct}) {
                     <article key={x.id} className="catalog-card" style={{'position': 'relative'}}>
                         <img src={`/photos/${x.photo}`} alt={x.name} />
                         <div className="text">
-                            <h3>{x.name}</h3>                            
-                            <div className="input-group">
-                                <div className="input-group-text">$</div>
-                                <input type="number" className="form-control" placeholder="Precio"/>
-                            </div>      
+                            <h3>{x.name}</h3>      
                             <span className="badge bg-secondary">{x.categoryName}</span>       
                         </div>
                         <div className="form-check" style={{'position': 'absolute', 'bottom': '0'}}>

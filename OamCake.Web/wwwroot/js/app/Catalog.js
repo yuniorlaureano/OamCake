@@ -52,9 +52,7 @@ function CakeDetail(_ref) {
       currentCakes = _useState4[0],
       setCurrentCakes = _useState4[1];
 
-  function setSelectionHandler(e, option) {
-    setSelection(option);
-
+  function setSetlectionOptions(option) {
     switch (option) {
       case SELECTION_ALL:
         setCurrentCakes(_toConsumableArray(cakes));
@@ -74,6 +72,16 @@ function CakeDetail(_ref) {
     }
   }
 
+  function setSelectionHandler(e, option) {
+    setSelection(option);
+    setSetlectionOptions(option);
+  }
+
+  function hadlePriceChange(e, cakeId) {}
+
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    setSetlectionOptions(selection);
+  }, [cakes]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -134,15 +142,7 @@ function CakeDetail(_ref) {
       alt: x.name
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       className: "text"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, x.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "input-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "input-group-text"
-    }, "$"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
-      type: "number",
-      className: "form-control",
-      placeholder: "Precio"
-    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, x.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
       className: "badge bg-secondary"
     }, x.categoryName)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       className: "form-check",
@@ -216,6 +216,16 @@ function Ingredient() {
       setCakesId = _useState2[1];
 
   function addProduct(e, id) {
+    if (e.target.checked) {
+      setCakesId(_objectSpread(_objectSpread({}, cakesId), {}, _defineProperty({}, "".concat(id), id)));
+    } else {
+      setCakesId(_objectSpread(_objectSpread({}, cakesId), {}, _defineProperty({}, "".concat(id), null)));
+    }
+  }
+
+  function addPrice(e, id) {
+    if (cakesId[id]) {}
+
     if (e.target.checked) {
       setCakesId(_objectSpread(_objectSpread({}, cakesId), {}, _defineProperty({}, "".concat(id), id)));
     } else {
@@ -329,7 +339,8 @@ function CatalogDetailForm(_ref) {
       type: "hidden",
       defaultValue: cakesId[x],
       name: "Catalog.CakesId[".concat(i, "]")
-    });
+    }) // agregar el repcio aqui ver si es viable tener un solo input aqui.
+    ;
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     type: "hidden",
     name: "__RequestVerificationToken",

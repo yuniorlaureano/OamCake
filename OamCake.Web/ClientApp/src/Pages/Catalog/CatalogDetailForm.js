@@ -31,7 +31,6 @@ export default function CatalogDetailForm({catalog, cakesId={}}) {
                 {
                     Object.keys(cakesId).filter(x => cakesId[x] != null).map((x , i) => (
                         <input key={cakesId[x]} type="hidden" defaultValue={cakesId[x]} name={`Catalog.CakesId[${i}]`} />
-                        // agregar el repcio aqui ver si es viable tener un solo input aqui.
                     ))
                 }
                 <input type="hidden" name="__RequestVerificationToken" defaultValue={window.antiForgeryToken}/>

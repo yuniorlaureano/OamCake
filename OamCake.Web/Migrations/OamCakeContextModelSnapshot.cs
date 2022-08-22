@@ -69,7 +69,7 @@ namespace OamCake.Web.Migrations
                         {
                             Id = 1L,
                             CategoryId = 1L,
-                            CreatedAt = new DateTime(2022, 7, 31, 19, 52, 37, 814, DateTimeKind.Local).AddTicks(7572),
+                            CreatedAt = new DateTime(2022, 8, 21, 18, 46, 41, 401, DateTimeKind.Local).AddTicks(3817),
                             CreatedBy = 1L,
                             Name = "Bizcocho",
                             Photo = "7a0d3b02-a564-48ad-9328-9d225ab0dbd4.jpg"
@@ -78,7 +78,7 @@ namespace OamCake.Web.Migrations
                         {
                             Id = 2L,
                             CategoryId = 2L,
-                            CreatedAt = new DateTime(2022, 7, 31, 19, 52, 37, 814, DateTimeKind.Local).AddTicks(7576),
+                            CreatedAt = new DateTime(2022, 8, 21, 18, 46, 41, 401, DateTimeKind.Local).AddTicks(3820),
                             CreatedBy = 1L,
                             Name = "Zahahoria",
                             Photo = "5b67ce7b-3744-4bc8-9337-72ef6928ea9b.jfif"
@@ -87,7 +87,7 @@ namespace OamCake.Web.Migrations
                         {
                             Id = 3L,
                             CategoryId = 3L,
-                            CreatedAt = new DateTime(2022, 7, 31, 19, 52, 37, 814, DateTimeKind.Local).AddTicks(7577),
+                            CreatedAt = new DateTime(2022, 8, 21, 18, 46, 41, 401, DateTimeKind.Local).AddTicks(3821),
                             CreatedBy = 1L,
                             Name = "Chocolate",
                             Photo = "daca910f-94b4-4201-99ea-f5df6488bb2a.jfif"
@@ -96,7 +96,7 @@ namespace OamCake.Web.Migrations
                         {
                             Id = 4L,
                             CategoryId = 1L,
-                            CreatedAt = new DateTime(2022, 7, 31, 19, 52, 37, 814, DateTimeKind.Local).AddTicks(7578),
+                            CreatedAt = new DateTime(2022, 8, 21, 18, 46, 41, 401, DateTimeKind.Local).AddTicks(3822),
                             CreatedBy = 1L,
                             Name = "Sandia",
                             Photo = "c6ea26ac-f3ad-47f1-9e13-772a33c91667.jpg"
@@ -230,21 +230,21 @@ namespace OamCake.Web.Migrations
                         new
                         {
                             Id = 1L,
-                            CreatedAt = new DateTime(2022, 7, 31, 19, 52, 37, 814, DateTimeKind.Local).AddTicks(7421),
+                            CreatedAt = new DateTime(2022, 8, 21, 18, 46, 41, 401, DateTimeKind.Local).AddTicks(3692),
                             CreatedBy = 1L,
                             Name = "Boda"
                         },
                         new
                         {
                             Id = 2L,
-                            CreatedAt = new DateTime(2022, 7, 31, 19, 52, 37, 814, DateTimeKind.Local).AddTicks(7425),
+                            CreatedAt = new DateTime(2022, 8, 21, 18, 46, 41, 401, DateTimeKind.Local).AddTicks(3695),
                             CreatedBy = 1L,
                             Name = "Cumple años"
                         },
                         new
                         {
                             Id = 3L,
-                            CreatedAt = new DateTime(2022, 7, 31, 19, 52, 37, 814, DateTimeKind.Local).AddTicks(7426),
+                            CreatedAt = new DateTime(2022, 8, 21, 18, 46, 41, 401, DateTimeKind.Local).AddTicks(3696),
                             CreatedBy = 1L,
                             Name = "Velorios"
                         });
@@ -461,7 +461,7 @@ namespace OamCake.Web.Migrations
                         {
                             Id = 1L,
                             Address = "San Luis",
-                            CreatedAt = new DateTime(2022, 7, 31, 19, 52, 37, 814, DateTimeKind.Local).AddTicks(6694),
+                            CreatedAt = new DateTime(2022, 8, 21, 18, 46, 41, 401, DateTimeKind.Local).AddTicks(3108),
                             CreatedBy = 1L,
                             LastName = "Laureano",
                             Name = "Yunior",
@@ -565,9 +565,9 @@ namespace OamCake.Web.Migrations
                         new
                         {
                             Id = 1L,
-                            CreatedAt = new DateTime(2022, 7, 31, 19, 52, 37, 814, DateTimeKind.Local).AddTicks(7486),
+                            CreatedAt = new DateTime(2022, 8, 21, 18, 46, 41, 401, DateTimeKind.Local).AddTicks(3785),
                             CreatedBy = 1L,
-                            Date = new DateTime(2022, 7, 31, 19, 52, 37, 814, DateTimeKind.Local).AddTicks(7485),
+                            Date = new DateTime(2022, 8, 21, 18, 46, 41, 401, DateTimeKind.Local).AddTicks(3784),
                             IventoryProviderId = 0L,
                             ProductId = 1L,
                             Quantity = 43
@@ -575,9 +575,9 @@ namespace OamCake.Web.Migrations
                         new
                         {
                             Id = 2L,
-                            CreatedAt = new DateTime(2022, 7, 31, 19, 52, 37, 814, DateTimeKind.Local).AddTicks(7489),
+                            CreatedAt = new DateTime(2022, 8, 21, 18, 46, 41, 401, DateTimeKind.Local).AddTicks(3788),
                             CreatedBy = 1L,
-                            Date = new DateTime(2022, 7, 31, 19, 52, 37, 814, DateTimeKind.Local).AddTicks(7488),
+                            Date = new DateTime(2022, 8, 21, 18, 46, 41, 401, DateTimeKind.Local).AddTicks(3788),
                             IventoryProviderId = 0L,
                             ProductId = 2L,
                             Quantity = 12
@@ -585,9 +585,9 @@ namespace OamCake.Web.Migrations
                         new
                         {
                             Id = 3L,
-                            CreatedAt = new DateTime(2022, 7, 31, 19, 52, 37, 814, DateTimeKind.Local).AddTicks(7490),
+                            CreatedAt = new DateTime(2022, 8, 21, 18, 46, 41, 401, DateTimeKind.Local).AddTicks(3789),
                             CreatedBy = 1L,
-                            Date = new DateTime(2022, 7, 31, 19, 52, 37, 814, DateTimeKind.Local).AddTicks(7490),
+                            Date = new DateTime(2022, 8, 21, 18, 46, 41, 401, DateTimeKind.Local).AddTicks(3789),
                             IventoryProviderId = 0L,
                             ProductId = 3L,
                             Quantity = 4
@@ -595,9 +595,9 @@ namespace OamCake.Web.Migrations
                         new
                         {
                             Id = 4L,
-                            CreatedAt = new DateTime(2022, 7, 31, 19, 52, 37, 814, DateTimeKind.Local).AddTicks(7491),
+                            CreatedAt = new DateTime(2022, 8, 21, 18, 46, 41, 401, DateTimeKind.Local).AddTicks(3791),
                             CreatedBy = 1L,
-                            Date = new DateTime(2022, 7, 31, 19, 52, 37, 814, DateTimeKind.Local).AddTicks(7491),
+                            Date = new DateTime(2022, 8, 21, 18, 46, 41, 401, DateTimeKind.Local).AddTicks(3790),
                             IventoryProviderId = 0L,
                             ProductId = 1L,
                             Quantity = -2
@@ -605,9 +605,9 @@ namespace OamCake.Web.Migrations
                         new
                         {
                             Id = 5L,
-                            CreatedAt = new DateTime(2022, 7, 31, 19, 52, 37, 814, DateTimeKind.Local).AddTicks(7492),
+                            CreatedAt = new DateTime(2022, 8, 21, 18, 46, 41, 401, DateTimeKind.Local).AddTicks(3794),
                             CreatedBy = 1L,
-                            Date = new DateTime(2022, 7, 31, 19, 52, 37, 814, DateTimeKind.Local).AddTicks(7492),
+                            Date = new DateTime(2022, 8, 21, 18, 46, 41, 401, DateTimeKind.Local).AddTicks(3794),
                             IventoryProviderId = 0L,
                             ProductId = 2L,
                             Quantity = -10
@@ -615,9 +615,9 @@ namespace OamCake.Web.Migrations
                         new
                         {
                             Id = 6L,
-                            CreatedAt = new DateTime(2022, 7, 31, 19, 52, 37, 814, DateTimeKind.Local).AddTicks(7497),
+                            CreatedAt = new DateTime(2022, 8, 21, 18, 46, 41, 401, DateTimeKind.Local).AddTicks(3799),
                             CreatedBy = 1L,
-                            Date = new DateTime(2022, 7, 31, 19, 52, 37, 814, DateTimeKind.Local).AddTicks(7497),
+                            Date = new DateTime(2022, 8, 21, 18, 46, 41, 401, DateTimeKind.Local).AddTicks(3798),
                             IventoryProviderId = 0L,
                             ProductId = 3L,
                             Quantity = -2
@@ -1074,7 +1074,7 @@ namespace OamCake.Web.Migrations
                         {
                             Id = 1L,
                             Code = "C-453",
-                            CreatedAt = new DateTime(2022, 7, 31, 19, 52, 37, 814, DateTimeKind.Local).AddTicks(7458),
+                            CreatedAt = new DateTime(2022, 8, 21, 18, 46, 41, 401, DateTimeKind.Local).AddTicks(3719),
                             CreatedBy = 1L,
                             Description = "Negra",
                             Name = "Azucar"
@@ -1083,7 +1083,7 @@ namespace OamCake.Web.Migrations
                         {
                             Id = 2L,
                             Code = "C-451",
-                            CreatedAt = new DateTime(2022, 7, 31, 19, 52, 37, 814, DateTimeKind.Local).AddTicks(7461),
+                            CreatedAt = new DateTime(2022, 8, 21, 18, 46, 41, 401, DateTimeKind.Local).AddTicks(3722),
                             CreatedBy = 1L,
                             Description = "Blanca",
                             Name = "Vainilla "
@@ -1092,7 +1092,7 @@ namespace OamCake.Web.Migrations
                         {
                             Id = 3L,
                             Code = "C-457",
-                            CreatedAt = new DateTime(2022, 7, 31, 19, 52, 37, 814, DateTimeKind.Local).AddTicks(7462),
+                            CreatedAt = new DateTime(2022, 8, 21, 18, 46, 41, 401, DateTimeKind.Local).AddTicks(3761),
                             CreatedBy = 1L,
                             Description = "Integral",
                             Name = "Arina"
@@ -1123,9 +1123,8 @@ namespace OamCake.Web.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("IsOpen")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -1353,7 +1352,7 @@ namespace OamCake.Web.Migrations
                         new
                         {
                             Id = 1L,
-                            CreatedAt = new DateTime(2022, 7, 31, 19, 52, 37, 814, DateTimeKind.Local).AddTicks(6856),
+                            CreatedAt = new DateTime(2022, 8, 21, 18, 46, 41, 401, DateTimeKind.Local).AddTicks(3265),
                             CreatedBy = 1L,
                             Email = "yuniorlaureano@gmail.com",
                             EmployeeId = 1L,
@@ -1422,7 +1421,7 @@ namespace OamCake.Web.Migrations
                         .IsRequired();
 
                     b.HasOne("OamCake.Entity.Catalog", "Catalog")
-                        .WithMany()
+                        .WithMany("CatalogDetails")
                         .HasForeignKey("CatalogId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1591,7 +1590,7 @@ namespace OamCake.Web.Migrations
                         .IsRequired();
 
                     b.HasOne("OamCake.Entity.Projection", "Projection")
-                        .WithMany()
+                        .WithMany("ProjectionDetails")
                         .HasForeignKey("ProjectionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1626,6 +1625,16 @@ namespace OamCake.Web.Migrations
             modelBuilder.Entity("OamCake.Entity.Cake", b =>
                 {
                     b.Navigation("Ingredients");
+                });
+
+            modelBuilder.Entity("OamCake.Entity.Catalog", b =>
+                {
+                    b.Navigation("CatalogDetails");
+                });
+
+            modelBuilder.Entity("OamCake.Entity.Projection", b =>
+                {
+                    b.Navigation("ProjectionDetails");
                 });
 #pragma warning restore 612, 618
         }

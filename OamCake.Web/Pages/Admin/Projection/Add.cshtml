@@ -1,0 +1,59 @@
+﻿@page
+@model OamCake.Web.Pages.Admin.Projection.AddModel
+@inject IAntiforgery antiforgery
+
+@{
+    ViewData["Page"] = "Projección";
+    ViewData[nameof(PageTypes)] = PageTypes.ProjectionEntry;
+
+    var serializerSettings = new JsonSerializerSettings();
+    serializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+}
+
+@section Style {
+<style>
+    .catalog-cards {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: stretch;
+    }
+
+    .catalog-card {
+        flex: 0 0 200px;
+        margin: 10px;
+        border: 1px solid #ccc;
+        box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.3);
+    }
+
+        .catalog-card img {
+            max-width: 100%;
+        }
+
+        .catalog-card .text {
+            padding: 0 20px 20px;
+        }
+
+            .catalog-card .text > button {
+                background: gray;
+                border: 0;
+                color: white;
+                padding: 10px;
+                width: 100%;
+            }
+</style>
+}
+<div id="root-react-app"></div>
+
+@section Scripts {
+    <script type="text/javascript">
+        
+        window.antiForgeryToken = "@antiforgery.GetTokens(HttpContext).RequestToken";
+        window.bcategoryId = "@Model.CategoryId";
+        window.bsearch = "@Model.Search";
+        window.bcatalog = @Html.Raw(JsonConvert.SerializeObject(Model.Projection, serializerSettings));
+        window.bcategories = @Html.Raw(JsonConvert.SerializeObject(Model.Categories, serializerSettings));
+        window.bcakes = @Html.Raw(JsonConvert.SerializeObject(Model.CakeTable.Data, serializerSettings));
+    </script>
+    <script src="~/js/app/vendor.js" asp-append-version="true"></script>
+    <script src="~/js/app/Projection.js" asp-append-version="true"></script>
+}

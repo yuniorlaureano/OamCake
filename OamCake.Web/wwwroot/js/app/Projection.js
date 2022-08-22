@@ -2,186 +2,59 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/Pages/Catalog/CakeDetail.js":
-/*!*****************************************!*\
-  !*** ./src/Pages/Catalog/CakeDetail.js ***!
-  \*****************************************/
+/***/ "./src/Pages/Projection/CakePage.js":
+/*!******************************************!*\
+  !*** ./src/Pages/Projection/CakePage.js ***!
+  \******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ CakeDetail)
+/* harmony export */   "default": () => (/* binding */ CakePage)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-
-var SELECTION_ALL = 1;
-var SELECTION_SELECTED = 2;
-var SELECTION_NOT_SELECTED = 3;
-function CakeDetail(_ref) {
-  var cakes = _ref.cakes,
-      addProduct = _ref.addProduct;
-
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
-      _useState2 = _slicedToArray(_useState, 2),
-      selection = _useState2[0],
-      setSelection = _useState2[1];
-
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(_toConsumableArray(cakes)),
-      _useState4 = _slicedToArray(_useState3, 2),
-      currentCakes = _useState4[0],
-      setCurrentCakes = _useState4[1];
-
-  function setSetlectionOptions(option) {
-    switch (option) {
-      case SELECTION_ALL:
-        setCurrentCakes(_toConsumableArray(cakes));
-        break;
-
-      case SELECTION_SELECTED:
-        setCurrentCakes(cakes.filter(function (x) {
-          return x.isSet;
-        }));
-        break;
-
-      case SELECTION_NOT_SELECTED:
-        setCurrentCakes(cakes.filter(function (x) {
-          return !x.isSet;
-        }));
-        break;
-    }
-  }
-
-  function setSelectionHandler(e, option) {
-    setSelection(option);
-    setSetlectionOptions(option);
-  }
-
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    setSetlectionOptions(selection);
-  }, [cakes]);
+function CakePage(_ref) {
+  var _ref$cakes = _ref.cakes,
+      cakes = _ref$cakes === void 0 ? [] : _ref$cakes,
+      addCake = _ref.addCake;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "row"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "mb-3"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "form-check form-check-inline"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
-    className: "form-check-input",
-    type: "radio",
-    name: "panel-seleccion",
-    id: "selecionados-check",
-    onChange: function onChange(e) {
-      return setSelectionHandler(e, SELECTION_SELECTED);
-    },
-    checked: selection == SELECTION_SELECTED
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
-    className: "form-check-label",
-    htmlFor: "selecionados-check"
-  }, "Seleccionados")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "form-check form-check-inline"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
-    className: "form-check-input",
-    type: "radio",
-    name: "panel-seleccion",
-    id: "productos-check",
-    onChange: function onChange(e) {
-      return setSelectionHandler(e, SELECTION_NOT_SELECTED);
-    },
-    checked: selection == SELECTION_NOT_SELECTED
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
-    className: "form-check-label",
-    htmlFor: "productos-check"
-  }, "No selecionados")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "form-check form-check-inline"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
-    className: "form-check-input",
-    type: "radio",
-    name: "panel-seleccion",
-    id: "all-check",
-    onChange: function onChange(e) {
-      return setSelectionHandler(e, SELECTION_ALL);
-    },
-    checked: selection == SELECTION_ALL
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
-    className: "form-check-label",
-    htmlFor: "all-check"
-  }, "Todos"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("hr", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", {
-    className: "catalog-cards"
-  }, currentCakes.map(function (x) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("article", {
-      key: x.id,
-      className: "catalog-card",
-      style: {
-        'position': 'relative'
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-      src: "/photos/".concat(x.photo),
-      alt: x.name
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "text"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, x.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-      className: "badge bg-secondary"
-    }, x.categoryName)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "form-check",
-      style: {
-        'position': 'absolute',
-        'bottom': '0'
-      }
+    className: "list-group"
+  }, cakes.map(function (x) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
+      className: "list-group-item",
+      key: "cake-".concat(x.id)
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
-      className: "form-check-input",
+      className: "form-check-input me-1",
       type: "checkbox",
-      name: "check-add-catalog-input-".concat(x.id),
-      id: "check-add-catalog-input-".concat(x.id),
+      defaultChecked: x.isSet,
       onClick: function onClick(e) {
-        return addProduct(e, x.id);
-      },
-      defaultChecked: x.isSet
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
-      className: "form-check-label",
-      htmlFor: "check-add-catalog-input-".concat(x.id)
-    }, "Agregar")));
-  })));
+        return addCake(e, x);
+      }
+    }), x.name + " | " + x.categoryName + "  $" + x.price);
+  }));
 }
 
 /***/ }),
 
-/***/ "./src/Pages/Catalog/Catalog.js":
-/*!**************************************!*\
-  !*** ./src/Pages/Catalog/Catalog.js ***!
-  \**************************************/
+/***/ "./src/Pages/Projection/Projection.js":
+/*!********************************************!*\
+  !*** ./src/Pages/Projection/Projection.js ***!
+  \********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ Ingredient)
+/* harmony export */   "default": () => (/* binding */ Projection)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _CatalogDetailForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CatalogDetailForm */ "./src/Pages/Catalog/CatalogDetailForm.js");
-/* harmony import */ var _SerachForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SerachForm */ "./src/Pages/Catalog/SerachForm.js");
-/* harmony import */ var _Categorybar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Categorybar */ "./src/Pages/Catalog/Categorybar.js");
-/* harmony import */ var _CakeDetail__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./CakeDetail */ "./src/Pages/Catalog/CakeDetail.js");
+/* harmony import */ var _ProjectionDetailForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ProjectionDetailForm */ "./src/Pages/Projection/ProjectionDetailForm.js");
+/* harmony import */ var _CakePage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CakePage */ "./src/Pages/Projection/CakePage.js");
+/* harmony import */ var _ProjectionPage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ProjectionPage */ "./src/Pages/Projection/ProjectionPage.js");
+/* harmony import */ var _SummaryPage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./SummaryPage */ "./src/Pages/Projection/SummaryPage.js");
+/* harmony import */ var _components_Categorybar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/Categorybar */ "./src/components/Categorybar.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
@@ -205,62 +78,106 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-function Ingredient() {
-  var _window$bcatalog2;
+
+function Projection() {
+  var _window$bcatalog;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
       _useState2 = _slicedToArray(_useState, 2),
-      cakesId = _useState2[0],
-      setCakesId = _useState2[1];
+      selectedCakes = _useState2[0],
+      setSelectedCakes = _useState2[1];
 
-  function addProduct(e, id) {
+  function addCake(e, cake) {
     if (e.target.checked) {
-      setCakesId(_objectSpread(_objectSpread({}, cakesId), {}, _defineProperty({}, "".concat(id), id)));
+      setSelectedCakes(_objectSpread(_objectSpread({}, selectedCakes), {}, _defineProperty({}, "".concat(cake.id), _objectSpread({}, cake))));
     } else {
-      setCakesId(_objectSpread(_objectSpread({}, cakesId), {}, _defineProperty({}, "".concat(id), null)));
+      setSelectedCakes(_objectSpread(_objectSpread({}, selectedCakes), {}, _defineProperty({}, "".concat(cake.id), null)));
     }
   }
 
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    var _window$bcatalog;
-
-    if ((_window$bcatalog = window.bcatalog) !== null && _window$bcatalog !== void 0 && _window$bcatalog.cakesId) {
-      var cakes = {};
-      window.bcatalog.cakesId.forEach(function (id) {
-        cakes["".concat(id)] = id;
-      });
-      setCakesId(cakes);
-    }
-  }, []);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "row"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_CatalogDetailForm__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_ProjectionDetailForm__WEBPACK_IMPORTED_MODULE_1__["default"], {
     catalog: window.bcatalog,
-    cakesId: cakesId
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("hr", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SerachForm__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    search: window.bsearch
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Categorybar__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    catalogId: (_window$bcatalog2 = window.bcatalog) === null || _window$bcatalog2 === void 0 ? void 0 : _window$bcatalog2.id,
+    cakesId: []
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Categorybar__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    catalogId: (_window$bcatalog = window.bcatalog) === null || _window$bcatalog === void 0 ? void 0 : _window$bcatalog.id,
     categoryId: window.bcategoryId,
     categories: window.bcategories,
     search: window.bsearch
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_CakeDetail__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "card"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("nav", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "nav nav-tabs",
+    id: "nav-tab",
+    role: "tablist"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    className: "nav-link active",
+    id: "nav-cakes-tab",
+    "data-bs-toggle": "tab",
+    "data-bs-target": "#nav-cakes",
+    type: "button",
+    role: "tab",
+    "aria-controls": "nav-cakes",
+    "aria-selected": "true"
+  }, "Pasteles"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    className: "nav-link",
+    id: "nav-projection-tab",
+    "data-bs-toggle": "tab",
+    "data-bs-target": "#nav-projection",
+    type: "button",
+    role: "tab",
+    "aria-controls": "nav-projection",
+    "aria-selected": "false"
+  }, "Proyecci\xF3n"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    className: "nav-link",
+    id: "nav-summary-tab",
+    "data-bs-toggle": "tab",
+    "data-bs-target": "#nav-summary",
+    type: "button",
+    role: "tab",
+    "aria-controls": "nav-summary",
+    "aria-selected": "false"
+  }, "Resumen"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "tab-content",
+    id: "nav-tabContent",
+    style: {
+      'padding': '15px'
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "tab-pane fade show active",
+    id: "nav-cakes",
+    role: "tabpanel",
+    "aria-labelledby": "nav-cakes-tab"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_CakePage__WEBPACK_IMPORTED_MODULE_2__["default"], {
     cakes: window.bcakes,
-    addProduct: addProduct
-  }));
+    addCake: addCake
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "tab-pane fade",
+    id: "nav-projection",
+    role: "tabpanel",
+    "aria-labelledby": "nav-projection-tab"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_ProjectionPage__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    cakes: selectedCakes
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "tab-pane fade",
+    id: "nav-summary",
+    role: "tabpanel",
+    "aria-labelledby": "nav-summary-tab"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SummaryPage__WEBPACK_IMPORTED_MODULE_4__["default"], null)))));
 }
 
 /***/ }),
 
-/***/ "./src/Pages/Catalog/CatalogDetailForm.js":
-/*!************************************************!*\
-  !*** ./src/Pages/Catalog/CatalogDetailForm.js ***!
-  \************************************************/
+/***/ "./src/Pages/Projection/ProjectionDetailForm.js":
+/*!******************************************************!*\
+  !*** ./src/Pages/Projection/ProjectionDetailForm.js ***!
+  \******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ CatalogDetailForm)
+/* harmony export */   "default": () => (/* binding */ ProjectionDetailForm)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
@@ -277,7 +194,7 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
-function CatalogDetailForm(_ref) {
+function ProjectionDetailForm(_ref) {
   var catalog = _ref.catalog,
       _ref$cakesId = _ref.cakesId,
       cakesId = _ref$cakesId === void 0 ? {} : _ref$cakesId;
@@ -374,10 +291,103 @@ function CatalogDetailForm(_ref) {
 
 /***/ }),
 
-/***/ "./src/Pages/Catalog/Categorybar.js":
-/*!******************************************!*\
-  !*** ./src/Pages/Catalog/Categorybar.js ***!
-  \******************************************/
+/***/ "./src/Pages/Projection/ProjectionPage.js":
+/*!************************************************!*\
+  !*** ./src/Pages/Projection/ProjectionPage.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ ProjectionPage)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+function ProjectionPage(_ref) {
+  var _ref$cakes = _ref.cakes,
+      cakes = _ref$cakes === void 0 ? {} : _ref$cakes;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "accordion accordion-flush",
+    id: "projection-accordion"
+  }, Object.keys(cakes).filter(function (x) {
+    return cakes[x] != null;
+  }).map(function (x) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "accordion-item",
+      key: "cake-".concat(cakes[x].id)
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", {
+      className: "accordion-header",
+      id: "flush-headingOne"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+      className: "accordion-button collapsed",
+      type: "button",
+      "data-bs-toggle": "collapse",
+      "data-bs-target": "#flush-collapse-" + cakes[x].id,
+      "aria-expanded": "false",
+      "aria-controls": "flush-collapse-" + cakes[x].id
+    }, cakes[x].name + " | " + cakes[x].categoryName + "  $" + cakes[x].price), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+      type: "number",
+      className: "form-control",
+      style: {
+        width: '100px'
+      }
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      id: "flush-collapse-" + cakes[x].id,
+      className: "accordion-collapse collapse",
+      "aria-labelledby": "flush-headingOne",
+      "data-bs-parent": "#projection-accordion"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "accordion-body"
+    }, "Placeholder content for this accordion, which is intended to demonstrate the ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("code", null, ".accordion-flush"), " className. This is the first item's accordion body.")));
+  }));
+}
+
+/***/ }),
+
+/***/ "./src/Pages/Projection/SummaryPage.js":
+/*!*********************************************!*\
+  !*** ./src/Pages/Projection/SummaryPage.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ SummaryPage)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+function SummaryPage() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "SummaryPage");
+}
+
+/***/ }),
+
+/***/ "./src/Pages/Projection/index.js":
+/*!***************************************!*\
+  !*** ./src/Pages/Projection/index.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom/client */ "./node_modules/react-dom/client.js");
+/* harmony import */ var _Projection__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Projection */ "./src/Pages/Projection/Projection.js");
+
+
+
+var container = document.getElementById("root-react-app");
+var root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot)(container);
+root.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Projection__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+
+/***/ }),
+
+/***/ "./src/components/Categorybar.js":
+/*!***************************************!*\
+  !*** ./src/components/Categorybar.js ***!
+  \***************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -420,62 +430,6 @@ function Categorybar(_ref) {
     }
   })));
 }
-
-/***/ }),
-
-/***/ "./src/Pages/Catalog/SerachForm.js":
-/*!*****************************************!*\
-  !*** ./src/Pages/Catalog/SerachForm.js ***!
-  \*****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ SerachForm)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-
-function SerachForm(_ref) {
-  var search = _ref.search;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
-    className: "d-flex justify-content-end",
-    method: "get"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "input-group mb-3"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
-    type: "text",
-    className: "form-control",
-    name: "Search",
-    placeholder: "Nombre del Pastel",
-    defaultValue: search
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: "btn btn-outline-secondary",
-    type: "submit"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("i", {
-    className: "bi bi-search"
-  }))));
-}
-
-/***/ }),
-
-/***/ "./src/Pages/Catalog/index.js":
-/*!************************************!*\
-  !*** ./src/Pages/Catalog/index.js ***!
-  \************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom/client */ "./node_modules/react-dom/client.js");
-/* harmony import */ var _Catalog__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Catalog */ "./src/Pages/Catalog/Catalog.js");
-
-
-
-var container = document.getElementById("root-react-app");
-var root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot)(container);
-root.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Catalog__WEBPACK_IMPORTED_MODULE_2__["default"], null));
 
 /***/ })
 
@@ -601,7 +555,7 @@ root.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createEle
 /******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
-/******/ 			"Catalog": 0
+/******/ 			"Projection": 0
 /******/ 		};
 /******/ 		
 /******/ 		// no chunk on demand loading
@@ -651,9 +605,9 @@ root.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createEle
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["vendor"], () => (__webpack_require__("./src/Pages/Catalog/index.js")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["vendor"], () => (__webpack_require__("./src/Pages/Projection/index.js")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=Catalog.js.map
+//# sourceMappingURL=Projection.js.map

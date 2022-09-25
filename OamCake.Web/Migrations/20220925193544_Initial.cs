@@ -725,24 +725,24 @@ namespace OamCake.Web.Migrations
                 columns: new[] { "Id", "CreatedAt", "CreatedBy", "DeletedAt", "DeletedBy", "Name", "UpdatedAt", "UpdatedBy" },
                 values: new object[,]
                 {
-                    { 1L, new DateTime(2022, 8, 21, 18, 46, 41, 401, DateTimeKind.Local).AddTicks(3692), 1L, null, null, "Boda", null, null },
-                    { 2L, new DateTime(2022, 8, 21, 18, 46, 41, 401, DateTimeKind.Local).AddTicks(3695), 1L, null, null, "Cumple años", null, null },
-                    { 3L, new DateTime(2022, 8, 21, 18, 46, 41, 401, DateTimeKind.Local).AddTicks(3696), 1L, null, null, "Velorios", null, null }
+                    { 1L, new DateTime(2022, 9, 25, 15, 35, 43, 988, DateTimeKind.Local).AddTicks(2331), 1L, null, null, "Boda", null, null },
+                    { 2L, new DateTime(2022, 9, 25, 15, 35, 43, 988, DateTimeKind.Local).AddTicks(2334), 1L, null, null, "Cumple años", null, null },
+                    { 3L, new DateTime(2022, 9, 25, 15, 35, 43, 988, DateTimeKind.Local).AddTicks(2335), 1L, null, null, "Velorios", null, null }
                 });
 
             migrationBuilder.InsertData(
                 table: "Employee",
                 columns: new[] { "Id", "Address", "CreatedAt", "CreatedBy", "DeletedAt", "DeletedBy", "LastName", "Name", "Phone", "Photo", "UpdatedAt", "UpdatedBy" },
-                values: new object[] { 1L, "San Luis", new DateTime(2022, 8, 21, 18, 46, 41, 401, DateTimeKind.Local).AddTicks(3108), 1L, null, null, "Laureano", "Yunior", "8295343561", null, null, null });
+                values: new object[] { 1L, "San Luis", new DateTime(2022, 9, 25, 15, 35, 43, 988, DateTimeKind.Local).AddTicks(1849), 1L, null, null, "Laureano", "Yunior", "8295343561", null, null, null });
 
             migrationBuilder.InsertData(
                 table: "Product",
                 columns: new[] { "Id", "Code", "CreatedAt", "CreatedBy", "DeletedAt", "DeletedBy", "Description", "Name", "UpdatedAt", "UpdatedBy" },
                 values: new object[,]
                 {
-                    { 1L, "C-453", new DateTime(2022, 8, 21, 18, 46, 41, 401, DateTimeKind.Local).AddTicks(3719), 1L, null, null, "Negra", "Azucar", null, null },
-                    { 2L, "C-451", new DateTime(2022, 8, 21, 18, 46, 41, 401, DateTimeKind.Local).AddTicks(3722), 1L, null, null, "Blanca", "Vainilla ", null, null },
-                    { 3L, "C-457", new DateTime(2022, 8, 21, 18, 46, 41, 401, DateTimeKind.Local).AddTicks(3761), 1L, null, null, "Integral", "Arina", null, null }
+                    { 1L, "C-453", new DateTime(2022, 9, 25, 15, 35, 43, 988, DateTimeKind.Local).AddTicks(2354), 1L, null, null, "Negra", "Azucar", null, null },
+                    { 2L, "C-451", new DateTime(2022, 9, 25, 15, 35, 43, 988, DateTimeKind.Local).AddTicks(2356), 1L, null, null, "Blanca", "Vainilla ", null, null },
+                    { 3L, "C-457", new DateTime(2022, 9, 25, 15, 35, 43, 988, DateTimeKind.Local).AddTicks(2357), 1L, null, null, "Integral", "Arina", null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -750,10 +750,10 @@ namespace OamCake.Web.Migrations
                 columns: new[] { "Id", "CategoryId", "CreatedAt", "CreatedBy", "DeletedAt", "DeletedBy", "Name", "Photo", "UpdatedAt", "UpdatedBy" },
                 values: new object[,]
                 {
-                    { 1L, 1L, new DateTime(2022, 8, 21, 18, 46, 41, 401, DateTimeKind.Local).AddTicks(3817), 1L, null, null, "Bizcocho", "7a0d3b02-a564-48ad-9328-9d225ab0dbd4.jpg", null, null },
-                    { 2L, 2L, new DateTime(2022, 8, 21, 18, 46, 41, 401, DateTimeKind.Local).AddTicks(3820), 1L, null, null, "Zahahoria", "5b67ce7b-3744-4bc8-9337-72ef6928ea9b.jfif", null, null },
-                    { 3L, 3L, new DateTime(2022, 8, 21, 18, 46, 41, 401, DateTimeKind.Local).AddTicks(3821), 1L, null, null, "Chocolate", "daca910f-94b4-4201-99ea-f5df6488bb2a.jfif", null, null },
-                    { 4L, 1L, new DateTime(2022, 8, 21, 18, 46, 41, 401, DateTimeKind.Local).AddTicks(3822), 1L, null, null, "Sandia", "c6ea26ac-f3ad-47f1-9e13-772a33c91667.jpg", null, null }
+                    { 1L, 1L, new DateTime(2022, 9, 25, 15, 35, 43, 988, DateTimeKind.Local).AddTicks(2394), 1L, null, null, "Bizcocho", "7a0d3b02-a564-48ad-9328-9d225ab0dbd4.jpg", null, null },
+                    { 2L, 2L, new DateTime(2022, 9, 25, 15, 35, 43, 988, DateTimeKind.Local).AddTicks(2396), 1L, null, null, "Zahahoria", "5b67ce7b-3744-4bc8-9337-72ef6928ea9b.jfif", null, null },
+                    { 3L, 3L, new DateTime(2022, 9, 25, 15, 35, 43, 988, DateTimeKind.Local).AddTicks(2397), 1L, null, null, "Chocolate", "daca910f-94b4-4201-99ea-f5df6488bb2a.jfif", null, null },
+                    { 4L, 1L, new DateTime(2022, 9, 25, 15, 35, 43, 988, DateTimeKind.Local).AddTicks(2398), 1L, null, null, "Sandia", "c6ea26ac-f3ad-47f1-9e13-772a33c91667.jpg", null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -761,18 +761,37 @@ namespace OamCake.Web.Migrations
                 columns: new[] { "Id", "CreatedAt", "CreatedBy", "Date", "DeletedAt", "DeletedBy", "IventoryProviderId", "ProductId", "Quantity", "UpdatedAt", "UpdatedBy" },
                 values: new object[,]
                 {
-                    { 1L, new DateTime(2022, 8, 21, 18, 46, 41, 401, DateTimeKind.Local).AddTicks(3785), 1L, new DateTime(2022, 8, 21, 18, 46, 41, 401, DateTimeKind.Local).AddTicks(3784), null, null, 0L, 1L, 43, null, null },
-                    { 2L, new DateTime(2022, 8, 21, 18, 46, 41, 401, DateTimeKind.Local).AddTicks(3788), 1L, new DateTime(2022, 8, 21, 18, 46, 41, 401, DateTimeKind.Local).AddTicks(3788), null, null, 0L, 2L, 12, null, null },
-                    { 3L, new DateTime(2022, 8, 21, 18, 46, 41, 401, DateTimeKind.Local).AddTicks(3789), 1L, new DateTime(2022, 8, 21, 18, 46, 41, 401, DateTimeKind.Local).AddTicks(3789), null, null, 0L, 3L, 4, null, null },
-                    { 4L, new DateTime(2022, 8, 21, 18, 46, 41, 401, DateTimeKind.Local).AddTicks(3791), 1L, new DateTime(2022, 8, 21, 18, 46, 41, 401, DateTimeKind.Local).AddTicks(3790), null, null, 0L, 1L, -2, null, null },
-                    { 5L, new DateTime(2022, 8, 21, 18, 46, 41, 401, DateTimeKind.Local).AddTicks(3794), 1L, new DateTime(2022, 8, 21, 18, 46, 41, 401, DateTimeKind.Local).AddTicks(3794), null, null, 0L, 2L, -10, null, null },
-                    { 6L, new DateTime(2022, 8, 21, 18, 46, 41, 401, DateTimeKind.Local).AddTicks(3799), 1L, new DateTime(2022, 8, 21, 18, 46, 41, 401, DateTimeKind.Local).AddTicks(3798), null, null, 0L, 3L, -2, null, null }
+                    { 1L, new DateTime(2022, 9, 25, 15, 35, 43, 988, DateTimeKind.Local).AddTicks(2370), 1L, new DateTime(2022, 9, 25, 15, 35, 43, 988, DateTimeKind.Local).AddTicks(2369), null, null, 0L, 1L, 43, null, null },
+                    { 2L, new DateTime(2022, 9, 25, 15, 35, 43, 988, DateTimeKind.Local).AddTicks(2373), 1L, new DateTime(2022, 9, 25, 15, 35, 43, 988, DateTimeKind.Local).AddTicks(2373), null, null, 0L, 2L, 12, null, null },
+                    { 3L, new DateTime(2022, 9, 25, 15, 35, 43, 988, DateTimeKind.Local).AddTicks(2374), 1L, new DateTime(2022, 9, 25, 15, 35, 43, 988, DateTimeKind.Local).AddTicks(2374), null, null, 0L, 3L, 4, null, null },
+                    { 4L, new DateTime(2022, 9, 25, 15, 35, 43, 988, DateTimeKind.Local).AddTicks(2376), 1L, new DateTime(2022, 9, 25, 15, 35, 43, 988, DateTimeKind.Local).AddTicks(2375), null, null, 0L, 1L, -2, null, null },
+                    { 5L, new DateTime(2022, 9, 25, 15, 35, 43, 988, DateTimeKind.Local).AddTicks(2377), 1L, new DateTime(2022, 9, 25, 15, 35, 43, 988, DateTimeKind.Local).AddTicks(2376), null, null, 0L, 2L, -10, null, null },
+                    { 6L, new DateTime(2022, 9, 25, 15, 35, 43, 988, DateTimeKind.Local).AddTicks(2380), 1L, new DateTime(2022, 9, 25, 15, 35, 43, 988, DateTimeKind.Local).AddTicks(2379), null, null, 0L, 3L, -2, null, null }
                 });
 
             migrationBuilder.InsertData(
                 table: "User",
                 columns: new[] { "Id", "CreatedAt", "CreatedBy", "DeletedAt", "DeletedBy", "Email", "EmployeeId", "IsActive", "Password", "UpdatedAt", "UpdatedBy" },
-                values: new object[] { 1L, new DateTime(2022, 8, 21, 18, 46, 41, 401, DateTimeKind.Local).AddTicks(3265), 1L, null, null, "yuniorlaureano@gmail.com", 1L, true, "A6-65-A4", null, null });
+                values: new object[] { 1L, new DateTime(2022, 9, 25, 15, 35, 43, 988, DateTimeKind.Local).AddTicks(1954), 1L, null, null, "yuniorlaureano@gmail.com", 1L, true, "A6-65-A4", null, null });
+
+            migrationBuilder.InsertData(
+                table: "Ingredient",
+                columns: new[] { "Id", "CakeId", "CreatedAt", "CreatedBy", "DeletedAt", "DeletedBy", "ProductId", "Quantity", "Unid", "UpdatedAt", "UpdatedBy" },
+                values: new object[,]
+                {
+                    { 1L, 1L, new DateTime(2022, 9, 25, 15, 35, 43, 988, DateTimeKind.Local).AddTicks(2412), 1L, null, null, 1L, 4, "l", null, null },
+                    { 2L, 1L, new DateTime(2022, 9, 25, 15, 35, 43, 988, DateTimeKind.Local).AddTicks(2415), 1L, null, null, 2L, 4, "l", null, null },
+                    { 3L, 1L, new DateTime(2022, 9, 25, 15, 35, 43, 988, DateTimeKind.Local).AddTicks(2416), 1L, null, null, 3L, 4, "l", null, null },
+                    { 4L, 2L, new DateTime(2022, 9, 25, 15, 35, 43, 988, DateTimeKind.Local).AddTicks(2417), 1L, null, null, 1L, 4, "l", null, null },
+                    { 5L, 2L, new DateTime(2022, 9, 25, 15, 35, 43, 988, DateTimeKind.Local).AddTicks(2418), 1L, null, null, 2L, 4, "l", null, null },
+                    { 6L, 2L, new DateTime(2022, 9, 25, 15, 35, 43, 988, DateTimeKind.Local).AddTicks(2420), 1L, null, null, 3L, 5, "g", null, null },
+                    { 7L, 3L, new DateTime(2022, 9, 25, 15, 35, 43, 988, DateTimeKind.Local).AddTicks(2420), 1L, null, null, 1L, 4, "l", null, null },
+                    { 8L, 3L, new DateTime(2022, 9, 25, 15, 35, 43, 988, DateTimeKind.Local).AddTicks(2421), 1L, null, null, 2L, 2, "g", null, null },
+                    { 9L, 3L, new DateTime(2022, 9, 25, 15, 35, 43, 988, DateTimeKind.Local).AddTicks(2422), 1L, null, null, 3L, 3, "g", null, null },
+                    { 10L, 4L, new DateTime(2022, 9, 25, 15, 35, 43, 988, DateTimeKind.Local).AddTicks(2423), 1L, null, null, 1L, 7, "l", null, null },
+                    { 11L, 4L, new DateTime(2022, 9, 25, 15, 35, 43, 988, DateTimeKind.Local).AddTicks(2424), 1L, null, null, 2L, 8, "g", null, null },
+                    { 12L, 4L, new DateTime(2022, 9, 25, 15, 35, 43, 988, DateTimeKind.Local).AddTicks(2425), 1L, null, null, 3L, 11, "g", null, null }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cake_CategoryId",

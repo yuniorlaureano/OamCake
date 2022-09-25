@@ -38,7 +38,8 @@ namespace OamCake.Web.Pages.Admin.Projection
         {
             var query = _db.Cake.Include(x => x.Category)
                            .Include(x => x.Ingredients)
-                           .ThenInclude(x => x.Product).Where(x => x.DeletedAt == null);
+                           .ThenInclude(x => x.Product)
+                           .Where(x => x.DeletedAt == null);
 
             var projectionDetails = new Dictionary<long, Entity.ProjectionDetail>();
 
@@ -56,7 +57,7 @@ namespace OamCake.Web.Pages.Admin.Projection
                     Id = projection.Id,
                     Description = projection.Description,
                     IsOpen = projection.IsOpen,
-                    CakesId = projectionDetails.Values.Select(x => x.CakeId).ToArray()
+                    CakesId = projectionDetails.Values.Select(x => x.CakeId.ToString() + "|" + x.Quantity).ToArray()
                 };
             }
 
@@ -83,10 +84,17 @@ namespace OamCake.Web.Pages.Admin.Projection
                     Id = item.Id,
                     Name = item.Name,
                     CategoryId = item.CategoryId,
-                    CategoryName = item.Category?.Name,                   
+                    CategoryName = item.Category?.Name,
                     IsSet = cake != null,
                     Photo = item.Photo,
-                    Quantity = cake?.Quantity ?? 0
+                    Quantity = cake?.Quantity ?? 0,
+                    Ingredients = item.Ingredients.Select(x => new IngredientDto
+                    {
+                        ProductId = x.ProductId,
+                        ProductName = x.Product.Name,
+                        Quantity = x.Quantity,
+                        Unit = x.Unid,
+                    }).ToList()
                 });
             }
 
@@ -95,11 +103,9 @@ namespace OamCake.Web.Pages.Admin.Projection
 
         public async Task<IActionResult> OnPostAsync()
         {
-            var x = await Task.FromResult(0);
-
-            if (String.IsNullOrWhiteSpace(Projection.Description))
+            if (String.IsNullOrWhiteSpace(Projection.Description) && Projection.CakesId?.Length == 0)
             {
-                Errors = "Debe proveer la descripción";
+                Errors = "Debe proveer la descripción y los Pasteles";
                 return RedirectToPage("/admin/projection/add", new { Search, Id, CategoryId });
             }
 
@@ -115,9 +121,9 @@ namespace OamCake.Web.Pages.Admin.Projection
                     if (details != null)
                     {
                         
-                        var existing = details.Where(x => Projection.CakesId.Contains(x.CakeId)).ToList();
-                        var removed = details.Where(x => !Projection.CakesId.Contains(x.CakeId)).ToList();
-                        var news = Projection.CakesId.Where(x => !existing.Any(j => j.CakeId == x)).ToList();
+                        var existing = details.Where(x => Projection.CakesId.Contains(x.CakeId.ToString())).ToList();
+                        var removed = details.Where(x => !Projection.CakesId.Contains(x.CakeId.ToString())).ToList();
+                        var news = Projection.CakesId.Where(x => !existing.Any(j => j.CakeId.ToString() == x)).ToList();
 
                         if (removed.Any())
                         {
@@ -128,7 +134,7 @@ namespace OamCake.Web.Pages.Admin.Projection
                         {
                             _db.ProjectionDetail.AddRange(news.Select(x => new Entity.ProjectionDetail
                             {
-                                CakeId = x,
+                                CakeId = long.Parse(x),
                                 CreatedAt = DateTime.Now,
                                 CreatedBy = userId,
                                 ProjectionId = projection.Id,
@@ -155,7 +161,7 @@ namespace OamCake.Web.Pages.Admin.Projection
                     IsOpen = Projection.IsOpen,
                     ProjectionDetails = Projection.CakesId.Select(x => new Entity.ProjectionDetail
                     {
-                        CakeId = x,
+                        CakeId = long.Parse(x),
                         CreatedAt = DateTime.Now,
                         CreatedBy = userId
                     }).ToList(),

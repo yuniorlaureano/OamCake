@@ -10,7 +10,7 @@ export default function ProjectionDetailForm({catalog, cakesId={}}) {
   }
 
   function selectedCakeCaptions() {
-    const selectedCakes = Object.keys(cakesId).length;
+    const selectedCakes = Object.keys(cakesId).filter(x => cakesId[x] != null).length;
     if(selectedCakes > 1) {
         return `Tiene ${selectedCakes} seleccionados`;
     } else {
@@ -29,8 +29,8 @@ export default function ProjectionDetailForm({catalog, cakesId={}}) {
             <h6 style={{'fontWeight': 'bold'}}>{selectedCakeCaptions()}</h6>
             <form method='POST'>
                 {
-                    Object.keys(cakesId).filter(x => cakesId[x] != null).map((x , i) => (
-                        <input key={cakesId[x].id} type="hidden" defaultValue={cakesId[x].id} name={`Projection.CakesId[${cakesId[x].id}]`} />
+                    Object.keys(cakesId).filter(x => cakesId[x] != null).map(x => (
+                        <input key={cakesId[x].id} type="hidden" defaultValue={`${cakesId[x].id}|${cakesId[x].quantity||1}`} name={`Projection.CakesId[${cakesId[x].id}]`} />
                     ))
                 }
                 <input type="hidden" name="__RequestVerificationToken" defaultValue={window.antiForgeryToken}/>
@@ -46,7 +46,7 @@ export default function ProjectionDetailForm({catalog, cakesId={}}) {
                         <div className="form-check">
                             <input className="form-check-input" type="checkbox" name="Projection.IsOpen" id="Projection.IsOpen" onChange={isPublishedHandler} value={isPublishedState} checked={isPublishedState}/>
                             <label className="form-check-label" htmlFor="Projection.IsOpen">
-                                Está publicado
+                                Está activa
                             </label>
                         </div>
                     </div>

@@ -63,6 +63,129 @@ namespace OamCake.Data
                 new Cake { Id = 4, Name = "Sandia", Photo = "c6ea26ac-f3ad-47f1-9e13-772a33c91667.jpg", CategoryId = 1, CreatedAt = DateTime.Now, CreatedBy = 1},
             });
 
+            modelBuilder.Entity<Ingredient>().HasData(new List<Ingredient>
+            {
+                new Ingredient
+                {
+                    Id = 1,
+                    CakeId = 1,
+                    ProductId = 1,
+                    Quantity = 4,
+                    Unid = 'l',
+                    CreatedAt = DateTime.Now,
+                    CreatedBy = 1,
+                },
+                new Ingredient
+                {
+                    Id = 2,
+                    CakeId = 1,
+                    ProductId = 2,
+                    Quantity = 4,
+                    Unid = 'l',
+                    CreatedAt = DateTime.Now,
+                    CreatedBy = 1,
+                },
+                new Ingredient
+                {
+                    Id = 3,
+                    CakeId = 1,
+                    ProductId = 3,
+                    Quantity = 4,
+                    Unid = 'l',
+                    CreatedAt = DateTime.Now,
+                    CreatedBy = 1,
+                },
+                new Ingredient
+                {
+                    Id = 4,
+                    CakeId = 2,
+                    ProductId = 1,
+                    Quantity = 4,
+                    Unid = 'l',
+                    CreatedAt = DateTime.Now,
+                    CreatedBy = 1,
+                },
+                new Ingredient
+                {
+                    Id = 5,
+                    CakeId = 2,
+                    ProductId = 2,
+                    Quantity = 4,
+                    Unid = 'l',
+                    CreatedAt = DateTime.Now,
+                    CreatedBy = 1,
+                },
+                new Ingredient
+                {
+                    Id = 6,
+                    CakeId = 2,
+                    ProductId = 3,
+                    Quantity = 5,
+                    Unid = 'g',
+                    CreatedAt = DateTime.Now,
+                    CreatedBy = 1,
+                },
+                new Ingredient
+                {
+                    Id = 7,
+                    CakeId = 3,
+                    ProductId = 1,
+                    Quantity = 4,
+                    Unid = 'l',
+                    CreatedAt = DateTime.Now,
+                    CreatedBy = 1,
+                },
+                new Ingredient
+                {
+                    Id = 8,
+                    CakeId = 3,
+                    ProductId = 2,
+                    Quantity = 2,
+                    Unid = 'g',
+                    CreatedAt = DateTime.Now,
+                    CreatedBy = 1,
+                },
+                new Ingredient
+                {
+                    Id = 9,
+                    CakeId = 3,
+                    ProductId = 3,
+                    Quantity = 3,
+                    Unid = 'g',
+                    CreatedAt = DateTime.Now,
+                    CreatedBy = 1,
+                },
+                new Ingredient
+                {
+                    Id = 10,
+                    CakeId = 4,
+                    ProductId = 1,
+                    Quantity = 7,
+                    Unid = 'l',
+                    CreatedAt = DateTime.Now,
+                    CreatedBy = 1,
+                },
+                new Ingredient
+                {
+                    Id = 11,
+                    CakeId = 4,
+                    ProductId = 2,
+                    Quantity = 8,
+                    Unid = 'g',
+                    CreatedAt = DateTime.Now,
+                    CreatedBy = 1,
+                },
+                new Ingredient
+                {
+                    Id = 12,
+                    CakeId = 4,
+                    ProductId = 3,
+                    Quantity = 11,
+                    Unid = 'g',
+                    CreatedAt = DateTime.Now,
+                    CreatedBy = 1,
+                }
+            });
         }
     }
 }

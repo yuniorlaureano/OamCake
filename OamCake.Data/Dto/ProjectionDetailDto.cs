@@ -12,6 +12,6 @@
         public long? CategoryId { get; set; }
         public string CategoryName { get; set; }
 
-        List<IngredientDto> Ingredients { get; set; }
+        public List<IngredientDto> Ingredients { get; set; }
     }
 }

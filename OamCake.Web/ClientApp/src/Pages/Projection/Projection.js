@@ -11,10 +11,14 @@ export default function Projection() {
 
   function addCake(e, cake) {
     if(e.target.checked) {
-      setSelectedCakes({...selectedCakes, [`${cake.id}`]: {...cake}})
+      setSelectedCakes({...selectedCakes, [`${cake.id}`]: {...cake, quantity: cake.quantity || 1}})
     } else {
       setSelectedCakes({...selectedCakes, [`${cake.id}`]: null})
     }    
+  }
+
+  function handleUpdateQuantity(id, quantity) {
+    setSelectedCakes({...selectedCakes, [`${id}`]: {...selectedCakes[id], quantity: quantity}});
   }
 
   return (
@@ -36,10 +40,10 @@ export default function Projection() {
               <CakePage cakes={window.bcakes} addCake={addCake}/>
             </div>
             <div className="tab-pane fade" id="nav-projection" role="tabpanel" aria-labelledby="nav-projection-tab">
-              <ProjectionPage cakes={selectedCakes}/>
+              <ProjectionPage cakes={selectedCakes} onUpdateQuantity={handleUpdateQuantity}/>
             </div>
             <div className="tab-pane fade" id="nav-summary" role="tabpanel" aria-labelledby="nav-summary-tab">
-              <SummaryPage/>
+              <SummaryPage cakesId={selectedCakes}/>
             </div>
           </div>
       </div>

@@ -103,6 +103,23 @@ function Projection() {
     }))));
   }
 
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (window.bcakes) {
+      var savedCakes = {};
+
+      for (var k in window.bcakes) {
+        if (!window.bcakes[k].isSet) {
+          continue;
+        }
+
+        savedCakes[window.bcakes[k].id] = _objectSpread({}, window.bcakes[k]);
+      }
+
+      setSelectedCakes(savedCakes);
+    }
+
+    console.log(window.bcakes);
+  }, []);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_ProjectionDetailForm__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -217,7 +234,7 @@ function ProjectionDetailForm(_ref) {
 
   var id = catalog.id,
       description = catalog.description,
-      isPublished = catalog.isPublished;
+      isOpen = catalog.isOpen;
 
   function isPublishedHandler(e) {
     setIsPublishedState(e.target.checked);
@@ -236,8 +253,7 @@ function ProjectionDetailForm(_ref) {
   }
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    console.log(isPublished);
-    setIsPublishedState(isPublished);
+    setIsPublishedState(isOpen);
   }, []);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "card p-5"
@@ -251,12 +267,12 @@ function ProjectionDetailForm(_ref) {
     method: "POST"
   }, Object.keys(cakesId).filter(function (x) {
     return cakesId[x] != null;
-  }).map(function (x) {
+  }).map(function (x, i) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
       key: cakesId[x].id,
       type: "hidden",
       defaultValue: "".concat(cakesId[x].id, "|").concat(cakesId[x].quantity || 1),
-      name: "Projection.CakesId[".concat(cakesId[x].id, "]")
+      name: "Projection.CakesId[".concat(i, "]")
     });
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     type: "hidden",

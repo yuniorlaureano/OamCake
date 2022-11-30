@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react'
 export default function ProjectionDetailForm({catalog, cakesId={}}) {
   const [isPublishedState, setIsPublishedState] = useState(false);
 
-  const {id, description, isPublished } = catalog;
+  const {id, description, isOpen } = catalog;
 
   function isPublishedHandler(e) {
     setIsPublishedState(e.target.checked);
@@ -19,8 +19,7 @@ export default function ProjectionDetailForm({catalog, cakesId={}}) {
   }
 
   useEffect(()=> {
-    console.log(isPublished);
-    setIsPublishedState(isPublished);
+    setIsPublishedState(isOpen);
   }, []);
   
   return (
@@ -29,8 +28,8 @@ export default function ProjectionDetailForm({catalog, cakesId={}}) {
             <h6 style={{'fontWeight': 'bold'}}>{selectedCakeCaptions()}</h6>
             <form method='POST'>
                 {
-                    Object.keys(cakesId).filter(x => cakesId[x] != null).map(x => (
-                        <input key={cakesId[x].id} type="hidden" defaultValue={`${cakesId[x].id}|${cakesId[x].quantity||1}`} name={`Projection.CakesId[${cakesId[x].id}]`} />
+                    Object.keys(cakesId).filter(x => cakesId[x] != null).map((x,i) => (
+                        <input key={cakesId[x].id} type="hidden" defaultValue={`${cakesId[x].id}|${cakesId[x].quantity||1}`} name={`Projection.CakesId[${i}]`} />
                     ))
                 }
                 <input type="hidden" name="__RequestVerificationToken" defaultValue={window.antiForgeryToken}/>

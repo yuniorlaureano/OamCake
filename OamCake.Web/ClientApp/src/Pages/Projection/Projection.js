@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import ProjectionDetailForm from './ProjectionDetailForm';
 import CakePage from './CakePage';
 import ProjectionPage from './ProjectionPage';
@@ -20,6 +20,22 @@ export default function Projection() {
   function handleUpdateQuantity(id, quantity) {
     setSelectedCakes({...selectedCakes, [`${id}`]: {...selectedCakes[id], quantity: quantity}});
   }
+
+  useEffect(function(){
+    if(window.bcakes){
+        const savedCakes = {};
+        for(let k in window.bcakes) {
+          if(!window.bcakes[k].isSet){
+            continue;
+          }
+          savedCakes[window.bcakes[k].id] = {
+            ...window.bcakes[k]
+          };
+        }
+        setSelectedCakes(savedCakes);
+    }
+    console.log(window.bcakes);
+  }, []);
 
   return (
     <div>

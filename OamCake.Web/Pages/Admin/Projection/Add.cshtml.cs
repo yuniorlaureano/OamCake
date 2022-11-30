@@ -103,7 +103,7 @@ namespace OamCake.Web.Pages.Admin.Projection
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (String.IsNullOrWhiteSpace(Projection.Description) && Projection.CakesId?.Length == 0)
+            if (String.IsNullOrWhiteSpace(Projection.Description) || Projection.CakesId?.Length == 0)
             {
                 Errors = "Debe proveer la descripción y los Pasteles";
                 return RedirectToPage("/admin/projection/add", new { Search, Id, CategoryId });
@@ -113,34 +113,22 @@ namespace OamCake.Web.Pages.Admin.Projection
 
             if (Projection.Id > 0)
             {
+
                 var projection = await _db.Projection.Where(x => x.Id == Projection.Id).FirstOrDefaultAsync();
                 var details = await _db.ProjectionDetail.Where(x => x.ProjectionId == Projection.Id).ToListAsync();
 
                 if (projection != null)
-                {
-                    if (details != null)
+                {                    
+                    _db.ProjectionDetail.RemoveRange(details);
+
+                    _db.ProjectionDetail.AddRange(Projection.AsProjectionQuantityAndIds().Select(x => new Entity.ProjectionDetail
                     {
-                        
-                        var existing = details.Where(x => Projection.CakesId.Contains(x.CakeId.ToString())).ToList();
-                        var removed = details.Where(x => !Projection.CakesId.Contains(x.CakeId.ToString())).ToList();
-                        var news = Projection.CakesId.Where(x => !existing.Any(j => j.CakeId.ToString() == x)).ToList();
-
-                        if (removed.Any())
-                        {
-                            _db.ProjectionDetail.RemoveRange(removed);
-                        }
-
-                        if (news.Any())
-                        {
-                            _db.ProjectionDetail.AddRange(news.Select(x => new Entity.ProjectionDetail
-                            {
-                                CakeId = long.Parse(x),
-                                CreatedAt = DateTime.Now,
-                                CreatedBy = userId,
-                                ProjectionId = projection.Id,
-                            }).ToList());
-                        }
-                    }
+                        CakeId = x.Id,
+                        Quantity = x.Quantity,
+                        CreatedAt = DateTime.Now,                                             
+                        CreatedBy = userId,
+                        ProjectionId = projection.Id,
+                    }).ToList());
 
                     projection.Description = Projection.Description;
                     projection.IsOpen = Projection.IsOpen;
@@ -159,9 +147,10 @@ namespace OamCake.Web.Pages.Admin.Projection
                     CreatedAt = DateTime.Now,
                     CreatedBy = userId,
                     IsOpen = Projection.IsOpen,
-                    ProjectionDetails = Projection.CakesId.Select(x => new Entity.ProjectionDetail
+                    ProjectionDetails = Projection.AsProjectionQuantityAndIds().Select(x => new Entity.ProjectionDetail
                     {
-                        CakeId = long.Parse(x),
+                        CakeId = x.Id,
+                        Quantity = x.Quantity,
                         CreatedAt = DateTime.Now,
                         CreatedBy = userId
                     }).ToList(),

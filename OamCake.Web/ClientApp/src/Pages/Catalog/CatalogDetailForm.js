@@ -30,7 +30,7 @@ export default function CatalogDetailForm({catalog, cakesId={}}) {
             <form method='POST'>
                 {
                     Object.keys(cakesId).filter(x => cakesId[x] != null).map((x , i) => (
-                        <input key={cakesId[x]} type="hidden" defaultValue={cakesId[x]} name={`Catalog.CakesId[${i}]`} />
+                        <input key={cakesId[x].id} type="hidden" defaultValue={`${cakesId[x].id}|${cakesId[x].value}`} name={`Catalog.CakesId[${i}]`} />
                     ))
                 }
                 <input type="hidden" name="__RequestVerificationToken" defaultValue={window.antiForgeryToken}/>

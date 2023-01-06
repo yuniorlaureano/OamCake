@@ -3,14 +3,13 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using OamCake.Data;
 using OamCake.Data.Dto;
-using OamCake.Entity;
 
 namespace OamCake.Web.Pages
 {
     public class IndexModel : PageModel
     {
         private readonly OamCakeContext _db;
-        public Catalog Catalog { get; set; } = new();
+        public CatalogListDto Catalog { get; set; } = new();
         public IEnumerable<Entity.Category> Categories { get; set; } = Enumerable.Empty<Entity.Category>();
 
         public IndexModel(OamCakeContext db)
@@ -32,11 +31,29 @@ namespace OamCake.Web.Pages
             var query = _db.Catalog.Include(x => x.CatalogDetails)
                                    .ThenInclude(x => x.Cake).Where(x => x.DeletedAt == null && x.IsPublished);
 
-            Catalog = await query.FirstOrDefaultAsync();
-            Catalog.CatalogDetails = Catalog.CatalogDetails.Where(x => 
-                (x.Cake.CategoryId == CategoryId || CategoryId == null) &&
-                (Search == null || x.Cake.Name.Contains(Search, StringComparison.OrdinalIgnoreCase))
-            ).ToList();
+            var result = await query.FirstOrDefaultAsync();
+            if (result != null)
+            {
+                Catalog = new CatalogListDto
+                {
+                    Description = result.Description,
+                    Id = result.Id,
+                    CatalogDetailListDto = result.CatalogDetails.Where(x =>
+                            (x.Cake.CategoryId == CategoryId || CategoryId == null) &&
+                            (Search == null || x.Cake.Name.Contains(Search, StringComparison.OrdinalIgnoreCase))
+                    ).Select(x => new CatalogDetailListDto
+                    {
+                        Id = x.Id,
+                        CakeId = x.CakeId,
+                        CakeName = x.Cake.Name,
+                        CatalogId = x.CatalogId,
+                        Photo = x.Photo,
+                        RealPhoto = x.Cake.Photo,
+                        Price = x.Price
+                    }).ToList()
+                };
+            }
+
             Categories = await _db.Category.ToListAsync();
         }
     }

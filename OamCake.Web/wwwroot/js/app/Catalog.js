@@ -40,7 +40,9 @@ var SELECTION_SELECTED = 2;
 var SELECTION_NOT_SELECTED = 3;
 function CakeDetail(_ref) {
   var cakes = _ref.cakes,
-      addProduct = _ref.addProduct;
+      chosenCakes = _ref.chosenCakes,
+      addProduct = _ref.addProduct,
+      addPrice = _ref.addPrice;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
       _useState2 = _slicedToArray(_useState, 2),
@@ -129,6 +131,8 @@ function CakeDetail(_ref) {
   }, "Todos"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("hr", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", {
     className: "catalog-cards"
   }, currentCakes.map(function (x) {
+    var _chosenCakes;
+
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("article", {
       key: x.id,
       className: "catalog-card",
@@ -143,11 +147,7 @@ function CakeDetail(_ref) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, x.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
       className: "badge bg-secondary"
     }, x.categoryName)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "form-check",
-      style: {
-        'position': 'absolute',
-        'bottom': '0'
-      }
+      className: "form-check"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
       className: "form-check-input",
       type: "checkbox",
@@ -160,7 +160,18 @@ function CakeDetail(_ref) {
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
       className: "form-check-label",
       htmlFor: "check-add-catalog-input-".concat(x.id)
-    }, "Agregar")));
+    }, "Agregar"), chosenCakes["".concat(x.id)] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+      type: "text",
+      className: "form-control form-control-sm",
+      value: (_chosenCakes = chosenCakes["".concat(x.id)]) === null || _chosenCakes === void 0 ? void 0 : _chosenCakes.value,
+      onChange: function onChange(e) {
+        return addPrice(e, x.id);
+      },
+      placeholder: "$ Precio",
+      style: {
+        'width': '100px'
+      }
+    })));
   })));
 }
 
@@ -215,10 +226,21 @@ function Ingredient() {
 
   function addProduct(e, id) {
     if (e.target.checked) {
-      setCakesId(_objectSpread(_objectSpread({}, cakesId), {}, _defineProperty({}, "".concat(id), id)));
+      setCakesId(_objectSpread(_objectSpread({}, cakesId), {}, _defineProperty({}, "".concat(id), {
+        id: id,
+        value: 0
+      })));
     } else {
       setCakesId(_objectSpread(_objectSpread({}, cakesId), {}, _defineProperty({}, "".concat(id), null)));
     }
+  }
+
+  function addPrice(e, id) {
+    var value = e.target.value;
+    setCakesId(_objectSpread(_objectSpread({}, cakesId), {}, _defineProperty({}, "".concat(id), {
+      id: id,
+      value: value
+    })));
   }
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
@@ -226,8 +248,12 @@ function Ingredient() {
 
     if ((_window$bcatalog = window.bcatalog) !== null && _window$bcatalog !== void 0 && _window$bcatalog.cakesId) {
       var cakes = {};
-      window.bcatalog.cakesId.forEach(function (id) {
-        cakes["".concat(id)] = id;
+      window.bcatalog.cakesId.forEach(function (item) {
+        var values = item.split('|');
+        cakes[values[0]] = {
+          id: values[0],
+          value: values[1]
+        };
       });
       setCakesId(cakes);
     }
@@ -246,7 +272,9 @@ function Ingredient() {
     search: window.bsearch
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_CakeDetail__WEBPACK_IMPORTED_MODULE_4__["default"], {
     cakes: window.bcakes,
-    addProduct: addProduct
+    chosenCakes: cakesId,
+    addProduct: addProduct,
+    addPrice: addPrice
   }));
 }
 
@@ -323,9 +351,9 @@ function CatalogDetailForm(_ref) {
     return cakesId[x] != null;
   }).map(function (x, i) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
-      key: cakesId[x],
+      key: cakesId[x].id,
       type: "hidden",
-      defaultValue: cakesId[x],
+      defaultValue: "".concat(cakesId[x].id, "|").concat(cakesId[x].value),
       name: "Catalog.CakesId[".concat(i, "]")
     });
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {

@@ -32,7 +32,7 @@ namespace OamCake.Web.Pages.Account
                 return Page();
             }
 
-            var user = _db.User.Include(x => x.Employee).FirstOrDefault(x => x.Email == LoginDto.Email && x.Password == LoginDto.Password.HashedPassword() && x.IsActive);
+            var user = _db.User.Include(x => x.Employee).FirstOrDefault(x => x.Email == LoginDto.Email && x.Password == LoginDto.Password.HashedPassword());
 
             if (user == null)
             {
@@ -40,13 +40,18 @@ namespace OamCake.Web.Pages.Account
                 return Page();
             }
 
-            var claims = new Claim[]
+            var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, $"{user.Employee.Name} {user.Employee.LastName}"),
                 new Claim(ClaimTypes.Email, user.Email),
                 new Claim(Constants.CLAIM_PHOTO, user.Employee.Photo ?? ""),
                 new Claim(Constants.CLAIM_ID, user.Id.ToString())
             };
+
+            if (user.IsAdmin)
+            {
+                claims.Add(new Claim(Constants.CLAIM_ADMIN, Constants.CLAIM_ADMIN));
+            }
 
             var identity = new ClaimsIdentity(claims, Constants.AUTH_TYPE);
             var claimsPrincipal = new ClaimsPrincipal(identity);
@@ -59,7 +64,7 @@ namespace OamCake.Web.Pages.Account
 
             await HttpContext.SignInAsync(Constants.AUTH_TYPE, claimsPrincipal, authenticationProperties);
 
-            return RedirectToPage("/Admin/Index");
+            return RedirectToPage("/Index");
         }
     }
 }

@@ -4,7 +4,7 @@ const SELECTION_ALL = 1;
 const SELECTION_SELECTED = 2;
 const SELECTION_NOT_SELECTED = 3;
 
-export default function CakeDetail({cakes, addProduct}) {
+export default function CakeDetail({cakes, chosenCakes, addProduct, addPrice}) {
     const [selection, setSelection] = useState(0);
     const [currentCakes, setCurrentCakes] = useState([...cakes]);
 
@@ -22,11 +22,9 @@ export default function CakeDetail({cakes, addProduct}) {
         setSelection(option);
         setSetlectionOptions(option);  
     }
-
     useEffect(() => {
         setSetlectionOptions(selection);
     }, [cakes]);
-
   return (
     <div className="row">
         <div className='mb-3'>
@@ -53,7 +51,7 @@ export default function CakeDetail({cakes, addProduct}) {
                             <h3>{x.name}</h3>      
                             <span className="badge bg-secondary">{x.categoryName}</span>       
                         </div>
-                        <div className="form-check" style={{'position': 'absolute', 'bottom': '0'}}>
+                        <div className="form-check" >
                             <input 
                                 className="form-check-input" 
                                 type="checkbox" 
@@ -65,6 +63,15 @@ export default function CakeDetail({cakes, addProduct}) {
                             <label className="form-check-label" htmlFor={`check-add-catalog-input-${x.id}`}>
                                 Agregar
                             </label>
+                            {
+                                chosenCakes[`${x.id}`] && (<input 
+                                    type="text" 
+                                    className="form-control form-control-sm" 
+                                    value={chosenCakes[`${x.id}`]?.value} 
+                                    onChange={(e) => addPrice(e, x.id)} 
+                                    placeholder="$ Precio" 
+                                    style={{'width': '100px'}} />) 
+                            }
                         </div>
                     </article>
                 ))

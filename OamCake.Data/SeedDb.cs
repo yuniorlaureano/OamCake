@@ -27,6 +27,7 @@ namespace OamCake.Data
                 CreatedBy = 1,
                 Password = "123".HashedPassword(),
                 IsActive = true,
+                IsAdmin = true,
                 EmployeeId = 1
             });
 

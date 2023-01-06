@@ -1,10 +1,10 @@
 ﻿namespace OamCake.Data.Dto
 {
-    public class CatalogCreationDto
+    public class CatalogListDto
     {
         public long Id { get; set; }
         public string Description { get; set; }
-        public bool IsPublished { get; set; }
-        public string[] CakesId { get; set; }
+
+        public List<CatalogDetailListDto> CatalogDetailListDto { get; set; }
     }
 }

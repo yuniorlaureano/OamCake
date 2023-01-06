@@ -2,6 +2,8 @@
 @model IndexModel
 @{
     Layout = null;
+    var serializerSettings = new JsonSerializerSettings();
+    serializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 }
 <html>
 <head>
@@ -15,11 +17,16 @@
     <title>Cake</title>
     <link href="~/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="~/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        .body-modal {
+            overflow: hidden;
+            padding-right: 17px;
+        }
+    </style>
 </head>
 <body>
     <div class="page-holder">
         <partial name="_Home_Navbar" />
-        
         <div class="container pb-3 bg-cover bg-center d-flex align-items-center" style="background-image: url('https://images.heb.com/is/image/HEBGrocery/002127574');height: 30%;background-repeat: no-repeat;background-position: center; background-size: contain;box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 15px;margin-top:14px">
             <section>
                 <div class="container py-5">
@@ -63,28 +70,17 @@
                         </ol>
                     </nav>
                 </header>
-                <div class="row">
-                    @foreach (var product in Model.Catalog.CatalogDetails)
-                    {
-                        <!-- PRODUCT-->
-                        <div class="col-xl-3 col-lg-4 col-sm-6">
-                            <div class="product text-center border mb-2">
-                                <div class="position-relative mb-3">
-                                    <div class="badge text-white bg-"></div><a class="d-block" href="/Details?id=@product.Id"><img class="img-fluid w-100" src="/photos/@product.Cake.Photo" alt="@product.Cake.Name"></a>
-                                    
-                                </div>
-                                <h6> <a class="reset-anchor" href="/Details?id=@product.Id">@product.Cake.Name</a></h6>
-                                <p class="small text-muted">$@product.Price</p>
-                                <button class="btn btn-primary"><i class="bi bi-cart"></i></button>
-                            </div>
-                        </div>
-                    }
-                </div>
+                <div id="root-react-app"></div>
             </section>
-            
         </div>
         <partial name="_Home_Footer" />
         <script src="~/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script type="text/javascript">
+             @*window.antiForgeryToken = "@antiforgery.GetTokens(HttpContext).RequestToken";*@
+                window.bcakes = @Html.Raw(JsonConvert.SerializeObject(Model.Catalog.CatalogDetailListDto, serializerSettings));
+        </script>
+        <script src="~/js/app/vendor.js" asp-append-version="true"></script>
+        <script src="~/js/app/Home.js" asp-append-version="true"></script>
     </div>
 </body>
 </html>

@@ -53,7 +53,7 @@ namespace OamCake.Web.Pages.Admin.Catalog
                     Id = catalog.Id,
                     Description = catalog.Description,
                     IsPublished = catalog.IsPublished,
-                    CakesId = catalogDetails.Values.Select(x => x.CakeId).ToArray()
+                    CakesId = catalogDetails.Values.Select(x => $"{x.CakeId}|{x.Price}").ToArray()
                 };
             }
 
@@ -101,6 +101,12 @@ namespace OamCake.Web.Pages.Admin.Catalog
             }
 
             var userId = Int32.Parse(User.Claims.FirstOrDefault(p => p.Type == Constants.CLAIM_ID).Value);
+            
+            var cakesIds = Catalog.CakesId.Select(x => new CakesIdHolder
+            {
+                CakeId = long.Parse(x.Split("|")[0]),
+                Price = decimal.Parse(String.IsNullOrEmpty(x.Split("|")[1]) ? "0": x.Split("|")[1])
+            }).ToList();
 
             if (Catalog.Id > 0)
             {
@@ -110,27 +116,22 @@ namespace OamCake.Web.Pages.Admin.Catalog
                 if (catalog != null)
                 {
                     if (details != null)
-                    {
-                        
-                        var existing = details.Where(x => Catalog.CakesId.Contains(x.CakeId)).ToList();
-                        var removed = details.Where(x => !Catalog.CakesId.Contains(x.CakeId)).ToList();
-                        var news = Catalog.CakesId.Where(x => !existing.Any(j => j.CakeId == x)).ToList();
-
-                        if (removed.Any())
+                    {                        
+                        if (details.Any())
                         {
-                            _db.CatalogDetail.RemoveRange(removed);
+                            _db.CatalogDetail.RemoveRange(details);
                         }
 
-                        if (news.Any())
+                        if (details.Any())
                         {
-                            _db.CatalogDetail.AddRange(news.Select(x => new Entity.CatalogDetail
+                            _db.CatalogDetail.AddRange(cakesIds.Select(x => new Entity.CatalogDetail
                             {
-                                CakeId = x,
+                                CakeId = x.CakeId,
                                 CreatedAt = DateTime.Now,
                                 CreatedBy = userId,
                                 CatalogId = catalog.Id,
                                 Photo = "",
-                                Price = 0
+                                Price = x.Price
                             }).ToList());
                         }
                     }
@@ -153,12 +154,13 @@ namespace OamCake.Web.Pages.Admin.Catalog
                     CreatedBy = userId,
                     IsPublished = Catalog.IsPublished,
                     PublishDate = DateTime.Now,
-                    CatalogDetails = Catalog.CakesId.Select(x => new Entity.CatalogDetail
+                    CatalogDetails = cakesIds.Select(x => new Entity.CatalogDetail
                     {
-                        CakeId = x,
+                        CakeId = x.CakeId,
                         CreatedAt = DateTime.Now,
                         CreatedBy = userId,
                         Photo = "",
+                        Price= x.Price
                     }).ToList(),
                 };
 
@@ -169,5 +171,11 @@ namespace OamCake.Web.Pages.Admin.Catalog
             return RedirectToPage("/admin/catalog/add", new { Search, Id, CategoryId });
 
         }
+    }
+
+    class CakesIdHolder
+    {
+        public long CakeId { get; set; }
+        public decimal Price { get; set; }
     }
 }

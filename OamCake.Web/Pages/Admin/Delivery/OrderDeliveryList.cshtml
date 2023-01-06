@@ -40,11 +40,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var orderDelivery in Model.OrderDeliveryTable.Data)
+                            @*@foreach (var orderDelivery in Model.OrderDeliveryTable.Data)
                             {
                                 <tr>
                                     <td>@($"{orderDelivery.Delivery.Employee.Name} {orderDelivery.Delivery.Employee.Name}")</td>
-                                    <td>@($"{orderDelivery.Order.Client.Name} {orderDelivery.Order.Client.LastName}")</td>
+                                    <td>@($"{orderDelivery.Order.User.Employee.Name} {orderDelivery.Order.User.Employee.LastName}")</td>
                                     <td>@orderDelivery.Status</td>
                                     <td>@orderDelivery.CreatedAt</td>
                                     <td style="text-align:right">
@@ -54,7 +54,7 @@
                                         <partial name="_DeleteForm" model="@orderDelivery.Id" />
                                     </td>
                                 </tr>
-                            }
+                            }*@
                         </tbody>
                         <tfoot>
                             <tr>

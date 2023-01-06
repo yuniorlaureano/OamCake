@@ -23,7 +23,6 @@ namespace OamCake.Data
 
         public DbSet<Cake> Cake { get; set; }
         public DbSet<Catalog> Catalog { get; set; }
-        public DbSet<Client> Client { get; set; }
         public DbSet<CustomCake> CustomCake { get; set; }
         public DbSet<Delivery> Delivery { get; set; }
         public DbSet<Employee> Employee { get; set; }

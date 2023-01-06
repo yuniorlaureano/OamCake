@@ -30,22 +30,23 @@ namespace OamCake.Web.Pages.Admin.Delivery
 
         public async Task OnGetAsync()
         {
-            var query = _db.OrderDelivery
-                           .Include(x => x.Order)
-                           .ThenInclude(x => x.Client)
-                           .Include(x => x.Delivery)
-                           .ThenInclude(x => x.Employee)
-                           .Where(x => x.DeletedAt == null);
+            //var query = _db.OrderDelivery
+            //               .Include(x => x.Order)
+            //               .ThenInclude(x => x.User)
+            //               .ThenInclude(x => x.Employee)
+            //               .Include(x => x.Delivery)
+            //               .ThenInclude(x => x.Employee)
+            //               .Where(x => x.DeletedAt == null);
 
-            if (!String.IsNullOrWhiteSpace(Search))
-            {
-                query = query.Where(x => x.Order.Client.Name.Contains(Search) || x.Order.Client.LastName.Contains(Search));
-            }
+            //if (!String.IsNullOrWhiteSpace(Search))
+            //{
+            //    query = query.Where(x => x.Order.User.Employee.Name.Contains(Search) || x.Order.User.Employee.LastName.Contains(Search));
+            //}
 
-            OrderDeliveryTable.Data = await query
-                                        .Skip((Pages) * 20)
-                                        .Take(20).ToListAsync();
-            OrderDeliveryTable.Count = await query.CountAsync();
+            //OrderDeliveryTable.Data = await query
+            //                            .Skip((Pages) * 20)
+            //                            .Take(20).ToListAsync();
+            //OrderDeliveryTable.Count = await query.CountAsync();
         }
 
         public async Task<IActionResult> OnPostDeleteAsync()

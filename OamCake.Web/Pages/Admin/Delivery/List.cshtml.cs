@@ -30,19 +30,19 @@ namespace OamCake.Web.Pages.Admin.Delivery
 
         public async Task OnGetAsync()
         {
-            var query = _db.Delivery
-                           .Include(x => x.Employee)
-                           .Where(x => x.DeletedAt == null);
+            //var query = _db.Delivery
+            //               .Include(x => x.Employee)
+            //               .Where(x => x.DeletedAt == null);
 
-            if (!String.IsNullOrWhiteSpace(Search))
-            {
-                query = query.Where(x => x.Employee.Name.Contains(Search) || x.Employee.LastName.Contains(Search));
-            }
+            //if (!String.IsNullOrWhiteSpace(Search))
+            //{
+            //    query = query.Where(x => x.Employee.Name.Contains(Search) || x.Employee.LastName.Contains(Search));
+            //}
 
-            DeliveryTable.Data = await query
-                                        .Skip((Pages) * 20)
-                                        .Take(20).ToListAsync();
-            DeliveryTable.Count = await query.CountAsync();
+            //DeliveryTable.Data = await query
+            //                            .Skip((Pages) * 20)
+            //                            .Take(20).ToListAsync();
+            //DeliveryTable.Count = await query.CountAsync();
         }
 
         public async Task<IActionResult> OnPostDeleteAsync()

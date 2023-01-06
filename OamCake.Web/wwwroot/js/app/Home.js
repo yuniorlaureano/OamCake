@@ -115,13 +115,26 @@ function totalKakes(cart) {
 
   for (var i = 0; i < cartKeys.length; i++) {
     total += cart[cartKeys[i]].qty;
-    price += cart[cartKeys[i]].price;
+    price += cart[cartKeys[i]].price * cart[cartKeys[i]].qty;
   }
 
   return {
     price: price,
     total: total
   };
+}
+
+function cartToSave(cart) {
+  var cartKeys = Object.keys(cart);
+  var cartToSave = {};
+
+  for (var i = 0; i < cartKeys.length; i++) {
+    if (cart[cartKeys[i]].qty > 0) {
+      cartToSave[cartKeys[i]] = cart[cartKeys[i]];
+    }
+  }
+
+  return cartToSave;
 }
 
 function Home(_ref) {
@@ -150,9 +163,12 @@ function Home(_ref) {
     var _cart$cake$id;
 
     var tempQty = ((_cart$cake$id = cart[cake.id]) === null || _cart$cake$id === void 0 ? void 0 : _cart$cake$id.qty) || 0;
-    setCart(_objectSpread(_objectSpread({}, cart), {}, _defineProperty({}, cake.id, _objectSpread(_objectSpread({}, cake), {}, {
+
+    var tempCart = _objectSpread(_objectSpread({}, cart), {}, _defineProperty({}, cake.id, _objectSpread(_objectSpread({}, cake), {}, {
       qty: tempQty + 1
-    }))));
+    })));
+
+    setCart(cartToSave(tempCart));
   }
 
   function substract(cake) {
@@ -160,9 +176,12 @@ function Home(_ref) {
 
     var tempQty = (((_cart$cake$id2 = cart[cake.id]) === null || _cart$cake$id2 === void 0 ? void 0 : _cart$cake$id2.qty) || 1) - 1;
     tempQty = tempQty < 0 ? 0 : tempQty;
-    setCart(_objectSpread(_objectSpread({}, cart), {}, _defineProperty({}, cake.id, _objectSpread(_objectSpread({}, cake), {}, {
+
+    var tempCart = _objectSpread(_objectSpread({}, cart), {}, _defineProperty({}, cake.id, _objectSpread(_objectSpread({}, cake), {}, {
       qty: tempQty
-    }))));
+    })));
+
+    setCart(cartToSave(tempCart));
   }
 
   function showModal() {
@@ -175,7 +194,6 @@ function Home(_ref) {
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     setTotalProduct(totalKakes(cart));
-    console.log(totalProduct);
     window.localStorage.setItem('oam_cake_cart', JSON.stringify(cart));
   }, [cart]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Modal__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -184,10 +202,10 @@ function Home(_ref) {
     heading: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("i", {
       className: "bi bi-cart"
     }),
-    buttons: [/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    buttons: [/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+      className: "btn btn-primary",
       key: "1",
-      type: "button",
-      className: "btn btn-primary"
+      href: "/Checkout"
     }, "Comprar") // <button key="2" type="button" className="btn btn-primary">Save changes</button>
     ]
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("table", {
@@ -198,12 +216,15 @@ function Home(_ref) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", {
       key: i
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, (_cart$k = cart[k]) === null || _cart$k === void 0 ? void 0 : _cart$k.cakeName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, (_cart$k2 = cart[k]) === null || _cart$k2 === void 0 ? void 0 : _cart$k2.qty), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, ((_cart$k3 = cart[k]) === null || _cart$k3 === void 0 ? void 0 : _cart$k3.qty) * ((_cart$k4 = cart[k]) === null || _cart$k4 === void 0 ? void 0 : _cart$k4.price)));
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tfoot", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null, "Total"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, totalProduct.total), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, totalProduct.total * totalProduct.price))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: "btn btn-info",
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tfoot", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null, "Total"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, totalProduct.total), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, totalProduct.price))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    className: "btn btn-default",
     onClick: showModal
   }, "Pedidos ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("i", {
     className: "bi bi-cart"
-  }), " ", totalProduct.total), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_CakeList__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }), " ", totalProduct.total), "|", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    className: "btn btn-default",
+    onClick: showModal
+  }, "Mis pedidos"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_CakeList__WEBPACK_IMPORTED_MODULE_1__["default"], {
     bcakes: bcakes,
     add: add,
     substract: substract,

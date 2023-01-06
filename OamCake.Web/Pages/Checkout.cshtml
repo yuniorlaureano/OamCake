@@ -1,0 +1,44 @@
+﻿@page
+@model CheckoutModel
+@inject IAntiforgery antiforgery
+@{
+    Layout = null;
+    var serializerSettings = new JsonSerializerSettings();
+    serializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+}
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keywords" content="" />
+    <meta name="author" content="Yunior Miguel Laureano">
+    <meta name="copyright" content="Yunior Miguel Laureano">
+    <meta name="generator" content="Hugo 0.84.0">
+    <title>Cake</title>
+    <link href="~/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        .body-modal {
+            overflow: hidden;
+            padding-right: 17px;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-holder">
+        <partial name="_Home_Navbar" />
+        <div class="container">
+            <section class="py-5">
+                <div id="root-react-app"></div>
+            </section>
+        </div>
+        <script>
+            window.antiForgeryToken = "@antiforgery.GetTokens(HttpContext).RequestToken";
+        </script>
+        <script src="~/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/app/vendor.js" asp-append-version="true"></script>
+        <script src="~/js/app/Checkout.js" asp-append-version="true"></script>
+    </div>
+</body>
+</html>

@@ -9,7 +9,7 @@
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
 
-        public Order Order { get; set; }
-        public Delivery Delivery { get; set; }
+        //public Order Order { get; set; }
+        //public Delivery Delivery { get; set; }
     }
 }

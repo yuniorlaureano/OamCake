@@ -8,12 +8,24 @@ function totalKakes(cart){
     let cartKeys = Object.keys(cart)
     for(let i = 0; i < cartKeys.length; i++) {
         total += cart[cartKeys[i]].qty;
-        price += cart[cartKeys[i]].price;
+        price += cart[cartKeys[i]].price * cart[cartKeys[i]].qty;
     }
     return {
         price: price,
         total: total
     };
+}
+
+function cartToSave(cart){
+    let cartKeys = Object.keys(cart)
+    let cartToSave = {}
+    for(let i = 0; i < cartKeys.length; i++) {
+        if(cart[cartKeys[i]].qty > 0) {
+            cartToSave[cartKeys[i]] = cart[cartKeys[i]];
+        }
+        
+    }
+    return cartToSave;
 }
 
 export default function Home({bcakes, savedCart}) {
@@ -26,25 +38,27 @@ export default function Home({bcakes, savedCart}) {
 
     function add(cake){
         let tempQty = (cart[cake.id]?.qty || 0);
-        setCart({
+        let tempCart = {
             ...cart,
             [cake.id]: { 
                 ...cake,
                 qty: tempQty + 1
             },
-        })
+        };
+        setCart(cartToSave(tempCart))
     }
 
     function substract(cake){
         let tempQty = (cart[cake.id]?.qty || 1) - 1;
         tempQty = tempQty < 0 ? 0 : tempQty;
-        setCart({
+        let tempCart = {
             ...cart,
             [cake.id]: { 
                 ...cake,
                 qty: tempQty
             },
-        })
+        };
+        setCart(cartToSave(tempCart))
     }
 
     function showModal() {
@@ -57,14 +71,13 @@ export default function Home({bcakes, savedCart}) {
 
     useEffect(function() {
         setTotalProduct(totalKakes(cart))
-        console.log(totalProduct)
         window.localStorage.setItem('oam_cake_cart', JSON.stringify(cart))
     }, [cart])
     
     return (
         <div>
             <Modal show={modalShow} hide={hideModal} heading={<i className="bi bi-cart"></i>} buttons={[
-                <button key="1" type="button" className="btn btn-primary" >Comprar</button>
+                <a className="btn btn-primary" key="1" href="/Checkout">Comprar</a>
                 // <button key="2" type="button" className="btn btn-primary">Save changes</button>
             ]}>
                 <table className="table">
@@ -90,15 +103,18 @@ export default function Home({bcakes, savedCart}) {
                         <tr>
                             <th>Total</th>
                             <td>{totalProduct.total}</td>
-                            <td>{totalProduct.total * totalProduct.price}</td>
+                            <td>{totalProduct.price}</td>
                         </tr>
                     </tfoot>
                 </table>
             </Modal>
-            <button className="btn btn-info" onClick={showModal}>
-            Pedidos <i className="bi bi-cart"></i> {totalProduct.total}
+            <button className="btn btn-default" onClick={showModal}>
+                Pedidos <i className="bi bi-cart"></i> {totalProduct.total}
             </button>
-
+            |
+            <button className="btn btn-default" onClick={showModal}>
+                Mis pedidos
+            </button>
             <CakeList bcakes={bcakes} add={add} substract={substract} cart={cart}/>
         </div>
     )
